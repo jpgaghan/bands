@@ -59,8 +59,7 @@ var API = {
         })
     });
   },
-  yelpApi: () => {
-    $.post("/restaurants").then(response => console.log(response))
+  yelpApi: (params) => {$.post("/restaurants", {...params}).then(response => console.log(response))
     // var options = {
     //   headers: {
     //       "authorization": process.env.YELP_API_TOKEN
@@ -254,8 +253,10 @@ $(document).on("click", ".concerts", (e) => {
     eventData.city
   );
   API.yelpApi(
-    eventData.city, 
-    eventData.state
+    {
+      city: eventData.city,
+      state: eventData.state
+    }
   );
   API.googleHotels(
     eventData.city

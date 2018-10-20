@@ -50,9 +50,9 @@ module.exports = function(app) {
           "authorization": process.env.YELP_API_TOKEN
       }
   }
-  console.log (options)
+  const {city, state} = req.body
 var foodtype = `japanese`
-    fetchUrl(`https://api.yelp.com/v3/businesses/search?term=${foodtype}+food&location=charlotte_nc`, options, function (error, meta, body) {
+    fetchUrl(`https://api.yelp.com/v3/businesses/search?term=restaurant&location=${city}_${state}`, options, function (error, meta, body) {
       var obj = JSON.parse(body);
       for (i=0; i<10; i++) {
       var img = obj.businesses[i].image_url;
