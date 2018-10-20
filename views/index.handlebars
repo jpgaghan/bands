@@ -1,0 +1,212 @@
+{{!-- <div id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 offset-2">
+        <h1>{{msg}}</h1>
+        <h2>This is our Home Page!</h2>
+        <form class="clearfix mb-4" action="POST">
+          <div class="form-group">
+            <label for="example-text">Example Text</label>
+            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
+          </div>
+          <div class="form-group">
+            <label for="example-description">Example Description</label>
+            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
+          </div>
+          <button id="submit" class="btn btn-primary float-right">Submit</button>
+        </form>
+        <h3>Examples:</h3>
+        <ul id="example-list" class="list-group">
+          {{#each examples}}
+          <li data-id="{{this.id}}" class="list-group-item">
+            <a href="example/{{this.id}}">{{this.text}}</a>
+            <button class="btn btn-danger float-right delete">ｘ</button>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/index.js"></script> --}}
+
+
+<body ng-app="FireCart" ng-controller="AuthController">
+
+
+  <div class="row header">
+    <ul>
+      <!-- social icons -->
+      <a href="#" class="fa fa-facebook fa-2x"></a>
+      <a href="#" class="fa fa-twitter fa-2x"></a>
+      <a href="#" class="fa fa-instagram fa-2x"></a>
+      <a href="#" class="fa fa-youtube fa-2x"></a>
+    </ul>
+  </div>
+
+
+  <main>
+    <!--Sign In card-->
+    <div class="row center">
+      <div class="col s12 m10 offset-m1 l6 offset-l3">
+        <div class="card sticky-action z-depth-4 card-panel hoverable" style=" margin : 0px; padding : 2px">
+
+          <!--Login fields-->
+          <form>
+            <div class="card-content">
+              <div class="row center-align">
+                <h2>
+                  App Name Here
+                </h2>
+                <span class="card-title grey-text text-darken-4 center-align">Already have an account? Sign in below.</span>
+
+                <div class="input-field col s12">
+                  <i class="material-icons prefix center">account_circle</i>
+                  <input id="email" type='email' name='email' class="validate left-align" required="true" placeholder="Email ID"
+                  />
+                  <label for="email" class="left-align">Enter your email
+                  </label>
+                </div>
+                <div class="input-field col s12">
+                  <i class="material-icons prefix center">dialpad</i>
+                  <input type='password' name='password' id='password' class="validate" required="true" placeholder="Password"
+                  />
+
+                  <label for="password" class=" left-align">Enter your password
+                  </label>
+                </div>
+              </div>
+
+              <input type="submit" class="waves-effect waves-light btn" value='Login' id="signin">
+              </input>
+
+            </div>
+          </form>
+
+          <!--More actions -->
+          <div class="card-action " style=" margin : 2px; padding-bottom:0px ;padding-top : 5px">
+            <div class="row ">
+
+              <div class="col s4 left-align valign-wrapper">
+                <a href="#" class="activator">
+                  <i class="signup-btn" aria-hidden="true"></i>
+                  SignUp</a>
+              </div>
+              <div class="col s4 right">
+                <a href="/artist" class="right">
+                  <i aria-hidden="true"></i>
+                  Continue as Guest</a>
+              </div>
+              <div class="col s4 right">
+                <a data-target="ResetPassDialog" class="modal-trigger" class="right">
+                  <i aria-hidden="true"></i>
+                  Forgot Password</a>
+              </div>
+            </div>
+          </div>
+
+          <!--Hidden Actions For SignUp-->
+          <div class="card-reveal">
+            <div class="row center-align">
+              <span class="card-title grey-text text-darken-4">Sign Up
+                <i class="material-icons right">close</i>
+              </span>
+              <div class="input-field col s12">
+                <i class="material-icons prefix center">account_circle</i>
+                <input id="idsignup" type="text" class="validate left-align" required="required" placeholder="User Mail ID" />
+                <label for="idsignup" class="left-align">Username</label>
+              </div>
+              <div class="input-field col s12">
+                <i class="material-icons prefix center">dialpad</i>
+                <input id="passsignup" type="password" class="validate" required="required" placeholder="Password" />
+                <label for="passsignup" class=" left-align">Password</label>
+              </div>
+              <input type="button" class="waves-effect waves-light btn" value="Signup" id="signup" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Structure for Pass Resest (optional, we can work on this if we have time)-->
+  <div id="ResetPassDialog" class="modal bottom-sheet">
+    <div class="modal-content">
+      <div class="card-reveal">
+        <div class="row center-align">
+          <span class="card-title grey-text text-darken-4">Reset Password
+            <i class="material-icons right modal-action modal-close">close</i>
+          </span>
+          <div class="input-field col s12">
+            <i class="material-icons prefix center">account_circle</i>
+            <input id="id_reset_pass" type="text" class="validate left-align" required="required" placeholder="User Mail ID" />
+            <label for="id_reset_pass" class="left-align">Please enter your Email Address</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer center-align">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn orange" style="margin-left:10px">CANCEL</a>
+      <input type="button" class="waves-effect waves-light btn green" value="Reset Password" id="resetPassword" onclick="resetPassword()"
+      />
+    </div>
+  </div>
+
+  <!-- filler rows -->
+  <div class="row">
+    <div class="col sm12"></div>
+  </div>
+  <div class="row">
+    <div class="col sm12"></div>
+  </div>
+
+  <!-- footer -->
+  <footer>
+    <div class="row">
+      <div class="container footer">
+        <span>© 2018 App Name Here</span>
+
+      </div>
+    </div>
+  </footer>
+
+
+
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+  <script type="text/javascript">
+
+    $(document).keypress(function (e) {
+      if (e.which == 13) {
+        signIn();
+      }
+    });
+    $(document).ready(function () {
+      //Initialize Dialog
+      $('.modal').modal();
+    });
+
+    var app = angular.module("FireCart", []);
+    app.controller("AuthController", function ($scope) {
+
+      //Authentication
+      $scope.authenticateUser = function () {
+        console.log("Email" + $scope.user.email + " Pass" + $scope.user.password)
+        Materialize.toast("Email: " + $scope.user.email + " Pass: " + $scope.user.password, 4000)
+
+      }
+    });
+
+
+  </script>
+
+</body>
+
+</html>
