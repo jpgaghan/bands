@@ -18,6 +18,7 @@ $(document).on("click", ".concerts", function () {
     var limit = 10;
     console.log(currEle)
     var city = currEle[0].childNodes[1].innerText;
+    city = city.substring(0, city.length - 4)
     // console.log(city);
 
 
@@ -28,7 +29,7 @@ $(document).on("click", ".concerts", function () {
             city: city,
             startDateTime: startDate,
             endDateTime: endDate,
-            // size: limit,
+            size: limit,
             locale: "en"
         }
     }).then(function (response) {
