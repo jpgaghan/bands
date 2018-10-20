@@ -65,7 +65,8 @@ var foodtype = `japanese`
       // console.log(obj.businesses[i])
       console.log(img, name, yelpUrl, rating, street, city)
     }
-              // var result = obj.businesses[0];
+res.json(obj)
+// var result = obj.businesses[0];
 })
   })
   app.post("/band/date", function(req, res) {

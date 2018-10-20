@@ -1,6 +1,7 @@
 // The API object contains methods for each kind of request we'll make
 //firebase config
 var dateArray = [];
+var eventData = {};
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyD937MlgcJiQIwVpX_UYcaqjUjn2O19vxk",
@@ -32,31 +33,31 @@ var API = {
       $(".artistName").append(artistName);
       $("#events").empty();
       $("#name").val("");
-      for (var i = 0; i< 12; i++) {
+      for (var i = 0; i < 12; i++) {
         dateArray.push(response[i].datetime);
       }
-      
-      $.post("/band/date",{'':dateArray})
+
+      $.post("/band/date", { '': dateArray })
         .then((dateresponse) => {
-        console.log(dateresponse)
-      // Loops through the events and adds them to the event rows
-      for (var i = 0; i < 12; i++) {
-        console.log(response[i].venue.region)
-        var data = `
+          console.log(dateresponse)
+          // Loops through the events and adds them to the event rows
+          for (var i = 0; i < 12; i++) {
+            console.log(response[i].venue.region)
+            var data = `
           <p class= "city"> ${response[i].venue.city} , ${response[i].venue.region}<p>
           <p> ${response[i].venue.name}<p>
           <p class ="dates" data-sdate = "${dateresponse.sdates[i]}" data-edate = "${dateresponse.edates[i]}"> ${dateresponse.dates[i]}<p>
           <p>${dateresponse.times[i]}<p>
 
           `;
-        var createDivs = $("<div>").addClass("col sm12 m3 concerts");
-        createDivs.append(data);
-        $("#events").append(createDivs);
-      };
-      //empty out input field after submission
-      document.getElementById("name").reset();
-    })
-  });
+            var createDivs = $("<div>").addClass("col sm12 m3 concerts");
+            createDivs.append(data);
+            $("#events").append(createDivs);
+          };
+          //empty out input field after submission
+          document.getElementById("name").reset();
+        })
+    });
   },
   yelpApi: () => {
     $.post("/restaurants").then(response => console.log(response))
@@ -65,17 +66,51 @@ var API = {
     //       "authorization": process.env.YELP_API_TOKEN
     //   }
   },
-  bandImage: (band) => {$.post("/band/image",{bandname:band}).then((responseimage) => {
-               Img = new Image();
-               Img.src = responseimage
-               $(".bandimg").html(Img)
-             }
-  )},
+  bandImage: (band) => {
+    $.post("/band/image", { bandname: band }).then((responseimage) => {
+      Img = new Image();
+      Img.src = responseimage
+      $(".bandimg").html(Img)
+    }
+    )
+  },
+  ticketMaster: (startDate, endDate, limit, city) => {
+    event.preventDefault();
+    console.log("I've been clicked");
+    var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=Z5KkKdg29zBxIkQFJCnXrG3TnUXuj1YW";
+    $.ajax({
+      url: queryURL,
+      method: "GET",
+      data: {
+        city: city,
+        startDateTime: startDate,
+        endDateTime: endDate,
+        size: limit,
+        locale: "en"
+      }
+    }).then(function (response) {
+
+      console.log(response);
+
+      eventArray = []
+      for (i = 0; i < 10; i++) {
+        console.log(response._embedded)
+        eventDates = response._embedded.events[i].dates.start.localDate;
+        eventTime = response._embedded.events[i].dates.start.localTime;
+        eventPics = response._embedded.events[i].images[0].url;
+        eventTitle = response._embedded.events[i].name;
+        ticketLink = response._embedded.events[i].url;
+
+      }
+
+
+      //   console.log(response._embedded.events);
+    });
+  },
   signIn: (email, password) => {
     console.log(`here`)
     firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
       window.location.href = "/artist"
-      // API.yelpApi();
     })
       .catch(function (error) {
         // Handle Errors here.
@@ -102,6 +137,15 @@ var API = {
     return $.ajax({
       url: "api/examples/" + id,
       type: "DELETE"
+    });
+  },
+  googleHotels: (city) => {
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ address: city }, function (results) {
+      map.setCenter(results[0].geometry.location);
+      map.setZoom(15);
+      // then places the markers on the map
+      search();
     });
   }
 };
@@ -151,20 +195,14 @@ var handleDeleteBtnClick = function () {
 // $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 $(() => {
-  var geocoder = new google.maps.Geocoder();
 
   $("#submit").on("click", function (event) {
     event.preventDefault();
     API.bandsApi();
   });
 
-  geocoder.geocode({ address: "charlotte" }, function (results) {
-    map.setCenter(results[0].geometry.location);
-    map.setZoom(15);
-    // then places the markers on the map
-    search();
-  });
-//listeners
+
+  //listeners
   $("#signup").on("click", () => {
     event.preventDefault();
     email = $("#idsignup").val();
@@ -177,14 +215,71 @@ $(() => {
     password = $("#password").val();
     API.signIn(email, password);
   });
+
+
+  $(document).on("click", ".favhotel", () => {
+    $("iw-address").text();
+    $("iw-website").text();
+    $("#iw-phone").text();
+  });
+  
 });
 
-$(document).on("click", ".favhotel", () => {
-  $("iw-address").text();
-  $("iw-website").text();
-  $("#iw-phone").text();
+
+
+$(document).on("click", ".concerts", (e) => {
+  event.preventDefault();
+  var currEle = $(e.currentTarget);
+  var location = currEle[0].childNodes[1].innerText;
+  var state = location.slice(-2)
+  // $.post("/state",state)
+  var startDate = currEle[0].childNodes[5].dataset.sdate;
+  var endDate = currEle[0].childNodes[5].dataset.edate;
+  var limit = 10;
+  var city = currEle[0].childNodes[1].innerText;
+  $("body").empty();
+  city = city.substring(0, city.length - 5)
+  eventData = {
+    location,
+    state,
+    startDate,
+    endDate,
+    limit,
+    city
+  }
+  API.ticketMaster(
+    eventData.startDate,
+    eventData.endDate,
+    eventData.limit,
+    eventData.city
+  );
+  API.yelpApi(
+    eventData.city, 
+    eventData.state
+  );
+  API.googleHotels(
+    eventData.city
+  );
 });
 
+$(window).bind('hashchange', function() {
+  /* things */
+ });
+// createVariables = () => {
+//   event.preventDefault();
+//   console.log("I've been clicked");
+//   var currEle = $(this)
+//   console.log(currEle)
+//   var location = currEle[0].childNodes[1].innerText;
+//   var state = location.slice(-2)
+//   // $.post("/state",state)
+//   var startDate = currEle[0].childNodes[5].dataset.sdate;
+//   var endDate = currEle[0].childNodes[5].dataset.edate;
+//   var limit = 10;
+//   var city = currEle[0].childNodes[1].innerText;
+//   city = city.substring(0, city.length - 4)
+//   window.location.href = "/events"
+// }
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     console.log(user.uid);
