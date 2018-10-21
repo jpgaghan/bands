@@ -87,13 +87,15 @@ var API = {
       }
       console.log("Values stored in restArray for restaurants:", restArray);
       console.log(response);
-      // Now read the save restaurants data from Array and append
-       for (i = 0; i < 10; i++) {
+      // Now read the saved restaurants data from Array and append
+       for (i = 0; i < 9; i++) {
  
         var eventsData =
 
           `
         <div class="col sm12 m3 resDiv">
+          <p><h6>Suggested Restaurant</h6></p>
+          <hr>
           <p> ${restArray[i].Name} </p>
           <p> ${restArray[i].Address1}</p>
           <p> ${restArray[i].Phone} </p>
