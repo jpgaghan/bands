@@ -90,18 +90,18 @@ var API = {
       console.log(response);
       // Now read the saved restaurants data from Array and append
       for (i = 0; i < 9; i++) {
-
+        phone = restArray[i].Phone.substring(2, restArray[i].Phone.length);
+        phone = `(${phone.substring(0,3)})${phone.substring(3,6)}-${phone.substring(6,10  )}`
         var eventsData =
-
           `
         <div class="col sm12 m3 resDiv">
           <p><h6>Suggested Restaurant</h6></p>
           <hr>
           <p> ${restArray[i].Name} </p>
           <p> ${restArray[i].Address1}</p>
-          <p> ${restArray[i].Phone} </p>
           <p> ${restArray[i].City} </p>
-          <p> ${restArray[i].Rating} </p>
+          <p> ${phone} </p>
+          <p> rating: ${restArray[i].Rating}</p>
           <button>Save to your Favorites Page!</button>
           </div>
       
