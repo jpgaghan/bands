@@ -61,3 +61,30 @@ margin-right: 0;
 #mapRow {
   margin-bottom: 0px;
 }
+
+.eventDiv {
+  width: 100%;
+  background: white;
+  color: black;
+  margin: 2%;
+  text-align: center;
+}
+
+.eventImages {
+  width: 50%;
+  height: 50%;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.resDiv {
+  width: 100%;
+  background: white;
+  color: black;
+  margin: 2%;
+  text-align: center;
+
+}

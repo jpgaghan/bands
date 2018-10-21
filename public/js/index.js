@@ -72,9 +72,45 @@ var API = {
         })
     });
   },
-  yelpApi: (params) => {$.post("/restaurants", {...params}).then(response => console.log(response))
-    
-  },
+  yelpApi: (params) => {
+    $.post("/restaurants", { ...params }).then(response => {
+      // store the restaurant data in array so we can use it later to display
+      restArray = [];
+ 
+      for (var i = 0; i < 10; i++) {
+        restArray.push({
+        Name: response.businesses[i].name,
+        Phone: response.businesses[i].phone,
+        Address1: response.businesses[i].location.address1,
+        City: response.businesses[i].location.city,
+        Rating: response.businesses[i].rating })
+      }
+      console.log("Values stored in restArray for restaurants:", restArray);
+      console.log(response);
+      // Now read the save restaurants data from Array and append
+       for (i = 0; i < 10; i++) {
+ 
+        var eventsData =
+
+          `
+        <div class="col sm12 m3 resDiv">
+          <p> ${restArray[i].Name} </p>
+          <p> ${restArray[i].Address1}</p>
+          <p> ${restArray[i].Phone} </p>
+          <p> ${restArray[i].City} </p>
+          <p> ${restArray[i].Rating} </p>
+          </div>
+      
+          `
+          // var createDivs = $("<div>").addClass("col sm12 m3 Restaurants");
+          // createDivs.append(eventsData);
+          $("#restaurants").append(eventsData);
+          console.log(eventsData);
+ 
+        }
+ 
+  })
+ },
   bandImage: (band) => {
     $.post("/band/image", { bandname: band }).then((responseimage) => {
       Img = new Image();
@@ -99,13 +135,12 @@ var API = {
       }
     }).then(function (response) {
       console.log(response);
-      eventArray = []
-      
-      for (i = 0; i < 8; i++) {
+     
+      for (i = 0; i < 12; i++) {
      
       var eventsData =
 
-        `<div class ="col m3 eventDiv">
+        `<div class ="col sm12 m3 eventDiv">
         <img class="eventImages" src=${response._embedded.events[i].images[0].url}>
         <p> ${response._embedded.events[i].name} </p>
         <p> ${response._embedded.events[i].dates.start.localDate}</p>
@@ -269,7 +304,7 @@ $(document).on("click", ".concerts", (e) => {
   var city = currEle[0].childNodes[1].innerText;
   var time = currEle[0].childNodes[7].innerText;
   var venue = currEle[0].childNodes[2].innerText;
-  $("body").empty();
+  $("#artist").empty();
   city = city.substring(0, city.length - 5);
   userid = localStorage.getItem('userid')
 $.post("/newconcert", {location,date,time,venue,userid});
