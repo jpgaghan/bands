@@ -101,14 +101,25 @@ var API = {
       console.log(response);
       eventArray = []
       
-      for (i = 0; i < 10; i++) {
-        console.log(response._embedded)
-        eventDates = response._embedded.events[i].dates.start.localDate;
-        eventTime = response._embedded.events[i].dates.start.localTime;
-        eventPics = response._embedded.events[i].images[0].url;
-        eventTitle = response._embedded.events[i].name;
-        ticketLink = response._embedded.events[i].url;
+      for (i = 0; i < 8; i++) {
+     
+      var eventsData =
+
+        `<div class ="col m3 eventDiv">
+        <img class="eventImages" src=${response._embedded.events[i].images[0].url}>
+        <p> ${response._embedded.events[i].name} </p>
+        <p> ${response._embedded.events[i].dates.start.localDate}</p>
+        <p> ${response._embedded.events[i].dates.start.localTime} </p>
+        <a href=${response._embedded.events[i].url}>
+
+        </div>
+        `
+
+        $("#attractions").append(eventsData); 
+        console.log(eventsData);
+
       }
+
     });
   },
   signIn: (email, password) => {
@@ -208,7 +219,20 @@ $(() => {
   $("#submit").on("click", function (event) {
     event.preventDefault();
     API.bandsApi();
+    API.ticketMaster
   });
+
+  //Populating hotel on different path /artist/hotel when clicking on city
+  // $("#submit").on("click", function (event) {
+  //   event.preventDefault();
+  //   $.get('/artist/hotel').then(function(res) {
+  //   API.bandsApi();
+  //   }).catch(function(err) {
+  //     console.log(err)
+  //   });
+  // });
+
+
 
   //listeners
   $("#signup").on("click", () => {
