@@ -27,7 +27,11 @@ module.exports = function(app) {
 
   app.post("/newuser", function (req,res) {
     db.Users.create(req.body).then((userInfo) => {});
-  })
+  });
+
+  app.post("/newconcert", (req,res) => {
+    db.Concerts.create(req.body).then((userinfo)=>{console.log(userinfo)})
+  });
 
   app.post("/band/image", function(req,res) {
     band = req.body
