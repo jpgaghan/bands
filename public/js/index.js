@@ -54,18 +54,18 @@ var API = {
             createDivs.append(data);
             $("#events").append(createDivs);
           };
-          //empty out input field after submission
-          document.getElementById("name").reset();
+
         })
     });
   },
-  yelpApi: (params) => {$.post("/restaurants", {...params}).then(response => console.log(response))
-    // var options = {
-    //   headers: {
-    //       "authorization": process.env.YELP_API_TOKEN
-    //   }
-  },
-  bandImage: (band) => {
+  yelpApi: (params) => {
+    $.post("/restaurants", { ...params }).then(response => console.log(response))
+    var options = {
+      headers: {
+        "authorization": process.env.YELP_API_TOKEN
+      }
+    },
+      bandImage: (band) => {
     $.post("/band/image", { bandname: band }).then((responseimage) => {
       Img = new Image();
       Img.src = responseimage
@@ -91,12 +91,12 @@ var API = {
 
       console.log(response);
 
-      eventArray = []
+      // eventArray = []
       for (i = 0; i < 8; i++) {
-     
-      var eventsData =
 
-        `<div class ="col m3 eventDiv">
+        var eventsData =
+
+          `<div class ="col m3 eventDiv">
         <img class="eventImages" src=${response._embedded.events[i].images[0].url}>
         <p> ${response._embedded.events[i].name} </p>
         <p> ${response._embedded.events[i].dates.start.localDate}</p>
@@ -106,7 +106,7 @@ var API = {
         </div>
         `
 
-        $("#attractions").append(eventsData); 
+        $("#attractions").append(eventsData);
         console.log(eventsData);
 
       }
@@ -134,7 +134,7 @@ var API = {
       console.log(user.user.uid, user.user.email)
       userid = user.user.uid;
       email = user.user.email;
-      $.post("/newuser", {userid,email});
+      $.post("/newuser", { userid, email });
       window.location.href = "/artist"
     })
       .catch(function (error) {
@@ -211,7 +211,6 @@ $(() => {
   $("#submit").on("click", function (event) {
     event.preventDefault();
     API.bandsApi();
-    API.ticketMaster
   });
 
   //Populating hotel on different path /artist/hotel when clicking on city
@@ -245,7 +244,7 @@ $(() => {
     $("iw-website").text();
     $("#iw-phone").text();
   });
-  
+
 });
 
 
@@ -287,9 +286,9 @@ $(document).on("click", ".concerts", (e) => {
   );
 });
 
-$(window).bind('hashchange', function() {
+$(window).bind('hashchange', function () {
   /* things */
- });
+});
 // createVariables = () => {
 //   event.preventDefault();
 //   console.log("I've been clicked");
