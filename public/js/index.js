@@ -59,8 +59,7 @@ var API = {
         })
     });
   },
-  yelpApi: () => {
-    $.post("/restaurants").then(response => console.log(response))
+  yelpApi: (params) => {$.post("/restaurants", {...params}).then(response => console.log(response))
     // var options = {
     //   headers: {
     //       "authorization": process.env.YELP_API_TOKEN
@@ -122,7 +121,12 @@ var API = {
       })
   },
   createUser: (email, password) => {
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then((user) => {
+      console.log(user)
+      console.log(user.user.uid, user.user.email)
+      userid = user.user.uid;
+      email = user.user.email;
+      $.post("/newuser", {userid,email});
       window.location.href = "/artist"
     })
       .catch(function (error) {
@@ -254,8 +258,10 @@ $(document).on("click", ".concerts", (e) => {
     eventData.city
   );
   API.yelpApi(
-    eventData.city, 
-    eventData.state
+    {
+      city: eventData.city,
+      state: eventData.state
+    }
   );
   API.googleHotels(
     eventData.city
@@ -280,9 +286,9 @@ $(window).bind('hashchange', function() {
 //   city = city.substring(0, city.length - 4)
 //   window.location.href = "/events"
 // }
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    console.log(user.uid);
-    localStorage.setItem("user", user.uid);
-  }
-});
+// firebase.auth().onAuthStateChanged((user) => {
+//   if (user) {
+//     console.log(user.uid);
+//     localStorage.setItem("user", user.uid);
+//   }
+// });
