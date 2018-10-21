@@ -101,7 +101,8 @@ var API = {
         <p> ${response._embedded.events[i].name} </p>
         <p> ${response._embedded.events[i].dates.start.localDate}</p>
         <p> ${response._embedded.events[i].dates.start.localTime} </p>
-        
+        <a href=${response._embedded.events[i].url}>
+
         </div>
         `
 
@@ -210,6 +211,7 @@ $(() => {
   $("#submit").on("click", function (event) {
     event.preventDefault();
     API.bandsApi();
+    API.ticketMaster
   });
 
   //Populating hotel on different path /artist/hotel when clicking on city
