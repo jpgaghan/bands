@@ -117,8 +117,8 @@ var API = {
   bandImage: (band) => {
     $.post("/band/image", { bandname: band }).then((responseimage) => {
       Img = new Image();
-      Img.src = responseimage
-      $(".bandimg").html(Img)
+      Img.src = responseimage;
+      $(".bandimg").html(Img);
     }
     )
   },
@@ -138,26 +138,21 @@ var API = {
       }
     }).then(function (response) {
       console.log(response);
-     
-      for (i = 0; i < 12; i++) {
-     
+
+      eventArray = [];
+      for (i = 0; i < 8; i++) {
       var eventsData =
-
-        `<div class ="col sm12 m3 eventDiv">
-        <img class="eventImages" src=${response._embedded.events[i].images[0].url}>
-        <p> ${response._embedded.events[i].name} </p>
-        <p> ${response._embedded.events[i].dates.start.localDate}</p>
-        <p> ${response._embedded.events[i].dates.start.localTime} </p>
-        <a href=${response._embedded.events[i].url}>
-        <button>Save to your Favorites Page!</button>
-
+        `<div class = "col m3 eventDiv">
+        <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
+        <p data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"> ${response._embedded.events[i].name} </p>
+        <p data-date="${response._embedded.events[i].dates.start.localDate}">${response._embedded.events[i].dates.start.localDate}</p>
+        <p data-time="${response._embedded.events[i].dates.start.localTime}">${response._embedded.events[i].dates.start.localTime}</p>
+        <a data-link="${response._embedded.events[i].url}" href=${response._embedded.events[i].url}>
         </div>
-         
-        `
+        `;
 
         $("#attractions").append(eventsData); 
         console.log(eventsData);
-
       }
 
     });
@@ -296,14 +291,14 @@ $(() => {
   
 });
 
-$(document).on("click", ".favevent", () => {
+$(document).on("click", ".eventDiv", (e) => {
   var currEle = $(e.currentTarget);
-  var eventdates = currEle[0].childNodes[5].innerText;
-  var eventtime = currEle[0].childNodes[5].dataset.sdate;
-  var eventpics = currEle[0].childNodes[5].dataset.edate;
-  var eventtitle = currEle[0].childNodes[5].innerText;
-  var ticketlink = currEle[0].childNodes[5].dataset.sdate;
-  var city = currEle[0].childNodes[5].dataset.edate;
+  var eventdates = currEle[0].childNodes[5].dataset.date;
+  var eventtime = currEle[0].childNodes[7].dataset.time;
+  var eventpics = currEle[0].childNodes[1].attributes[1].nodeValue;
+  var eventtitle = currEle[0].childNodes[3].dataset.name;
+  var ticketlink = currEle[0].childNodes[9].dataset.link; 
+  var city = currEle[0].childNodes[3].dataset.city;
   var userid = localStorage.getItem('userid');
   $.post("/event/favorite", {eventdates, eventtime, eventpics, eventtitle, ticketlink, city, userid}) 
 });
