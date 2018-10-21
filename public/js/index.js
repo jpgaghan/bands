@@ -111,7 +111,6 @@ var API = {
         <p> ${response._embedded.events[i].dates.start.localDate}</p>
         <p> ${response._embedded.events[i].dates.start.localTime} </p>
         <a href=${response._embedded.events[i].url}>
-
         </div>
         `
 
@@ -284,7 +283,7 @@ $(document).on("click", ".concerts", (e) => {
   var city = currEle[0].childNodes[1].innerText;
   var time = currEle[0].childNodes[7].innerText;
   var venue = currEle[0].childNodes[2].innerText;
-  $("body").empty();
+  $("#artist").empty();
   city = city.substring(0, city.length - 5);
   userid = localStorage.getItem('userid');
 $.post("/newconcert", {location,date,time,venue,userid});
