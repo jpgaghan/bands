@@ -99,6 +99,7 @@ var API = {
           <p> ${restArray[i].Phone} </p>
           <p> ${restArray[i].City} </p>
           <p> ${restArray[i].Rating} </p>
+          <button>Save to your Favorites Page!</button>
           </div>
       
           `
@@ -146,7 +147,9 @@ var API = {
         <p> ${response._embedded.events[i].dates.start.localDate}</p>
         <p> ${response._embedded.events[i].dates.start.localTime} </p>
         <a href=${response._embedded.events[i].url}>
+        <button>Save to your Favorites Page!</button>
         </div>
+         
         `
 
         $("#attractions").append(eventsData); 
