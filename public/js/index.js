@@ -121,7 +121,12 @@ var API = {
       })
   },
   createUser: (email, password) => {
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then((user) => {
+      console.log(user)
+      console.log(user.user.uid, user.user.email)
+      userid = user.user.uid;
+      email = user.user.email;
+      $.post("/newuser", {userid,email});
       window.location.href = "/artist"
     })
       .catch(function (error) {
@@ -281,9 +286,9 @@ $(window).bind('hashchange', function() {
 //   city = city.substring(0, city.length - 4)
 //   window.location.href = "/events"
 // }
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    console.log(user.uid);
-    localStorage.setItem("user", user.uid);
-  }
-});
+// firebase.auth().onAuthStateChanged((user) => {
+//   if (user) {
+//     console.log(user.uid);
+//     localStorage.setItem("user", user.uid);
+//   }
+// });
