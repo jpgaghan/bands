@@ -234,6 +234,18 @@ $(() => {
   
 });
 
+$(document).on("click", ".favevent", () => {
+  var currEle = $(e.currentTarget);
+  var eventdates = currEle[0].childNodes[5].innerText;
+  var eventtime = currEle[0].childNodes[5].dataset.sdate;
+  var eventpics = currEle[0].childNodes[5].dataset.edate;
+  var eventtitle = currEle[0].childNodes[5].innerText;
+  var ticketlink = currEle[0].childNodes[5].dataset.sdate;
+  var city = currEle[0].childNodes[5].dataset.edate;
+  var userid = localStorage.getItem('userid');
+  $.post("/event/favorite", {eventdates, eventtime, eventpics, eventtitle, ticketlink, city, userid}) 
+});
+
 $(document).on("click", ".concerts", (e) => {
   event.preventDefault();
   var currEle = $(e.currentTarget);
@@ -250,7 +262,7 @@ $(document).on("click", ".concerts", (e) => {
   var venue = currEle[0].childNodes[2].innerText;
   $("body").empty();
   city = city.substring(0, city.length - 5);
-  userid = localStorage.getItem('userid')
+  userid = localStorage.getItem('userid');
 $.post("/newconcert", {location,date,time,venue,userid});
   eventData = {
     location,
