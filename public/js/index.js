@@ -41,6 +41,7 @@ var API = {
         };
         i += 1;
       } while (countryCount < 12);
+
       $.post("/band/date", { '': dateArray })
         .then((dateresponse) => {
           // Loops through the events and adds them to the event rows
@@ -124,6 +125,7 @@ var API = {
         locale: "en"
       }
     }).then(function (response) {
+
       var dateArray = [];
       var timeArray = [];
       for (i=0; i<9; i++) {
@@ -146,6 +148,7 @@ var API = {
           `;
 
         $("#attractions").append(eventsData);
+
           }
       }
 
@@ -157,6 +160,7 @@ var API = {
       userid = user.user.uid;
       email = user.user.email;
       localStorage.setItem("userid", userid);
+
       // db queries
       // $.post("/db/concerts", {userid}). then((res) => {console.log(res)});
       // $.post("/db/hotels", {userid}).then((res) => {console.log(res)});

@@ -19,6 +19,7 @@ module.exports = function (app) {
     });
   });
 
+
   app.post("/db/hotels", (req, res) => {
     db.Hotels.findAll({
       where: {
@@ -57,6 +58,13 @@ module.exports = function (app) {
     });
   });
 
+  app.post("/event/favorite", function(req, res) {
+    db.Events.create(req.body).then(function(dbExample) {
+      res.json(dbExample);
+    });
+  });
+
+
   app.post("/res/favs", (req, res) => {
     db.Restaurants.create(req.body).then((dbExample) => {
       res.json(dbExample)
@@ -74,9 +82,8 @@ module.exports = function (app) {
     db.Restaurants.create(req.body).then((userinfo) => { console.log(userinfo) })
   });
 
-  app.post("/hotel/favorite", (req, res) => {
-    db.Hotels.create(req.body).then((userinfo) => { console.log(userinfo) })
-  });
+
+
 
   // spotify api request
   app.post("/band/image", function (req, res) {
