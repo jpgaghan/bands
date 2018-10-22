@@ -55,11 +55,11 @@ var API = {
             if (country === "United States") {
               console.log(dates)
               var data = `
-          <p class= "city"> ${response[i].venue.city} , ${response[i].venue.region}<p>
-          <p class = "venue"> ${response[i].venue.name}<p>
-          <p class = "dates" data-sdate = "${dates.sdates[countryCount]}" data-edate = "${dates.edates[countryCount]}"> ${dates.dates[countryCount]}<p>
-          <p class = "time" >${dates.times[countryCount]}<p>
-          `;
+              <p class= "city"> ${response[i].venue.city} , ${response[i].venue.region}<p>
+              <p class = "venue"> ${response[i].venue.name}<p>
+              <p class = "dates" data-sdate = "${dates.sdates[countryCount]}" data-edate = "${dates.edates[countryCount]}"> ${dates.dates[countryCount]}<p>
+              <p class = "time" >${dates.times[countryCount]}<p>
+              `;
               countryCount += 1;
               var createDivs = $("<div>").addClass("col sm12 m3 concerts");
               createDivs.append(data);
@@ -91,7 +91,7 @@ var API = {
       // Now read the saved restaurants data from Array and append
       for (i = 0; i < 9; i++) {
         phone = restArray[i].Phone.substring(2, restArray[i].Phone.length);
-        phone = `(${phone.substring(0,3)})${phone.substring(3,6)}-${phone.substring(6,10  )}`
+        phone = `(${phone.substring(0, 3)})${phone.substring(3, 6)}-${phone.substring(6, 10)}`
         var eventsData =
           `
         <div class="col sm12 m3 resDiv">
@@ -101,8 +101,8 @@ var API = {
           <p> ${restArray[i].Address1}</p>
           <p> ${restArray[i].City} </p>
           <p> ${phone} </p>
-          <p> rating: ${restArray[i].Rating}</p>
-          <button>Save to your Favorites Page!</button>
+          <p data-rating = ${restArray[i].Rating}>  Rating: ${restArray[i].Rating}</p>
+          <button id = "favrest"> Save to your Favorites Page!</button>
           </div>
       
           `
@@ -200,7 +200,8 @@ var API = {
   },
   googleHotels: (city) => {
     $("#hotels").show();
-// $("#hotels").append(hotelMap)
+    $( "#hotels" ).addClass(city);
+    // $("#hotels").append(hotelMap)
     console.log(city)
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: city }, function (results) {
@@ -279,9 +280,14 @@ $(() => {
 
 
   $(document).on("click", ".favhotel", () => {
-    $("iw-address").text();
-    $("iw-website").text();
-    $("#iw-phone").text();
+    console.log($("iw-address"))
+    var address = $("#iw-address").text();
+    var city = address.substring(address.indexOf(',')+1,address.length).trim();
+    var address = address.substring(0, address.indexOf(',')).trim(  );
+    var website = $("#iw-website").text();
+    var telephone = $("#iw-phone").text();
+    var userid = localStorage.getItem("userid");
+    $.post("/hotel/favorite", {address,website,telephone,userid,city})
   });
 
 });

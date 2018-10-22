@@ -33,6 +33,14 @@ module.exports = function(app) {
     db.Concerts.create(req.body).then((userinfo)=>{console.log(userinfo)})
   });
 
+  app.post("/restaurants/favorite", (req,res) => {
+    db.Restaurants.create(req.body).then((userinfo)=>{console.log(userinfo)})
+  });
+
+  app.post("/hotel/favorite", (req,res) => {
+    db.Hotels.create(req.body).then((userinfo)=>{console.log(userinfo)})
+  });
+
   app.post("/band/image", function(req,res) {
     band = req.body
     console.log(band)
