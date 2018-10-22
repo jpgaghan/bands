@@ -63,6 +63,12 @@ module.exports = function(app) {
     });
   });
 
+  app.post("/event/favorite", function(req, res) {
+    db.Events.create(req.body).then(function(dbExample) {
+      res.json(dbExample);
+    });
+  });
+
   app.post("/res/favs", (req,res) => {
     db.Restaurants.create(req.body).then((dbExample) => {
       console.log(dbExample)

@@ -159,10 +159,10 @@ var API = {
       userid = user.user.uid;
       email = user.user.email;
       localStorage.setItem("userid", userid);
-      $.post("/db/concerts", {userid}, (req, res) => {console.log(res)});
-      $.post("/db/hotels", {userid}, (req,res) => {console.log(res)});
-      $.post("/db/events", {userid}, (req,res) => {console.log(res)});
-      $.post("/db/restaurants", {userid}, (req,res) => {console.log(res)});
+      $.post("/db/concerts", {userid}). then((res) => {console.log(res)});
+      $.post("/db/hotels", {userid}).then((res) => {console.log(res)});
+      $.post("/db/events", {userid}).then((res) => {console.log(res)});
+      $.post("/db/restaurants", {userid}).then ((res) => {console.log(res)});
       $.post("/newuser", { userid, email });
       window.location.href = "/artist"
     })
@@ -306,18 +306,17 @@ $(document).on("click", ".concerts", (e) => {
   console.log(currEle)
   var location = currEle[0].childNodes[1].innerText;
   var state = location.slice(-2);
+  var city = location.substring(0,location.indexOf(',')).trim();
   // $.post("/state",state)
   var date = currEle[0].childNodes[5].innerText;
   var startDate = currEle[0].childNodes[5].dataset.sdate;
   var endDate = currEle[0].childNodes[5].dataset.edate;
   var limit = 10;
-  var city = currEle[0].childNodes[1].innerText;
   var time = currEle[0].childNodes[7].innerText;
   var venue = currEle[0].childNodes[3].innerText;
   $("#artist").empty();
-  city = city.substring(0, city.length - 5);
   userid = localStorage.getItem('userid');
-  $.post("/newconcert", { location, date, time, venue, userid });
+  $.post("/newconcert", { location, date, time, venue, userid, city});
   eventData = {
     location,
     state,
