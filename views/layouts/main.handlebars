@@ -45,65 +45,67 @@
       <div id="restaurants"></div>
     </div>
   </div>
-    <div class="container">
+  
+  <div class="container">
     <div class="row">
       <div id="hotels" style="display: none;">
         <div class="wrapper" id="hotelWrapper">
-  <!-- Hotel Wrapper Container -->
-  <div class="container">
-    <!-- City Name Banner -->
-    <div class="row">
-      <div class="col s12 m10 text-center banner" id="cityBanner"></div>
-    </div>
-    <!-- Map -->
-    <div class="row" id="mapRow">
-      {{!-- <div class="container"> --}}
-        <div class="card col s12" sid="mapCard">
-          <!-- Map Div -->
-          <div class="row" style="height:800px;" id="mapRow">
-            <div id="map" style="height:100%; width:100%;"></div>
-            <div id="listing" style="display: none;">
-              <table id="resultsTable">
-                <tbody id="results"></tbody>
-              </table>
+          <!-- Hotel Wrapper Container -->
+          <div class="container">
+            <!-- City Name Banner -->
+            <div class="row">
+              <div class="col s12 m10 text-center banner" id="cityBanner"></div>
+            </div>
+            <!-- Map -->
+            <div class="row" id="mapRow">
+              {{!-- <div class="container"> --}}
+                <div class="card col s12" sid="mapCard">
+                  <!-- Map Div -->
+                  <div class="row" style="height:800px;" id="mapRow">
+                    <div id="map" style="height:100%; width:100%;"></div>
+                    <div id="listing" style="display: none;">
+                      <table id="resultsTable">
+                        <tbody id="results"></tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <!-- Hotel Panel Information (When clicked in map) -->
+                  <div style="display: none">
+                    <div id="info-content">
+                      <table>
+                        <tr id="iw-url-row" class="iw_table_row">
+                          <td id="iw-icon" class="iw_table_icon"></td>
+                          <td id="iw-url"></td>
+                        </tr>
+                        <tr id="iw-address-row" class="iw_table_row">
+                          <td class="iw_attribute_name">Address:</td>
+                          <td id="iw-address"></td>
+                        </tr>
+                        <tr id="iw-phone-row" class="iw_table_row">
+                          <td class="iw_attribute_name">Telephone:</td>
+                          <td id="iw-phone"></td>
+                        </tr>
+                        <tr id="iw-rating-row" class="iw_table_row">
+                          <td class="iw_attribute_name">Rating:</td>
+                          <td id="iw-rating"></td>
+                        </tr>
+                        <tr id="iw-website-row" class="iw_table_row">
+                          <td class="iw_attribute_name">Website:</td>
+                          <td id="iw-website"></td>
+                        </tr>
+                        <tr>
+                          <td><button class="favhotel">choose hotel</button></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                  {{!--
+                </div> --}}
+                <!-- Choose a Hotel Banner -->
+              </div>
             </div>
           </div>
-          <!-- Hotel Panel Information (When clicked in map) -->
-          <div style="display: none">
-            <div id="info-content">
-              <table>
-                <tr id="iw-url-row" class="iw_table_row">
-                  <td id="iw-icon" class="iw_table_icon"></td>
-                  <td id="iw-url"></td>
-                </tr>
-                <tr id="iw-address-row" class="iw_table_row">
-                  <td class="iw_attribute_name">Address:</td>
-                  <td id="iw-address"></td>
-                </tr>
-                <tr id="iw-phone-row" class="iw_table_row">
-                  <td class="iw_attribute_name">Telephone:</td>
-                  <td id="iw-phone"></td>
-                </tr>
-                <tr id="iw-rating-row" class="iw_table_row">
-                  <td class="iw_attribute_name">Rating:</td>
-                  <td id="iw-rating"></td>
-                </tr>
-                <tr id="iw-website-row" class="iw_table_row">
-                  <td class="iw_attribute_name">Website:</td>
-                  <td id="iw-website"></td>
-                </tr>
-                <tr>
-                  <td><button class = "favhotel">choose hotel</button></td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        {{!-- </div> --}}
-        <!-- Choose a Hotel Banner -->
-      </div>
-    </div>
-  </div>
-</div>
+        </div>
       </div>
     </div>
   </div>
