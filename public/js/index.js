@@ -79,11 +79,14 @@ var API = {
  
       for (var i = 0; i < 10; i++) {
         restArray.push({
+        Pic: response.businesses[i].image_url,
         Name: response.businesses[i].name,
         Phone: response.businesses[i].phone,
         Address1: response.businesses[i].location.address1,
         City: response.businesses[i].location.city,
-        Rating: response.businesses[i].rating })
+        Rating: response.businesses[i].rating,
+        Url: response.businesses[i].url
+       })
       }
       console.log("Values stored in restArray for restaurants:", restArray);
       console.log(response);
@@ -94,13 +97,13 @@ var API = {
 
           `
         <div class="col sm12 m3 resDiv">
-          <p><h6>Suggested Restaurant</h6></p>
-          <hr>
-          <p> ${restArray[i].Name} </p>
+          <img class="resImages" src=${restArray[i].Pic}>
+          <p><a href = ${restArray[i].Url}>${restArray[i].Name}</a></p>
           <p> ${restArray[i].Address1}</p>
           <p> ${restArray[i].Phone} </p>
           <p> ${restArray[i].City} </p>
           <p> ${restArray[i].Rating} </p>
+          <a href=${restArray[i].Url}>
           <button>Save to your Favorites Page!</button>
           </div>
       
