@@ -38,35 +38,33 @@ var API = {
         let country = concertdata[i].venue.country;
         if (country === "United States") {
           dateArray.push(concertdata[i].datetime);
-          countryCount +=1;
+          countryCount += 1;
         };
-        i+=1;
-        }  while (countryCount <12);
+        i += 1;
+      } while (countryCount < 12);
       console.log(dateArray)
       $.post("/band/date", { '': dateArray })
         .then((dateresponse) => {
           // Loops through the events and adds them to the event rows
           let countryCount = 0;
           let i = 0;
-      do {
-        const dates = dateresponse
-        console.log(dates)
-        let country = response[i].venue.country
-        if (country === "United States") {
-          console.log(dates)
-          var data = `
-          <p class= "city"> ${response[i].venue.city} , ${response[i].venue.region}<p>
-          <p class = "venue"> ${response[i].venue.name}<p>
-          <p class = "dates" data-sdate = "${dates.sdates[countryCount]}" data-edate = "${dates.edates[countryCount]}"> ${dates.dates[countryCount]}<p>
-          <p class = "time" >${dates.times[countryCount]}<p>
-          `;
-          countryCount += 1;
-          var createDivs = $("<div>").addClass("col sm12 m3 concerts");
-          createDivs.append(data);
-          $("#events").append(createDivs);
-          };
-          i += 1          
-        } while (countryCount <12);
+          do {
+            const dates = dateresponse
+            let country = response[i].venue.country
+            if (country === "United States") {
+              var data = `
+              <p class= "city"> ${response[i].venue.city} , ${response[i].venue.region}<p>
+              <p class = "venue"> ${response[i].venue.name}<p>
+              <p class = "dates" data-sdate = "${dates.sdates[countryCount]}" data-edate = "${dates.edates[countryCount]}"> ${dates.dates[countryCount]}<p>
+              <p class = "time" >${dates.times[countryCount]}<p>
+              `;
+              countryCount += 1;
+              var createDivs = $("<div>").addClass("col sm12 m3 concerts");
+              createDivs.append(data);
+              $("#events").append(createDivs);
+            };
+            i += 1
+          } while (countryCount < 12);
           //empty out input field after submission
           document.getElementById("name").reset();
         })
@@ -76,47 +74,47 @@ var API = {
     $.post("/restaurants", { ...params }).then(response => {
       // store the restaurant data in array so we can use it later to display
       restArray = [];
- 
+
       for (var i = 0; i < 10; i++) {
         restArray.push({
-        Name: response.businesses[i].name,
-        Phone: response.businesses[i].phone,
-        Address1: response.businesses[i].location.address1,
-        City: response.businesses[i].location.city,
-        Rating: response.businesses[i].rating })
+          Pic: response.businesses[i].image_url,
+          Name: response.businesses[i].name,
+          Phone: response.businesses[i].phone,
+          Address1: response.businesses[i].location.address1,
+          City: response.businesses[i].location.city,
+          Rating: response.businesses[i].rating,
+          Url: response.businesses[i].url
+        })
       }
       console.log("Values stored in restArray for restaurants:", restArray);
       console.log(response);
-      // Now read the save restaurants data from Array and append
-       for (i = 0; i < 10; i++) {
- 
+      // Now read the saved restaurants data from Array and append
+      for (i = 0; i < 9; i++) {
+        phone = restArray[i].Phone.substring(2, restArray[i].Phone.length);
+        phone = `(${phone.substring(0, 3)})${phone.substring(3, 6)}-${phone.substring(6, 10)}`
         var eventsData =
-
-          `
+        `
         <div class="col sm12 m3 resDiv">
-          <p> ${restArray[i].Name} </p>
-          <p> ${restArray[i].Address1}</p>
-          <p> ${restArray[i].Phone} </p>
-          <p> ${restArray[i].City} </p>
-          <p> ${restArray[i].Rating} </p>
-          <button>Save to your Favorites Page!</button>
-          </div>
-      
-          `
-          // var createDivs = $("<div>").addClass("col sm12 m3 Restaurants");
-          // createDivs.append(eventsData);
-          $("#restaurants").append(eventsData);
-          console.log(eventsData);
- 
-        }
- 
-  })
- },
+        <img class="resImages" src=${restArray[i].Pic}>
+        <p><a href = ${restArray[i].Url}>${restArray[i].Name}</a></p>
+        <p>${restArray[i].Address1}</p>
+        <p> ${restArray[i].City} </p>
+        <p> ${phone}</p>
+        <p > ${restArray[i].Rating} </p>
+        <button class ="resfav" data-rating="${restArray[i].Rating}" data-phone="${phone}" data-city="${restArray[i].City}" 
+        data-address="${restArray[i].Address1}" data-image = "${restArray[i].Pic}" data-url="${restArray[i].Url}" data-name="${restArray[i].Name}">Save to your Favorites Page!</button>
+        </div>
+        `
+        $("#restaurants").append(eventsData);
+        console.log(eventsData);
+      }
+    })
+  },
   bandImage: (band) => {
     $.post("/band/image", { bandname: band }).then((responseimage) => {
       Img = new Image();
-      Img.src = responseimage
-      $(".bandimg").html(Img)
+      Img.src = responseimage;
+      $(".bandimg").html(Img);
     }
     )
   },
@@ -136,26 +134,21 @@ var API = {
       }
     }).then(function (response) {
       console.log(response);
-     
-      for (i = 0; i < 12; i++) {
-     
-      var eventsData =
 
-        `<div class ="col sm12 m3 eventDiv">
-        <img class="eventImages" src=${response._embedded.events[i].images[0].url}>
-        <p> ${response._embedded.events[i].name} </p>
-        <p> ${response._embedded.events[i].dates.start.localDate}</p>
-        <p> ${response._embedded.events[i].dates.start.localTime} </p>
-        <a href=${response._embedded.events[i].url}>
-        <button>Save to your Favorites Page!</button>
+      eventArray = [];
+      for (i = 0; i < 9; i++) {
+        var eventsData =
+          `<div class = "col m3 eventDiv">
+          <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
+          <p data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"> ${response._embedded.events[i].name} </p>
+          <p data-date="${response._embedded.events[i].dates.start.localDate}">${response._embedded.events[i].dates.start.localDate}</p>
+          <p data-time="${response._embedded.events[i].dates.start.localTime}">${response._embedded.events[i].dates.start.localTime}</p>
+          <a data-link="${response._embedded.events[i].url}" href=${response._embedded.events[i].url}>
+          </div>
+          `;
 
-        </div>
-         
-        `
-
-        $("#attractions").append(eventsData); 
+        $("#attractions").append(eventsData);
         console.log(eventsData);
-
       }
 
     });
@@ -166,7 +159,11 @@ var API = {
       userid = user.user.uid;
       email = user.user.email;
       localStorage.setItem("userid", userid);
-      $.post("/newuser", {userid,email});
+      $.post("/db/concerts", {userid}). then((res) => {console.log(res)});
+      $.post("/db/hotels", {userid}).then((res) => {console.log(res)});
+      $.post("/db/events", {userid}).then((res) => {console.log(res)});
+      $.post("/db/restaurants", {userid}).then ((res) => {console.log(res)});
+      $.post("/newuser", { userid, email });
       window.location.href = "/artist"
     })
       .catch(function (error) {
@@ -183,7 +180,7 @@ var API = {
       userid = user.user.uid;
       email = user.user.email;
       localStorage.setItem("userid", userid);
-      $.post("/newuser", {userid,email});
+      $.post("/newuser", { userid, email });
       window.location.href = "/artist"
     })
       .catch(function (error) {
@@ -192,7 +189,6 @@ var API = {
         var errorMessage = error.message;
         // ...
       });
-
   },
   deleteExample: function (id) {
     return $.ajax({
@@ -201,6 +197,10 @@ var API = {
     });
   },
   googleHotels: (city) => {
+    $("#hotels").show();
+    $( "#hotels" ).addClass(city);
+    // $("#hotels").append(hotelMap)
+    console.log(city)
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: city }, function (results) {
       map.setCenter(results[0].geometry.location);
@@ -260,15 +260,6 @@ $(() => {
     API.ticketMaster
   });
 
-  //Populating hotel on different path /artist/hotel when clicking on city
-  // $("#submit").on("click", function (event) {
-  //   event.preventDefault();
-  //   $.get('/artist/hotel').then(function(res) {
-  //   API.bandsApi();
-  //   }).catch(function(err) {
-  //     console.log(err)
-  //   });
-  // });
 
   //listeners
   $("#signup").on("click", () => {
@@ -285,25 +276,28 @@ $(() => {
     API.signIn(email, password);
   });
 
-
   $(document).on("click", ".favhotel", () => {
-    $("iw-address").text();
-    $("iw-website").text();
-    $("#iw-phone").text();
+    console.log($("iw-address"))
+    var address = $("#iw-address").text();
+    var city = address.substring(address.indexOf(',')+1,address.length).trim();
+    var address = address.substring(0, address.indexOf(',')).trim(  );
+    var website = $("#iw-website").text();
+    var telephone = $("#iw-phone").text();
+    var userid = localStorage.getItem("userid");
+    $.post("/hotel/favorite", {address,website,telephone,userid,city})
   });
-  
 });
 
-$(document).on("click", ".favevent", () => {
+$(document).on("click", ".eventDiv", (e) => {
   var currEle = $(e.currentTarget);
-  var eventdates = currEle[0].childNodes[5].innerText;
-  var eventtime = currEle[0].childNodes[5].dataset.sdate;
-  var eventpics = currEle[0].childNodes[5].dataset.edate;
-  var eventtitle = currEle[0].childNodes[5].innerText;
-  var ticketlink = currEle[0].childNodes[5].dataset.sdate;
-  var city = currEle[0].childNodes[5].dataset.edate;
+  var eventdates = currEle[0].childNodes[5].dataset.date;
+  var eventtime = currEle[0].childNodes[7].dataset.time;
+  var eventpics = currEle[0].childNodes[1].attributes[1].nodeValue;
+  var eventtitle = currEle[0].childNodes[3].dataset.name;
+  var ticketlink = currEle[0].childNodes[9].dataset.link;
+  var city = currEle[0].childNodes[3].dataset.city;
   var userid = localStorage.getItem('userid');
-  $.post("/event/favorite", {eventdates, eventtime, eventpics, eventtitle, ticketlink, city, userid}) 
+  $.post("/event/favorite", { eventdates, eventtime, eventpics, eventtitle, ticketlink, city, userid })
 });
 
 $(document).on("click", ".concerts", (e) => {
@@ -312,18 +306,17 @@ $(document).on("click", ".concerts", (e) => {
   console.log(currEle)
   var location = currEle[0].childNodes[1].innerText;
   var state = location.slice(-2);
+  var city = location.substring(0,location.indexOf(',')).trim();
   // $.post("/state",state)
   var date = currEle[0].childNodes[5].innerText;
   var startDate = currEle[0].childNodes[5].dataset.sdate;
   var endDate = currEle[0].childNodes[5].dataset.edate;
   var limit = 10;
-  var city = currEle[0].childNodes[1].innerText;
   var time = currEle[0].childNodes[7].innerText;
-  var venue = currEle[0].childNodes[2].innerText;
+  var venue = currEle[0].childNodes[3].innerText;
   $("#artist").empty();
-  city = city.substring(0, city.length - 5);
   userid = localStorage.getItem('userid');
-$.post("/newconcert", {location,date,time,venue,userid});
+  $.post("/newconcert", { location, date, time, venue, userid, city});
   eventData = {
     location,
     state,
@@ -348,3 +341,26 @@ $.post("/newconcert", {location,date,time,venue,userid});
     eventData.city
   );
 });
+
+$(document).on("click", ".resfav", (e) => {
+  event.preventDefault();
+  // data-rating="${restArray[i].Rating}" data-phone="${phone}" data-city="${restArray[i].City}" 
+  //       data-address="${restArray[i].Address1}" data-url="${restArray[i].Url} data-name=
+  var currEle = $(e.currentTarget);
+  var street = currEle[0].dataset.address;
+  var rating = currEle[0].dataset.rating;
+  var phone = currEle[0].dataset.phone;
+  var city = currEle[0].dataset.city;
+  var url = currEle[0].dataset.url;
+  var name = currEle[0].dataset.name;
+  var img = currEle[0].dataset.image;
+  var userid = localStorage.getItem("userid");
+  $.post("/res/favs",{street, rating, phone, city, url, name, img, userid});
+})
+
+$(document).on("click", ".favorites", (e) => {
+  // $.get("/db/concerts", (req, res) => {console.log(res)});
+  // $.get("/db/hotels", (req,res) => {console.log(res)});
+  // $.get("/db/events", (req,res) => {console.log(res)});
+  // $.get("/db/restaurants", (req,res) => {console.log(res)});
+})

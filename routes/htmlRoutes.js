@@ -46,8 +46,17 @@ module.exports = function (app) {
   app.get("/hotel", function (req, res) {
     res.render("hotel");
   });
+  app.get("/login", function (req, res) {
+    res.render("login");
+  });
+
+
   app.get("/events", function (req, res) {
     res.render("events");
+  });
+
+  app.get("/favorites", function (req, res) {
+    res.render("favorites");
   });
 
   // Render 404 page for any unmatched routes
