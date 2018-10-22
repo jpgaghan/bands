@@ -73,14 +73,14 @@ var API = {
       restArray = [];
       for (var i = 0; i < 10; i++) {
         restArray.push({
-          Pic: response.businesses[i].image_url,
-          Name: response.businesses[i].name,
-          Phone: response.businesses[i].phone,
-          Address1: response.businesses[i].location.address1,
-          City: response.businesses[i].location.city,
-          Rating: response.businesses[i].rating,
-          Url: response.businesses[i].url
-        })
+        Pic: response.businesses[i].image_url,
+        Name: response.businesses[i].name,
+        Phone: response.businesses[i].phone,
+        Address1: response.businesses[i].location.address1,
+        City: response.businesses[i].location.city,
+        Rating: response.businesses[i].rating,
+        Url: response.businesses[i].url
+       })
       }
       // Now read the saved restaurants data from Array and append
       for (i = 0; i < 9; i++) {
@@ -89,20 +89,26 @@ var API = {
         var eventsData =
         `
         <div class="col sm12 m3 resDiv">
-        <img class="resImages" src=${restArray[i].Pic}>
-        <p><a href = ${restArray[i].Url}>${restArray[i].Name}</a></p>
-        <p>${restArray[i].Address1}</p>
-        <p> ${restArray[i].City} </p>
-        <p> ${phone}</p>
-        <p > ${restArray[i].Rating} </p>
-        <button class ="resfav" data-rating="${restArray[i].Rating}" data-phone="${phone}" data-city="${restArray[i].City}" 
-        data-address="${restArray[i].Address1}" data-image = "${restArray[i].Pic}" data-url="${restArray[i].Url}" data-name="${restArray[i].Name}">Save to your Favorites Page!</button>
-        </div>
-        `
-        $("#restaurants").append(eventsData);
-      }
-    })
-  },
+          <img class="resImages" src=${restArray[i].Pic}>
+          <p><a href = ${restArray[i].Url}>${restArray[i].Name}</a></p>
+          <p> ${restArray[i].Address1}</p>
+          <p> ${restArray[i].Phone} </p>
+          <p> ${restArray[i].City} </p>
+          <p> ${restArray[i].Rating} </p>
+          <a href=${restArray[i].Url}>
+          <button>Save to your Favorites Page!</button>
+          </div>
+      
+          `
+          // var createDivs = $("<div>").addClass("col sm12 m3 Restaurants");
+          // createDivs.append(eventsData);
+          $("#restaurants").append(eventsData);
+          console.log(eventsData);
+ 
+        }
+ 
+  })
+ },
   bandImage: (band) => {
     $.post("/band/image", { bandname: band }).then((responseimage) => {
       Img = new Image();
