@@ -16,6 +16,7 @@ firebase.initializeApp(config)
 
 var database = firebase.database();
 
+
 var API = {
   bandsApi: () => {
     const band = $("#name").val();
