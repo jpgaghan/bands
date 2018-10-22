@@ -19,7 +19,6 @@ var database = firebase.database();
 var API = {
   bandsApi: () => {
     const band = $("#name").val();
-    console.log(band)
     var URL = "https://rest.bandsintown.com/artists/" + band + "/events?app_id=codingbootcamp";
     $.ajax({
       url: URL,
@@ -42,7 +41,6 @@ var API = {
         };
         i += 1;
       } while (countryCount < 12);
-      console.log(dateArray)
       $.post("/band/date", { '': dateArray })
         .then((dateresponse) => {
           // Loops through the events and adds them to the event rows
@@ -65,8 +63,6 @@ var API = {
             };
             i += 1
           } while (countryCount < 12);
-          //empty out input field after submission
-          document.getElementById("name").reset();
         })
     });
   },
@@ -74,7 +70,6 @@ var API = {
     $.post("/restaurants", { ...params }).then(response => {
       // store the restaurant data in array so we can use it later to display
       restArray = [];
-
       for (var i = 0; i < 10; i++) {
         restArray.push({
           Pic: response.businesses[i].image_url,
@@ -86,8 +81,6 @@ var API = {
           Url: response.businesses[i].url
         })
       }
-      console.log("Values stored in restArray for restaurants:", restArray);
-      console.log(response);
       // Now read the saved restaurants data from Array and append
       for (i = 0; i < 9; i++) {
         phone = restArray[i].Phone.substring(2, restArray[i].Phone.length);
@@ -106,7 +99,6 @@ var API = {
         </div>
         `
         $("#restaurants").append(eventsData);
-        console.log(eventsData);
       }
     })
   },
@@ -120,7 +112,6 @@ var API = {
   },
   ticketMaster: (startDate, endDate, limit, city) => {
     event.preventDefault();
-    console.log("I've been clicked");
     var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=Z5KkKdg29zBxIkQFJCnXrG3TnUXuj1YW";
     $.ajax({
       url: queryURL,
@@ -133,36 +124,44 @@ var API = {
         locale: "en"
       }
     }).then(function (response) {
-      console.log(response);
-
-      eventArray = [];
-      for (i = 0; i < 9; i++) {
+      var dateArray = [];
+      var timeArray = [];
+      for (i=0; i<9; i++) {
+        if(i<response._embedded.events.length) {
+        dateArray.push(response._embedded.events[i].dates.start.localDate);
+        timeArray.push(response._embedded.events[i].dates.start.localTime);
+      }
+      }
+      $.post("/event/date", { '':dateArray}).then((dateresponse) => {
+        for (i = 0; i < 9; i++) {
+          if(i<response._embedded.events.length) {
         var eventsData =
           `<div class = "col m3 eventDiv">
           <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
           <p data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"> ${response._embedded.events[i].name} </p>
-          <p data-date="${response._embedded.events[i].dates.start.localDate}">${response._embedded.events[i].dates.start.localDate}</p>
+          <p data-date="${response._embedded.events[i].dates.start.localDate}">${dateresponse.dates[i]}</p>
           <p data-time="${response._embedded.events[i].dates.start.localTime}">${response._embedded.events[i].dates.start.localTime}</p>
           <a data-link="${response._embedded.events[i].url}" href=${response._embedded.events[i].url}>
           </div>
           `;
 
         $("#attractions").append(eventsData);
-        console.log(eventsData);
+          }
       }
 
     });
-  },
+  })
+},
   signIn: (email, password) => {
-    console.log(`here`)
     firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
       userid = user.user.uid;
       email = user.user.email;
       localStorage.setItem("userid", userid);
-      $.post("/db/concerts", {userid}). then((res) => {console.log(res)});
-      $.post("/db/hotels", {userid}).then((res) => {console.log(res)});
-      $.post("/db/events", {userid}).then((res) => {console.log(res)});
-      $.post("/db/restaurants", {userid}).then ((res) => {console.log(res)});
+      // db queries
+      // $.post("/db/concerts", {userid}). then((res) => {console.log(res)});
+      // $.post("/db/hotels", {userid}).then((res) => {console.log(res)});
+      // $.post("/db/events", {userid}).then((res) => {console.log(res)});
+      // $.post("/db/restaurants", {userid}).then ((res) => {console.log(res)});
       $.post("/newuser", { userid, email });
       window.location.href = "/artist"
     })
@@ -199,8 +198,6 @@ var API = {
   googleHotels: (city) => {
     $("#hotels").show();
     $( "#hotels" ).addClass(city);
-    // $("#hotels").append(hotelMap)
-    console.log(city)
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: city }, function (results) {
       map.setCenter(results[0].geometry.location);
@@ -211,34 +208,6 @@ var API = {
   }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function () {
-  API.getExamples().then(function (data) {
-    var $examples = data.map(function (example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
-
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
-
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
-};
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
 var handleDeleteBtnClick = function () {
@@ -254,7 +223,7 @@ var handleDeleteBtnClick = function () {
 // Add event listeners to the submit and delete buttons
 
 $(() => {
-  $("#submit").on("click", function (event) {
+  $("#submit").on("click", (event) => {
     event.preventDefault();
     API.bandsApi();
     API.ticketMaster
@@ -277,7 +246,6 @@ $(() => {
   });
 
   $(document).on("click", ".favhotel", () => {
-    console.log($("iw-address"))
     var address = $("#iw-address").text();
     var city = address.substring(address.indexOf(',')+1,address.length).trim();
     var address = address.substring(0, address.indexOf(',')).trim(  );
@@ -303,11 +271,9 @@ $(document).on("click", ".eventDiv", (e) => {
 $(document).on("click", ".concerts", (e) => {
   event.preventDefault();
   var currEle = $(e.currentTarget);
-  console.log(currEle)
   var location = currEle[0].childNodes[1].innerText;
   var state = location.slice(-2);
   var city = location.substring(0,location.indexOf(',')).trim();
-  // $.post("/state",state)
   var date = currEle[0].childNodes[5].innerText;
   var startDate = currEle[0].childNodes[5].dataset.sdate;
   var endDate = currEle[0].childNodes[5].dataset.edate;
@@ -344,8 +310,6 @@ $(document).on("click", ".concerts", (e) => {
 
 $(document).on("click", ".resfav", (e) => {
   event.preventDefault();
-  // data-rating="${restArray[i].Rating}" data-phone="${phone}" data-city="${restArray[i].City}" 
-  //       data-address="${restArray[i].Address1}" data-url="${restArray[i].Url} data-name=
   var currEle = $(e.currentTarget);
   var street = currEle[0].dataset.address;
   var rating = currEle[0].dataset.rating;
