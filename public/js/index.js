@@ -59,7 +59,8 @@ var API = {
         })
     });
   },
-  yelpApi: (params) => {$.post("/restaurants", {...params}).then(response => console.log(response))
+  yelpApi: (params) => {
+    $.post("/restaurants", { ...params }).then(response => console.log(response))
     // var options = {
     //   headers: {
     //       "authorization": process.env.YELP_API_TOKEN
@@ -126,7 +127,7 @@ var API = {
       console.log(user.user.uid, user.user.email)
       userid = user.user.uid;
       email = user.user.email;
-      $.post("/newuser", {userid,email});
+      $.post("/newuser", { userid, email });
       window.location.href = "/artist"
     })
       .catch(function (error) {
@@ -226,7 +227,7 @@ $(() => {
     $("iw-website").text();
     $("#iw-phone").text();
   });
-  
+
 });
 
 
@@ -268,9 +269,9 @@ $(document).on("click", ".concerts", (e) => {
   );
 });
 
-$(window).bind('hashchange', function() {
+$(window).bind('hashchange', function () {
   /* things */
- });
+});
 // createVariables = () => {
 //   event.preventDefault();
 //   console.log("I've been clicked");

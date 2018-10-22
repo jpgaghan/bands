@@ -2,7 +2,7 @@ var db = require("../models");
 var moment = require("moment");
 var keys = require("../keys.js");
 var Spotify = require('node-spotify-api');
-var spotify = new Spotify(keys.spotify);
+// var spotify = new Spotify(keys.spotify);
 var fetchUrl = require("fetch").fetchUrl;
 var state;
 
