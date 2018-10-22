@@ -158,6 +158,7 @@ var API = {
     firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
       userid = user.user.uid;
       email = user.user.email;
+      localStorage.setItem("userid", userid);
       $.post("/db/concerts", {userid}, (req, res) => {console.log(res)});
       $.post("/db/hotels", {userid}, (req,res) => {console.log(res)});
       $.post("/db/events", {userid}, (req,res) => {console.log(res)});
