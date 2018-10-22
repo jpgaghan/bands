@@ -12,11 +12,49 @@ module.exports = function(app) {
     state = req.body.sloc;
   });
 
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
+  app.post("/db/concerts", function(req, res) {
+    // db.Concerts.findAll({
+    //   where: {
+    //   userid: req.body.userid
+    // },
+    // group: ['city']
+    // }).then(function(dbExamples) {
+    //   res.json(dbExamples);
+    // });
+
   });
+
+  app.post("/db/hotels", (req,res) => {
+    // db.Hotels.findAll({
+    //   where: {
+    //   userid: req.body.userid},
+    //   group: ['city']
+    // }).then(function(dbExamples) {
+    //   res.json(dbExamples);
+    // });
+  })
+
+  app.post("/db/events", (req,res)=>{
+    // db.Events.findAll({
+    //   where: {
+    //   userid: req.body.userid},
+    //   group: ['city']
+    // }).then(function(dbExamples) {
+    //   res.json(dbExamples);
+    // });
+    
+  })
+  app.post("/db/restaurants", (req,res)=>{
+    console.log(req.body)
+    db.Events.findAll({
+      where: {
+      userid: req.body.userid},
+      group: ['city']
+    }).then(function(dbExamples) {
+      console.log(dbExamples)
+      res.json(dbExamples);
+    }); 
+  })
 
   // Create a new example
   app.post("/api/examples", function(req, res) {
@@ -25,12 +63,31 @@ module.exports = function(app) {
     });
   });
 
+  app.post("/event/favorite", function(req, res) {
+    db.Events.create(req.body).then(function(dbExample) {
+      res.json(dbExample);
+    });
+  });
+
+  app.post("/res/favs", (req,res) => {
+    db.Restaurants.create(req.body).then((dbExample) => {
+      console.log(dbExample)
+      res.json(dbExample)})
+  })
   app.post("/newuser", function (req,res) {
     db.Users.create(req.body).then((userInfo) => {});
   });
 
   app.post("/newconcert", (req,res) => {
     db.Concerts.create(req.body).then((userinfo)=>{console.log(userinfo)})
+  });
+
+  app.post("/restaurants/favorite", (req,res) => {
+    db.Restaurants.create(req.body).then((userinfo)=>{console.log(userinfo)})
+  });
+
+  app.post("/hotel/favorite", (req,res) => {
+    db.Hotels.create(req.body).then((userinfo)=>{console.log(userinfo)})
   });
 
   app.post("/band/image", function(req,res) {
