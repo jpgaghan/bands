@@ -12,11 +12,49 @@ module.exports = function(app) {
     state = req.body.sloc;
   });
 
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
+  app.post("/db/concerts", function(req, res) {
+    // db.Concerts.findAll({
+    //   where: {
+    //   userid: req.body.userid
+    // },
+    // group: ['city']
+    // }).then(function(dbExamples) {
+    //   res.json(dbExamples);
+    // });
+
   });
+
+  app.post("/db/hotels", (req,res) => {
+    // db.Hotels.findAll({
+    //   where: {
+    //   userid: req.body.userid},
+    //   group: ['city']
+    // }).then(function(dbExamples) {
+    //   res.json(dbExamples);
+    // });
+  })
+
+  app.post("/db/events", (req,res)=>{
+    // db.Events.findAll({
+    //   where: {
+    //   userid: req.body.userid},
+    //   group: ['city']
+    // }).then(function(dbExamples) {
+    //   res.json(dbExamples);
+    // });
+    
+  })
+  app.post("/db/restaurants", (req,res)=>{
+    console.log(req.body)
+    db.Events.findAll({
+      where: {
+      userid: req.body.userid},
+      group: ['city']
+    }).then(function(dbExamples) {
+      console.log(dbExamples)
+      res.json(dbExamples);
+    }); 
+  })
 
   // Create a new example
   app.post("/api/examples", function(req, res) {
@@ -25,6 +63,11 @@ module.exports = function(app) {
     });
   });
 
+  app.post("/res/favs", (req,res) => {
+    db.Restaurants.create(req.body).then((dbExample) => {
+      console.log(dbExample)
+      res.json(dbExample)})
+  })
   app.post("/newuser", function (req,res) {
     db.Users.create(req.body).then((userInfo) => {});
   });
