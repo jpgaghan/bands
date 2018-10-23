@@ -12,7 +12,7 @@ var config = {
   messagingSenderId: "518120117449"
 };
 
-firebase.initializeApp(config);
+firebase.initializeApp(config)
 
 var database = firebase.database();
 
@@ -34,11 +34,12 @@ var API = {
       let i = 0
       do {
         const concertdata = response;
-        let country = concertdata[i].venue.country;
-        if (country === "United States") {
+        if (i< concertdata.length) {
+        // if (country === "United States") {
           dateArray.push(concertdata[i].datetime);
-          countryCount += 1;
-        };
+        // };
+      }
+        countryCount += 1;
         i += 1;
       } while (countryCount < 12);
 
@@ -50,18 +51,22 @@ var API = {
           do {
             const dates = dateresponse
             let country = response[i].venue.country
-            if (country === "United States") {
+            // if (country === "United States") {
+              if (i< response.length) {
               var data = `
               <p class= "city"> ${response[i].venue.city} , ${response[i].venue.region}<p>
               <p class = "venue"> ${response[i].venue.name}<p>
               <p class = "dates" data-sdate = "${dates.sdates[countryCount]}" data-edate = "${dates.edates[countryCount]}"> ${dates.dates[countryCount]}<p>
               <p class = "time" >${dates.times[countryCount]}<p>
               `;
-              countryCount += 1;
+
+              
               var createDivs = $("<div>").addClass("col sm12 m3 concerts");
               createDivs.append(data);
               $("#events").append(createDivs);
-            };
+              }
+              countryCount += 1;
+            // };
             i += 1
           } while (countryCount < 12);
         })
