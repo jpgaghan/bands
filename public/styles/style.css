@@ -13,9 +13,18 @@ body {
     text-align: center;
     border-radius: 10px;
     /* background: #eceff1; */
-    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.22), 0 25px 55px 0 rgba(0,0,0,0.21);
+    box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
     margin: 2%;
+    cursor: pointer;
 }
+
+.cityEvents {
+  margin: auto;
+}
+.noConcerts {
+  text-align: center;
+}
+
 .concerts:hover {
   background-color: #84ffff;
 }
@@ -44,16 +53,26 @@ margin-bottom: 0px;
 }
 
 .eventDiv {
-width: 100%;
-/* background: white; */
-color: black;
-margin: 2%;
-text-align: center;
+  text-align: center;
+  border-radius: 5px;
+  background: #eceff1;
+  box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
+  margin: 2%;
+  cursor: pointer;
+}
+
+.favBtn {
+  background-color: #bdbdbd;
+  text-align: center;
+  color: white;
+  margin-bottom: 5px;
+  border-radius: 5px;
 }
 
 .eventImages {
-width: 50%;
-height: 50%;
+margin-top: 3%;
+width: 75px;
+height: 75px;
 }
 .header {
   margin: -2.9rem 0 1.68rem 0;
@@ -67,7 +86,7 @@ flex-wrap: wrap;
   margin: 2%;
 } */
 
-
+/* 
 .resDiv {
 width: 100%;
 background: white;
@@ -75,7 +94,7 @@ color: black;
 margin: 2%;
 text-align: center;
 
-}
+} */
 
 #backgroundImage {
 background-image: url("../assets/crowd-png-4.png");
@@ -109,9 +128,4 @@ img {
 
 .eventTitle {
   text-align: center;
-}
-
-.resImages {
-  width: 40%;
-  height: 30%;
 }

@@ -19,6 +19,11 @@ module.exports = function (app) {
     });
   });
 
+  app.get("/db/concerts", (req, res) => {
+    db.Concerts.findAll().then((dbExamples) => {
+      res.json(dbExamples);
+    });
+  });  
 
   app.post("/db/hotels", (req, res) => {
     db.Hotels.findAll({
@@ -107,8 +112,11 @@ module.exports = function (app) {
     }
     const { city, state } = req.body
     var foodtype = `japanese`
-    fetchUrl(
-      `https://api.yelp.com/v3/businesses/search?term=restaurant&location=${city}_${state}`,
+    
+    var url = `https://api.yelp.com/v3/businesses/search?term=restaurant&location=${city}_${state}`      
+    
+    fetchUrl( 
+      url,
       options,
       function (error, meta, body) {
         var obj = JSON.parse(body);
