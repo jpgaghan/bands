@@ -5,7 +5,7 @@ module.exports =
       secret: process.env.SPOTIFY_SECRET
     },
     yelp: {
-      "authorization": process.env.YELP_API_TOKEN
+      "Authorization": process.env.YELP_API_TOKEN
     }
   }
 

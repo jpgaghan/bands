@@ -1,5 +1,3 @@
-var hotels = require("./hotels")
-
 module.exports = function(sequelize, DataTypes) {
     var Events = sequelize.define("Events", {
       eventdates: DataTypes.STRING,
@@ -8,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       eventtitle: DataTypes.STRING,
       ticketlink: DataTypes.STRING,
       city: DataTypes.STRING,
-      userid: DataTypes.STRING,
+      userid: DataTypes.STRING
     }); 
     return Events;
   };
