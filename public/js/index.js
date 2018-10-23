@@ -70,7 +70,7 @@ var API = {
                 `;
                 }
 
-                var createDivs = $("<div>").addClass("col sm12 m3 concerts");
+                var createDivs = $("<div>").addClass("col sm12 m4 concerts");
                 createDivs.append(data);
                 $("#events").append(createDivs);
 

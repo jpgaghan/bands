@@ -8,14 +8,23 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-
+/* 
 .concerts {
     text-align: center;
     border-radius: 10px;
     /* background: #eceff1; */
-    box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
+    /* box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
     margin: 2%;
     cursor: pointer;
+} */
+
+.concerts {
+  border: thin;
+  cursor: pointer;
+  box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
+  padding: 10%;
+  text-align: center;
+  border-radius: 10px;
 }
 
 .cityEvents {
