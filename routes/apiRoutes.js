@@ -36,6 +36,7 @@ module.exports = function (app) {
   })
 
   app.post("/db/events", (req, res) => {
+    console.log(req.body.userid)
     db.Events.findAll({
       where: {
         userid: req.body.userid

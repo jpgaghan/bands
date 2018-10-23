@@ -30,7 +30,7 @@ var API = {
       $(".artistName").empty();
       $(".artistName").append(artistName + "'s Upcoming Shows");
       $("#events").empty();
-      
+
       $("#name").val("");
       let countryCount = 0;
       let i = 0
@@ -73,7 +73,6 @@ var API = {
                 var createDivs = $("<div>").addClass("col sm12 m3 concerts");
                 createDivs.append(data);
                 $("#events").append(createDivs);
-
               }
               countryCount += 1;
               // };
@@ -138,7 +137,7 @@ var API = {
       Img = new Image();
       Img.src = responseimage;
       $(".bandimg").html(Img);
-    
+
     }
     )
   },
@@ -161,23 +160,23 @@ var API = {
       const nondupArray = [];
       const nondupindexArray = [];
       let z = 0
-      do{
-        if(!nondupArray.includes(response._embedded.events[z].name)) {
+      do {
+        if (!nondupArray.includes(response._embedded.events[z].name)) {
           nondupArray.push(response._embedded.events[z].name)
           nondupindexArray.push(z);
         }
-        z+=1
+        z += 1
       } while (nondupArray.length !== 10)
       var dateArray = [];
       console.log(nondupindexArray)
       nondupindexArray.forEach((i) => {
-          dateArray.push(response._embedded.events[i].dates.start.localDate);
+        dateArray.push(response._embedded.events[i].dates.start.localDate);
       });
       $.post("/event/date", { '': dateArray }).then((dateresponse) => {
         let z = 0
         nondupindexArray.forEach((i) => {
-            var eventsData =
-              `<div class = "col s12 m6 l3 eventDiv">
+          var eventsData =
+            `<div class = "col s12 m6 l3 eventDiv">
            <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
           <p data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"> ${response._embedded.events[i].name} </p>
           <p data-date="${response._embedded.events[i].dates.start.localDate}">${dateresponse.dates[z]}</p>
@@ -186,15 +185,14 @@ var API = {
           <button class="favBtn">Save to your Favorites Page!</button>
           </div>
           `;
-          z+=1
-            $("#attractions").append(eventsData);
+          z += 1
+          $("#attractions").append(eventsData);
 
         });
-
-
       });
-    })
+    });
   },
+
   signIn: (email, password) => {
     firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
       userid = user.user.uid;
@@ -202,15 +200,14 @@ var API = {
       localStorage.setItem("userid", userid);
       $.post("/newuser", { userid, email });
       window.location.href = "/artist"
+    }).catch(function (error) {
+      // Handle Errors here.
+      $("#error").text("Incorrect email or password")
+      $("#error").css({ "color": "red" })
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
     })
-      .catch(function (error) {
-        // Handle Errors here.
-        $("#error").text("Incorrect email or password")
-        $("#error").css({ "color": "red" })
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-      })
   },
   createUser: (email, password) => {
     firebase.auth().createUserWithEmailAndPassword(email, password).then((user) => {
@@ -235,7 +232,7 @@ var API = {
   },
   googleHotels: (city) => {
     $("#hotels").show();
-    $( "#hotels" ).addClass(city);
+    $("#hotels").addClass(city);
 
     // Adds the city to the City Banner after user searches for artist
     var banner = $("<div>").html("<h3>Hotels in " + city + "</h3>");
@@ -376,9 +373,150 @@ $(document).on("click", ".resfav", (e) => {
 })
 
 $(document).on("click", ".favorites", (e) => {
-  // db queries
-  // $.post("/db/concerts", {userid}). then((res) => {console.log(res)});
-  // $.post("/db/hotels", {userid}).then((res) => {console.log(res)});
-  // $.post("/db/events", {userid}).then((res) => {console.log(res)});
-  // $.post("/db/restaurants", {userid}).then ((res) => {console.log(res)});
-})
+  var userid = localStorage.getItem("userid");
+  let totalcityArray = [];
+  let concertArrays = [];
+  let hotelArrays = [];
+  let eventArrays = [];
+  let restaurantArrays = [];
+  $.post("/db/concerts", { userid }).then((res) => {
+    let cityArray = [];
+    res.forEach(index => {
+      if (!cityArray.includes(index.city)) {
+        cityArray.push(index.city)
+        totalcityArray.push(index.city);
+        concertArrays.push([index])
+      } else {
+        concertArrays.forEach(count => {
+          if (count[0].city === index.city) {
+            count.push(index)
+          }
+        })
+      };
+      if (!totalcityArray.includes(index.city)) {
+        totalcityArray.push(index.city)
+      }
+    });
+  });
+  $.post("/db/hotels", { userid }).then((res) => {
+    let cityArray = [];
+    res.forEach(index => {
+      if (!cityArray.includes(index.city)) {
+        cityArray.push(index.city)
+        totalcityArray.push(index.city);
+        hotelArrays.push([index])
+      } else {
+        hotelArrays.forEach(count => {
+          if (count[0].city === index.city) {
+            count.push(index)
+          }
+        })
+      };
+    });
+  });
+  cityArray = []
+  $.post("/db/events", { userid }).then((res) => {
+    let cityArray = [];
+    res.forEach(index => {
+      if (!cityArray.includes(index.city)) {
+        cityArray.push(index.city)
+        eventArrays.push([index])
+      } else {
+        eventArrays.forEach(count => {
+          if (count[0].city === index.city) {
+            count.push(index)
+          }
+        })
+      };
+    });
+  });
+
+  cityArray = []
+  $.post("/db/restaurants", { userid }).then((res) => {
+    let cityArray = [];
+    res.forEach(index => {
+      if (!cityArray.includes(index.city)) {
+        cityArray.push(index.city);
+        totalcityArray.push(index.city);
+        restaurantArrays.push([index]);
+      } else {
+        restaurantArrays.forEach(count => {
+          if (count[0].city === index.city) {
+            count.push(index)
+          }
+        })
+      }
+    })
+    let index = totalcityArray.indexOf("");
+    if (index > -1) {
+      totalcityArray.splice(index, 1);
+    }
+    index = totalcityArray.indexOf(null);
+    if (index > -1) {
+      totalcityArray.splice(index, 1);
+    }
+    let firstTime = 0;
+    totalcityArray.forEach(newcity => {
+        //append city (text should be new city) header/container here
+      concertArrays.forEach(item => {
+        item.forEach(cityc => {
+          if (cityc.city === newcity) {
+            //append concerts here
+            if (firstTime===0) {
+              firstTime +=1;
+              console.log(firstTime)
+              //append section
+            }
+          }
+        })
+      })
+      firstTime = 0;
+      eventArrays.forEach(item => {
+        item.forEach(citye => {
+          if (citye.city === newcity) {
+            if (firstTime===0) {
+              firstTime +=1;
+              console.log(firstTime)
+              //append section
+            }
+            //append events here
+            console.log(citye)
+          }
+        })
+      })
+      firstTime = 0;
+      hotelArrays.forEach(item => {
+        item.forEach(cityh => {
+          if (cityh.city === newcity) {
+            if (firstTime===0) {
+              firstTime +=1;
+              console.log(firstTime)
+              //append section
+            }
+            //append hotels here
+          }
+        })
+      })
+      firstTime = 0;
+      restaurantArrays.forEach(item => {
+        item.forEach(cityr => {
+          if (cityr.city === newcity) {
+            if (firstTime===0) {
+              firstTime +=1;
+              console.log(firstTime)
+              //append section
+            }
+            //append restaurants here
+          }
+        })
+      })
+    })
+      
+  });
+
+
+
+});
+
+
+
