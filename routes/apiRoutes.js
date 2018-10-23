@@ -19,6 +19,11 @@ module.exports = function (app) {
     });
   });
 
+  app.get("/db/concerts", (req, res) => {
+    db.Concerts.findAll().then((dbExamples) => {
+      res.json(dbExamples);
+    });
+  });  
 
   app.post("/db/hotels", (req, res) => {
     db.Hotels.findAll({
