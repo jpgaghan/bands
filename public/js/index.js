@@ -28,8 +28,9 @@ var API = {
       API.bandImage(band);
       var artistName = $("#name").val().trim();
       $(".artistName").empty();
-      $(".artistName").append(artistName);
+      $(".artistName").append(artistName + "'s Upcoming Shows");
       $("#events").empty();
+
       $("#name").val("");
       let countryCount = 0;
       let i = 0
@@ -135,6 +136,7 @@ var API = {
       Img = new Image();
       Img.src = responseimage;
       $(".bandimg").html(Img);
+
     }
     )
   },
@@ -157,54 +159,46 @@ var API = {
       const nondupArray = [];
       const nondupindexArray = [];
       let z = 0
-      do{
-        if(!nondupArray.includes(response._embedded.events[z].name)) {
+      do {
+        if (!nondupArray.includes(response._embedded.events[z].name)) {
           nondupArray.push(response._embedded.events[z].name)
           nondupindexArray.push(z);
         }
-        z+=1
+        z += 1
       } while (nondupArray.length !== 10)
       var dateArray = [];
       console.log(nondupindexArray)
       nondupindexArray.forEach((i) => {
-          dateArray.push(response._embedded.events[i].dates.start.localDate);
+        dateArray.push(response._embedded.events[i].dates.start.localDate);
       });
       $.post("/event/date", { '': dateArray }).then((dateresponse) => {
         let z = 0
         nondupindexArray.forEach((i) => {
-            var eventsData =
-              `<div class = "col m3 eventDiv">
+          var eventsData =
+            `<div class = "col m3 eventDiv">
           <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
           <p data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"> ${response._embedded.events[i].name} </p>
           <p data-date="${response._embedded.events[i].dates.start.localDate}">${dateresponse.dates[z]}</p>
           <p data-time="${response._embedded.events[i].dates.start.localTime}">${response._embedded.events[i].dates.start.localTime}</p>
           <a data-link="${response._embedded.events[i].url}" href=${response._embedded.events[i].url}>
+     
           </div>
           `;
-          z+=1
-            $("#attractions").append(eventsData);
+          z += 1
+          $("#attractions").append(eventsData);
 
-        });
-
-      });
-    })
-  },
-  signIn: (email, password) => {
-    firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
-      userid = user.user.uid;
-      email = user.user.email;
-      localStorage.setItem("userid", userid);
-      $.post("/newuser", { userid, email });
-      window.location.href = "/artist"
-    })
-      .catch(function (error) {
-        // Handle Errors here.
-        $("#error").text("Incorrect email or password")
-        $("#error").css({ "color": "red" })
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
+          window.location.href = "/artist"
+        })
+          .catch(function (error) {
+            // Handle Errors here.
+            $("#error").text("Incorrect email or password")
+            $("#error").css({ "color": "red" })
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+          })
       })
+    })
   },
   createUser: (email, password) => {
     firebase.auth().createUserWithEmailAndPassword(email, password).then((user) => {
@@ -359,9 +353,86 @@ $(document).on("click", ".resfav", (e) => {
 })
 
 $(document).on("click", ".favorites", (e) => {
-  // db queries
-  // $.post("/db/concerts", {userid}). then((res) => {console.log(res)});
-  // $.post("/db/hotels", {userid}).then((res) => {console.log(res)});
-  // $.post("/db/events", {userid}).then((res) => {console.log(res)});
-  // $.post("/db/restaurants", {userid}).then ((res) => {console.log(res)});
-})
+  var userid = localStorage.getItem("userid");
+  console.log(userid)
+
+  let concertArrays = [];
+  let hotelArrays = [];
+  let eventArrays = [];
+  let restaurantArrays = [];
+  $.post("/db/concerts", { userid }).then((res) => {
+    console.log(res)
+    let cityArray = [];
+    res.forEach(index => {
+      if (!cityArray.includes(index.city)) {
+        cityArray.push(index.city)
+        concertArrays.push([index])
+      } else {
+        concertArrays.forEach(count => {
+          if (count[0].city === index.city) {
+            count.push(index)
+          }
+        })
+      };
+    });
+    console.log(concertArrays);
+  });
+  $.post("/db/hotels", { userid }).then((res) => {
+    let cityArray = [];
+    console.log(res)
+    res.forEach(index => {
+      if (!cityArray.includes(index.city)) {
+        cityArray.push(index.city)
+        hotelArrays.push([index])
+      } else {
+        hotelArrays.forEach(count => {
+          if (count[0].city === index.city) {
+            count.push(index)
+          }
+        })
+      };
+    });
+
+    console.log(hotelArrays);
+  });
+  cityArray = []
+  $.post("/db/events", { userid }).then((res) => {
+    let cityArray = [];
+    res.forEach(index => {
+      if (!cityArray.includes(index.city)) {
+        cityArray.push(index.city)
+        eventArrays.push([index])
+      } else {
+        eventArrays.forEach(count => {
+          if (count[0].city === index.city) {
+            count.push(index)
+          }
+        })
+      };
+      console.log(eventArrays);
+
+    });
+  });
+
+  cityArray = []
+  $.post("/db/restaurants", { userid }).then((res) => {
+    console.log(res)
+    let cityArray = [];
+    res.forEach(index => {
+      if (!cityArray.includes(index.city)) {
+        cityArray.push(index.city)
+        restaurantArrays.push([index])
+      } else {
+        restaurantArrays.forEach(count => {
+          if (count[0].city === index.city) {
+            count.push(index)
+          }
+        })
+      }
+    })
+
+    console.log(restaurantArrays);
+
+  });
+}
+);
