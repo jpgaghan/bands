@@ -79,6 +79,14 @@ margin-bottom: 0px;
   border-radius: 5px;
 }
 
+.faveveBtn {
+  background-color: #bdbdbd;
+  text-align: center;
+  color: white;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
 .eventImages {
 margin-top: 3%;
 width: 75px;
