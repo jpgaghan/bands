@@ -25,10 +25,10 @@ var API = {
       method: "GET"
     }).then((response) => {
       console.log(response)
+      $(".artistName").append(artistName + "'s Upcoming Shows");
       API.bandImage(band);
       var artistName = $("#name").val().trim();
       $(".artistName").empty();
-      $(".artistName").append(artistName + "'s Upcoming Shows");
       $("#events").empty();
 
       $("#name").val("");
@@ -43,7 +43,7 @@ var API = {
         }
         countryCount += 1;
         i += 1;
-      } while (countryCount < 12);
+      } while (countryCount < 9);
       if (dateArray.length !== 0) {
         $.post("/band/date", { '': dateArray })
           .then((dateresponse) => {
@@ -56,28 +56,28 @@ var API = {
               if (i < response.length) {
                 if (response[i].venue.region !== "") {
                   var data = `
-                <p class= "city"> ${response[i].venue.city} , ${response[i].venue.region}<p>
+                <p class= "city" style="font-weight: bold; font-size: 18px"> ${response[i].venue.city} , ${response[i].venue.region}<p>
                 <p class = "venue"> ${response[i].venue.name}<p>
                 <p class = "dates" data-sdate = "${dates.sdates[countryCount]}" data-edate = "${dates.edates[countryCount]}"> ${dates.dates[countryCount]}<p>
                 <p class = "time" >${dates.times[countryCount]}<p>
                 `;
                 } else {
                   var data = `
-                <p class= "city">${response[i].venue.city}<p>
+                <p class= "city" style="font-weight: bold; font-size: 18px">${response[i].venue.city}<p>
                 <p class = "venue"> ${response[i].venue.name}<p>
                 <p class = "dates" data-sdate = "${dates.sdates[countryCount]}" data-edate = "${dates.edates[countryCount]}"> ${dates.dates[countryCount]}<p>
                 <p class = "time" >${dates.times[countryCount]}<p>
                 `;
                 }
 
-                var createDivs = $("<div>").addClass("col sm12 m3 concerts");
+                var createDivs = $("<div>").addClass("col sm12 m4 concerts");
                 createDivs.append(data);
                 $("#events").append(createDivs);
               }
               countryCount += 1;
               // };
               i += 1
-            } while (countryCount < 12);
+            } while (countryCount < 9);
           })
       } else {
         var data = `<h2 class="noConcert">This artist does not have any upcoming shows. Please choose another.</h2>`
@@ -94,7 +94,7 @@ var API = {
 
       // store the restaurant data in array so we can use it later to display
       restArray = [];
-      for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < 8; i++) {
         restArray.push({
           Pic: response.businesses[i].image_url,
           Name: response.businesses[i].name,
@@ -106,12 +106,12 @@ var API = {
         })
       }
       // Now read the saved restaurants data from Array and append
-      for (i = 0; i < 9; i++) {
+      for (i = 0; i < 8; i++) {
         phone = restArray[i].Phone.substring(2, restArray[i].Phone.length);
         phone = `(${phone.substring(0, 3)})${phone.substring(3, 6)}-${phone.substring(6, 10)}`
         var eventsData =
           `
-        <div class="col s12 m6 l3 eventDiv">
+        <div class="col s12 m3 eventDiv">
           <img class="eventImages" src=${restArray[i].Pic}>
           <p><a href = ${restArray[i].Url}>${restArray[i].Name}</a></p>
           <p> ${restArray[i].Address1}</p>
@@ -123,6 +123,7 @@ var API = {
           data-phone="${phone}" data-city="${restArray[i].City}" data-url="${restArray[i].Url}" 
           data-name="${restArray[i].Name}" data-image="${restArray[i].Pic}">Save to your Favorites Page!</button>
         </div>
+
       
           `
         // var createDivs = $("<div>").addClass("col sm12 m3 Restaurants");
@@ -168,7 +169,7 @@ var API = {
           nondupindexArray.push(z);
         }
         z += 1
-      } while (nondupArray.length !== 10)
+      } while (nondupArray.length !== 8)
       var dateArray = [];
       console.log(nondupindexArray)
       nondupindexArray.forEach((i) => {
@@ -186,6 +187,7 @@ var API = {
           <button class="faveveBtn" data-link="${response._embedded.events[i].url}" data-time="${response._embedded.events[i].dates.start.localTime}"
           data-date="${dateresponse.dates[z]}" data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"
           data-image="${response._embedded.events[i].images[0].url}">Save to your Favorites Page!</button>
+
           </div>
           `;
           z += 1
@@ -239,8 +241,17 @@ var API = {
 
     // Adds the city to the City Banner after user searches for artist
     var banner = $("<div>").html("<h3>Hotels in " + city + "</h3>");
+    var banner2 = $("<div>").html("<h3>Check the events in " + city + "</h3>");
+    var banner3 = $("<div>").html("<h3>Local Resturants in " + city + "</h3>");
+
     banner.addClass("row center").attr("id", "cityBanner");
     $("#cityBanner").html(banner);
+    $("#attractions").prepend(banner2);
+    $("#restaurants").prepend(banner3);
+
+
+
+Collap
 
 
     var geocoder = new google.maps.Geocoder();
