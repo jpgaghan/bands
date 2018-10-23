@@ -119,8 +119,10 @@ var API = {
           <p> ${restArray[i].City} </p>
           <p> ${restArray[i].Rating} </p>
           <a href=${restArray[i].Url}>
-          <button class="favBtn">Save to your Favorites Page!</button>
-          </div>
+          <button class="favBtn" data-address="${restArray[i].Address1}" data-rating="${restArray[i].Rating}" 
+          data-phone="${phone}" data-city="${restArray[i].City}" data-url="${restArray[i].Url}" 
+          data-name="${restArray[i].Name}" data-image="${restArray[i].Pic}">Save to your Favorites Page!</button>
+        </div>
       
           `
         // var createDivs = $("<div>").addClass("col sm12 m3 Restaurants");
@@ -177,12 +179,13 @@ var API = {
         nondupindexArray.forEach((i) => {
           var eventsData =
             `<div class = "col s12 m6 l3 eventDiv">
-           <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
-          <p data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"> ${response._embedded.events[i].name} </p>
-          <p data-date="${response._embedded.events[i].dates.start.localDate}">${dateresponse.dates[z]}</p>
-          <p data-time="${response._embedded.events[i].dates.start.localTime}">${response._embedded.events[i].dates.start.localTime}</p>
-          <a data-link="${response._embedded.events[i].url}" href=${response._embedded.events[i].url}>
-          <button class="favBtn">Save to your Favorites Page!</button>
+           <img class="eventImages" src=${response._embedded.events[i].images[0].url}>
+           <a href=${response._embedded.events[i].url}><p> ${response._embedded.events[i].name} </p> </a>
+          <p>${dateresponse.dates[z]}</p>
+          <p>${response._embedded.events[i].dates.start.localTime}</p>
+          <button class="faveveBtn" data-link="${response._embedded.events[i].url}" data-time="${response._embedded.events[i].dates.start.localTime}"
+          data-date="${dateresponse.dates[z]}" data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"
+          data-image="${response._embedded.events[i].images[0].url}">Save to your Favorites Page!</button>
           </div>
           `;
           z += 1
@@ -298,14 +301,14 @@ $(() => {
   });
 });
 
-$(document).on("click", ".eventDiv", (e) => {
+$(document).on("click", ".faveveBtn", (e) => {
   var currEle = $(e.currentTarget);
-  var eventdates = currEle[0].childNodes[5].dataset.date;
-  var eventtime = currEle[0].childNodes[7].dataset.time;
-  var eventpics = currEle[0].childNodes[1].attributes[1].nodeValue;
-  var eventtitle = currEle[0].childNodes[3].dataset.name;
-  var ticketlink = currEle[0].childNodes[9].dataset.link;
-  var city = currEle[0].childNodes[3].dataset.city;
+  var eventdates = currEle[0].dataset.date;
+  var eventtime = currEle[0].dataset.time;
+  var eventpics = currEle[0].dataset.image;
+  var eventtitle = currEle[0].dataset.name;
+  var ticketlink = currEle[0].dataset.link;
+  var city = currEle[0].dataset.city;
   var userid = localStorage.getItem('userid');
   $.post("/event/favorite", { eventdates, eventtime, eventpics, eventtitle, ticketlink, city, userid })
 });
@@ -358,7 +361,7 @@ $(document).on("click", ".concerts", (e) => {
   );
 });
 
-$(document).on("click", ".resfav", (e) => {
+$(document).on("click", ".favBtn", (e) => {
   event.preventDefault();
   var currEle = $(e.currentTarget);
   var street = currEle[0].dataset.address;
@@ -457,13 +460,13 @@ $(document).on("click", ".favorites", (e) => {
     }
     let firstTime = 0;
     totalcityArray.forEach(newcity => {
-        //append city (text should be new city) header/container here
+      //append city (text should be new city) header/container here
       concertArrays.forEach(item => {
         item.forEach(cityc => {
           if (cityc.city === newcity) {
             //append concerts here
-            if (firstTime===0) {
-              firstTime +=1;
+            if (firstTime === 0) {
+              firstTime += 1;
               console.log(firstTime)
               //append section
             }
@@ -474,8 +477,8 @@ $(document).on("click", ".favorites", (e) => {
       eventArrays.forEach(item => {
         item.forEach(citye => {
           if (citye.city === newcity) {
-            if (firstTime===0) {
-              firstTime +=1;
+            if (firstTime === 0) {
+              firstTime += 1;
               console.log(firstTime)
               //append section
             }
@@ -488,8 +491,8 @@ $(document).on("click", ".favorites", (e) => {
       hotelArrays.forEach(item => {
         item.forEach(cityh => {
           if (cityh.city === newcity) {
-            if (firstTime===0) {
-              firstTime +=1;
+            if (firstTime === 0) {
+              firstTime += 1;
               console.log(firstTime)
               //append section
             }
@@ -501,8 +504,8 @@ $(document).on("click", ".favorites", (e) => {
       restaurantArrays.forEach(item => {
         item.forEach(cityr => {
           if (cityr.city === newcity) {
-            if (firstTime===0) {
-              firstTime +=1;
+            if (firstTime === 0) {
+              firstTime += 1;
               console.log(firstTime)
               //append section
             }
@@ -511,7 +514,7 @@ $(document).on("click", ".favorites", (e) => {
         })
       })
     })
-      
+
   });
 
 
