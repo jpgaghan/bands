@@ -137,6 +137,7 @@ var API = {
       $.post("/event/date", { '':dateArray}).then((dateresponse) => {
         for (i = 0; i < 9; i++) {
           if(i<response._embedded.events.length) {
+            console.log(response);
         var eventsData =
           `<div class = "col m3 eventDiv">
           <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
@@ -144,6 +145,8 @@ var API = {
           <p data-date="${response._embedded.events[i].dates.start.localDate}">${dateresponse.dates[i]}</p>
           <p data-time="${response._embedded.events[i].dates.start.localTime}">${response._embedded.events[i].dates.start.localTime}</p>
           <a data-link="${response._embedded.events[i].url}" href=${response._embedded.events[i].url}>
+          <button class ="resfav" data-rating="${response._embedded.events[i].}" data-phone="${phone}" data-city="${restArray[i].City}" 
+        data-address="${restArray[i].Address1}" data-image = "${restArray[i].Pic}" data-url="${restArray[i].Url}" data-name="${restArray[i].Name}">Save to your Favorites Page!</button>
           </div>
           `;
 
