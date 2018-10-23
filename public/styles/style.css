@@ -8,19 +8,25 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-
+/* 
 .concerts {
     text-align: center;
     border-radius: 10px;
     /* background: #eceff1; */
-    box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
+    /* box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
     margin: 2%;
     cursor: pointer;
+} */
+
+.concerts {
+  border: thin;
+  cursor: pointer;
+  box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
+  padding: 10%;
+  text-align: center;
+  border-radius: 10px;
 }
 
-.cityEvents {
-  margin: auto;
-}
 .noConcerts {
   text-align: center;
 }
@@ -48,6 +54,11 @@ text-align: center;
 
 }
 
+#cityBanner {
+  margin: auto;
+  text-align: center;
+}
+
 #mapRow {
 margin-bottom: 0px;
 }
@@ -57,7 +68,6 @@ margin-bottom: 0px;
   border-radius: 5px;
   background: #eceff1;
   box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
-  margin: 2%;
   cursor: pointer;
 }
 
@@ -78,12 +88,9 @@ height: 75px;
   margin: -2.9rem 0 1.68rem 0;
 }
 
-.flex {
+/* .flex {
 display: flex;
 flex-wrap: wrap;
-}
-/* .row .col {
-  margin: 2%;
 } */
 
 /* 
