@@ -33,19 +33,14 @@ img {
   align-items: center;
 }
 
-
-#events {
-font-size: 15px;
-text-align: center;
-float: left;
-/* background-color: white; */
-
-
-}
-
 .artistName  {
 color: black;
 text-align: center;
+}
+
+.brand-logo {
+  margin-left: 5%;
+
 }
 
 #mapRow {
@@ -64,11 +59,18 @@ text-align: center;
 width: 50%;
 height: 50%;
 }
+.header {
+  margin: -2.9rem 0 1.68rem 0;
+}
 
 .flex {
 display: flex;
 flex-wrap: wrap;
 }
+.row .col {
+  margin: 2%;
+}
+
 
 .resDiv {
 width: 100%;
@@ -86,7 +88,7 @@ background-image: url("../assets/crowd-png-4.png");
 }
 
 .background {
-/* background-image: url("../assets/"); */
+/* background-image: url("../assets/crowd.jpg"); */
 background-color: #eeeeee;
 
 }
@@ -99,3 +101,39 @@ background-color: #eeeeee;
 top: 0px;
 
 }
+
+.bandimg {
+  margin: auto;
+
+}
+
+img {
+  margin: auto;
+}
+
+/* Main Map/Hotel Wrapper */
+#hotelWrapper {
+  position: relative;
+  width: 100%;
+  max-height: 65%;
+
+}
+.hotel-title {
+  text-align: center;
+}
+
+#mapRow {
+  position: static !important;
+  /* top: 1000px; */
+}
+#mapCard {
+  overflow: hidden;
+  justify-content: center;
+  width: 100%;
+  height: 400px;
+}
+#map {
+  position: static !important;
+}
+
+

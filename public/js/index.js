@@ -27,8 +27,9 @@ var API = {
       API.bandImage(band);
       var artistName = $("#name").val().trim();
       $(".artistName").empty();
-      $(".artistName").append(artistName);
+      $(".artistName").append(artistName + "'s Upcoming Shows");
       $("#events").empty();
+      
       $("#name").val("");
       let countryCount = 0;
       let i = 0
@@ -58,7 +59,8 @@ var API = {
               <p class = "time" >${dates.times[countryCount]}<p>
               `;
               countryCount += 1;
-              var createDivs = $("<div>").addClass("col sm12 m3 concerts");
+              var createDivs = $("<div>").addClass("col m3 card concerts");
+              // col s12 m10 offset-m1 l6 offset-l3
               createDivs.append(data);
               $("#events").append(createDivs);
             };
@@ -108,6 +110,7 @@ var API = {
       Img = new Image();
       Img.src = responseimage;
       $(".bandimg").html(Img);
+    
     }
     )
   },
@@ -140,15 +143,18 @@ var API = {
             console.log(response);
         var eventsData =
           `<div class = "col m3 eventDiv">
+         
           <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
           <p data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"> ${response._embedded.events[i].name} </p>
           <p data-date="${response._embedded.events[i].dates.start.localDate}">${dateresponse.dates[i]}</p>
           <p data-time="${response._embedded.events[i].dates.start.localTime}">${response._embedded.events[i].dates.start.localTime}</p>
           <a data-link="${response._embedded.events[i].url}" href=${response._embedded.events[i].url}>
-          <button class ="resfav" data-rating="${response._embedded.events[i].}" data-phone="${phone}" data-city="${restArray[i].City}" 
-        data-address="${restArray[i].Address1}" data-image = "${restArray[i].Pic}" data-url="${restArray[i].Url}" data-name="${restArray[i].Name}">Save to your Favorites Page!</button>
+     
           </div>
           `;
+
+          // <button class ="resfav" data-rating="${response._embedded.events[i].}" data-phone="${phone}" data-city="${restArray[i].City}" 
+          // data-address="${restArray[i].Address1}" data-image = "${restArray[i].Pic}" data-url="${restArray[i].Url}" data-name="${restArray[i].Name}">Save to your Favorites Page!</button>
 
         $("#attractions").append(eventsData);
 
