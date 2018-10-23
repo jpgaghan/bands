@@ -12,7 +12,7 @@ var config = {
   messagingSenderId: "518120117449"
 };
 
-firebase.initializeApp(config);
+firebase.initializeApp(config)
 
 var database = firebase.database();
 
@@ -35,11 +35,12 @@ var API = {
       let i = 0
       do {
         const concertdata = response;
-        let country = concertdata[i].venue.country;
-        if (country === "United States") {
+        if (i< concertdata.length) {
+        // if (country === "United States") {
           dateArray.push(concertdata[i].datetime);
-          countryCount += 1;
-        };
+        // };
+      }
+        countryCount += 1;
         i += 1;
       } while (countryCount < 12);
 
@@ -51,7 +52,8 @@ var API = {
           do {
             const dates = dateresponse
             let country = response[i].venue.country
-            if (country === "United States") {
+            // if (country === "United States") {
+              if (i< response.length) {
               var data = `
               <p class= "city"> ${response[i].venue.city} , ${response[i].venue.region}<p>
               <p class = "venue"> ${response[i].venue.name}<p>
@@ -59,11 +61,14 @@ var API = {
               <p class = "time" >${dates.times[countryCount]}<p>
               `;
               countryCount += 1;
-              var createDivs = $("<div>").addClass("col m3 card concerts");
+              var createDivs = $("<div>").addClass("col m3 concerts");
               // col s12 m10 offset-m1 l6 offset-l3
+
               createDivs.append(data);
               $("#events").append(createDivs);
-            };
+              }
+              countryCount += 1;
+            // };
             i += 1
           } while (countryCount < 12);
         })
@@ -75,14 +80,14 @@ var API = {
       restArray = [];
       for (var i = 0; i < 10; i++) {
         restArray.push({
-          Pic: response.businesses[i].image_url,
-          Name: response.businesses[i].name,
-          Phone: response.businesses[i].phone,
-          Address1: response.businesses[i].location.address1,
-          City: response.businesses[i].location.city,
-          Rating: response.businesses[i].rating,
-          Url: response.businesses[i].url
-        })
+        Pic: response.businesses[i].image_url,
+        Name: response.businesses[i].name,
+        Phone: response.businesses[i].phone,
+        Address1: response.businesses[i].location.address1,
+        City: response.businesses[i].location.city,
+        Rating: response.businesses[i].rating,
+        Url: response.businesses[i].url
+       })
       }
       // Now read the saved restaurants data from Array and append
       for (i = 0; i < 9; i++) {
@@ -90,22 +95,28 @@ var API = {
         phone = `(${phone.substring(0, 3)})${phone.substring(3, 6)}-${phone.substring(6, 10)}`
         var eventsData =
         `
-        <h3 class="resTitle">Local Restaurants${city}</h3>
+        
         <div class="col sm12 m3 resDiv">
-        <img class="resImages" src=${restArray[i].Pic}>
-        <p><a href = ${restArray[i].Url}>${restArray[i].Name}</a></p>
-        <p>${restArray[i].Address1}</p>
-        <p> ${restArray[i].City} </p>
-        <p> ${phone}</p>
-        <p > ${restArray[i].Rating} </p>
-        <button class ="resfav" data-rating="${restArray[i].Rating}" data-phone="${phone}" data-city="${restArray[i].City}" 
-        data-address="${restArray[i].Address1}" data-image = "${restArray[i].Pic}" data-url="${restArray[i].Url}" data-name="${restArray[i].Name}">Save to your Favorites Page!</button>
-        </div>
-        `
-        $("#restaurants").append(eventsData);
-      }
-    })
-  },
+          <img class="resImages" src=${restArray[i].Pic}>
+          <p><a href = ${restArray[i].Url}>${restArray[i].Name}</a></p>
+          <p> ${restArray[i].Address1}</p>
+          <p> ${phone} </p>
+          <p> ${restArray[i].City} </p>
+          <p> ${restArray[i].Rating} </p>
+          <a href=${restArray[i].Url}>
+          <button>Save to your Favorites Page!</button>
+          </div>
+      
+          `
+          // var createDivs = $("<div>").addClass("col sm12 m3 Restaurants");
+          // createDivs.append(eventsData);
+          $("#restaurants").append(eventsData);
+          console.log(eventsData);
+ 
+        }
+ 
+  })
+ },
   bandImage: (band) => {
     $.post("/band/image", { bandname: band }).then((responseimage) => {
       Img = new Image();
@@ -143,9 +154,8 @@ var API = {
           if(i<response._embedded.events.length) {
             console.log(response);
         var eventsData =
+
           `<div class = "col m3 eventDiv">
-          <h3 class=eventsTitle>Local Events${city}</h3>
-         
           <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
           <p data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"> ${response._embedded.events[i].name} </p>
           <p data-date="${response._embedded.events[i].dates.start.localDate}">${dateresponse.dates[i]}</p>
@@ -213,6 +223,13 @@ var API = {
   googleHotels: (city) => {
     $("#hotels").show();
     $( "#hotels" ).addClass(city);
+
+    // Adds the city to the City Banner after user searches for artist
+    var banner = $("<div>").html("<h3>Hotels in " + city + "</h3>");
+    banner.addClass("row center").attr("id", "cityBanner");
+    $("#cityBanner").html(banner);
+
+
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: city }, function (results) {
       map.setCenter(results[0].geometry.location);

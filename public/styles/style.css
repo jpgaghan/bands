@@ -9,20 +9,16 @@ body {
   background-size: cover;
 }
 
-/* main {
-  flex: 1 0 auto;
-}
-
-.row .col {
-  margin-top: 4%;
-
-}
-
-.card {
+.concerts {
     text-align: center;
     border-radius: 10px;
-    background: #eceff1;
-} */
+    /* background: #eceff1; */
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.22), 0 25px 55px 0 rgba(0,0,0,0.21);
+    margin: 2%;
+}
+.concerts:hover {
+  background-color: #84ffff;
+}
 
 img {
   display: -webkit-flex;
@@ -67,9 +63,9 @@ height: 50%;
 display: flex;
 flex-wrap: wrap;
 }
-.row .col {
+/* .row .col {
   margin: 2%;
-}
+} */
 
 
 .resDiv {
@@ -103,7 +99,7 @@ top: 0px;
 }
 
 .bandimg {
-  margin: auto;
+  text-align: center;
 
 }
 
@@ -111,35 +107,11 @@ img {
   margin: auto;
 }
 
-/* Main Map/Hotel Wrapper */
-#hotelWrapper {
-  position: relative;
-  width: 100%;
-  max-height: 65%;
-
-}
-.hotel-title {
-  text-align: center;
-}
-
-#mapRow {
-  position: static !important;
-  /* top: 1000px; */
-}
-#mapCard {
-  overflow: hidden;
-  justify-content: center;
-  width: 100%;
-  height: 400px;
-}
-#map {
-  position: static !important;
-}
-
 .eventTitle {
   text-align: center;
 }
 
-.resTitle {
-  text-align: center;
+.resImages {
+  width: 40%;
+  height: 30%;
 }
