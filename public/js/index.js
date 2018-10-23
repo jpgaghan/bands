@@ -174,8 +174,8 @@ var API = {
       $.post("/event/date", { '': dateArray }).then((dateresponse) => {
         let z = 0
         nondupindexArray.forEach((i) => {
-          var eventsData =
-            `<div class = "col m3 eventDiv">
+            var eventsData =
+              `<div class = "col m3 eventDiv">
           <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
           <p data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"> ${response._embedded.events[i].name} </p>
           <p data-date="${response._embedded.events[i].dates.start.localDate}">${dateresponse.dates[z]}</p>
@@ -184,12 +184,22 @@ var API = {
      
           </div>
           `;
-          z += 1
-          $("#attractions").append(eventsData);
+          z+=1
+            $("#attractions").append(eventsData);
 
+        });
+      });
+    });
+  },
+
+        signIn: (email, password) => {
+          firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
+            userid = user.user.uid;
+            email = user.user.email;
+            localStorage.setItem("userid", userid);
+            $.post("/newuser", { userid, email });
           window.location.href = "/artist"
-        })
-          .catch(function (error) {
+        }).catch(function (error) {
             // Handle Errors here.
             $("#error").text("Incorrect email or password")
             $("#error").css({ "color": "red" })
@@ -197,9 +207,7 @@ var API = {
             var errorMessage = error.message;
             // ...
           })
-      })
-    })
-  },
+      },
   createUser: (email, password) => {
     firebase.auth().createUserWithEmailAndPassword(email, password).then((user) => {
       userid = user.user.uid;
