@@ -1,206 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- custom CSS -->
-  <link rel="stylesheet" href="/styles/style.css">
-
-
-    <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <!-- materialize CDN -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-  <!-- font-awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-    crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- JQuery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHD6cVA78rs0apQveOhOaQUoO4epAFp9Y&libraries=places&callback=initMap"
-    async defer></script>
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
-
-  <script src="/js/index.js"></script>
-  <script src="/js/hotel.js"></script>
-
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
-
-  <!--Import jQuery before materialize.js-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
-  <!--Let browser know website is optimized for mobile-->
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MusicGo</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <!--Import Google Icon Font-->
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <!-- custom CSS -->
+ <link rel="stylesheet" href="/styles/style.css">
+  <!-- CSS -->
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+ <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+ <!-- materialize CDN -->
+ <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+ <!-- font-awesome -->
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+  crossorigin="anonymous">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <!-- JQuery -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHD6cVA78rs0apQveOhOaQUoO4epAFp9Y&libraries=places&callback=initMap"
+  async defer></script>
+ <!-- Firebase -->
+ <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+ <script src="/js/index.js"></script>
+ <script src="/js/hotel.js"></script>
+ <!-- Scripts-->
+ <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+ <script src="js/materialize.js"></script>
+ <script src="js/init.js"></script>
+ <!--Import jQuery before materialize.js-->
+ <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+ <!-- Compiled and minified JavaScript -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+ <!--Let browser know website is optimized for mobile-->
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>MusicGo</title>
 </head>
-
 <body>
-
-  <nav>
-    <div class="nav-wrapper grey darken">
-      <a href="/" class="brand-logo">MusicGo</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>
-          <a class = "favorites">Favorites</a>
-        </li>
-        <li>
-          <a href="#">About</a>
-        </li>
-        <li>
-          <a href="#">Contact</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-
-  <div class="container">
-
-    <div class="row">
-      <div id="hotels" style="display: none;">
-        <div class="wrapper" id="hotelWrapper">
-          <!-- Hotel Wrapper Container -->
-          <div class="container">
-            <!-- City Name Banner -->
-            <div class="row">
-              <div class="col s12 m10 text-center banner" id="cityBanner"></div>
-            </div>
-            <!-- Map -->
-            <div class="row" id="mapRow">
-              <div class="card col s12" sid="mapCard">
-                <!-- Map Div -->
-                <div class="row" style="height:800px;" id="mapRow">
-                  <div id="map" style="height:100%; width:100%;"></div>
-                  <div id="listing" style="display: none;">
-                    <table id="resultsTable">
-                      <tbody id="results"></tbody>
-                    </table>
-                  </div>
-                </div>
-                <!-- Hotel Panel Information (When clicked in map) -->
-                <div style="display: none">
-                  <div id="info-content">
-                    <table>
-                      <tr id="iw-url-row" class="iw_table_row">
-                        <td id="iw-icon" class="iw_table_icon"></td>
-                        <td id="iw-url"></td>
-                      </tr>
-                      <tr id="iw-address-row" class="iw_table_row">
-                        <td class="iw_attribute_name">Address:</td>
-                        <td id="iw-address"></td>
-                      </tr>
-                      <tr id="iw-phone-row" class="iw_table_row">
-                        <td class="iw_attribute_name">Telephone:</td>
-                        <td id="iw-phone"></td>
-                      </tr>
-                      <tr id="iw-rating-row" class="iw_table_row">
-                        <td class="iw_attribute_name">Rating:</td>
-                        <td id="iw-rating"></td>
-                      </tr>
-                      <tr id="iw-website-row" class="iw_table_row">
-                        <td class="iw_attribute_name">Website:</td>
-                        <td id="iw-website"></td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <button class="favhotel">choose hotel</button>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+ <nav class="grey darken-3">
+  <div class="nav-wrapper container">
+   <a href="/" class="brand-logo">MusicGo</a>
+   <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <li><a href="/favorites">Favorites</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+   </ul>
   </div>
-
-
-  <!-- Local Events -->
-  <div class="section cityEvents">
-
-    <div class="row center">
-      <div id="attractions"></div>
-    </div>
-
-    <div class="row center">
-      <div id="restaurants"></div>
-    </div>
-  </div>
-
-
-  <div id="artist">
-
-    {{{body}}}
-
-  </div>
-
-  <!-- Footer -->
-  <footer class="page-footer teal">
-    <div class="container">
+ </nav>
+ <div class="container">
+  <div class="row">
+   <div id="hotels" style="display: none;">
+    <div class="wrapper" id="hotelWrapper">
+     <!-- Hotel Wrapper Container -->
+     <div class="container">
+      <!-- City Name Banner -->
       <div class="row">
-        <div class="col l3 s12 m4">
-          <h5 class="white-text">Find your next music inspired trip.</h5>
-        </div>
-        <div class="col l3 s12 m4">
-          <h5 class="white-text">Resources</h5>
-          <ul>
-            <li>
-              <a class="white-text" href="#!">Learn More</a>
-            </li>
-            <li>
-              <a class="white-text" href="#!">Contact Us</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col l3 s12 m4">
-          <h5 class="white-text">Let's Connect</h5>
-          <ul>
-            <li>
-              <div class="social-media col-xs-12">
-                <ul class="list-inline">
-                  <a href="#">
-                    <i class="fa fa-instagram fa-5x"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fa fa-twitter-square fa-5x"></i>
-                  </a>
-                  <a href="#">
-                    <i class="fa fa-youtube-square fa-5x"></i>
-                  </a>
-
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </div>
+       <div class="col s12 m10 text-center banner" id="cityBanner"></div>
       </div>
-    </div>
-    <div class="footer-copyright">
-      <div class="container">
-        Copyright 2018 MusicGo
+      <!-- Map -->
+      <div class="row" id="mapRow">
+       <div class="card col s12" sid="mapCard">
+        <!-- Map Div -->
+        <div class="row" style="height:800px;" id="mapRow">
+         <div id="map" style="height:100%; width:100%;"></div>
+         <div id="listing" style="display: none;">
+          <table id="resultsTable">
+           <tbody id="results"></tbody>
+          </table>
+         </div>
+        </div>
+        <!-- Hotel Panel Information (When clicked in map) -->
+        <div style="display: none">
+         <div id="info-content">
+          <table>
+           <tr id="iw-url-row" class="iw_table_row">
+            <td id="iw-icon" class="iw_table_icon"></td>
+            <td id="iw-url"></td>
+           </tr>
+           <tr id="iw-address-row" class="iw_table_row">
+            <td class="iw_attribute_name">Address:</td>
+            <td id="iw-address"></td>
+           </tr>
+           <tr id="iw-phone-row" class="iw_table_row">
+            <td class="iw_attribute_name">Telephone:</td>
+            <td id="iw-phone"></td>
+           </tr>
+           <tr id="iw-rating-row" class="iw_table_row">
+            <td class="iw_attribute_name">Rating:</td>
+            <td id="iw-rating"></td>
+           </tr>
+           <tr id="iw-website-row" class="iw_table_row">
+            <td class="iw_attribute_name">Website:</td>
+            <td id="iw-website"></td>
+           </tr>
+           <tr>
+            <td>
+             <button class="favhotel">choose hotel</button>
+            </td>
+           </tr>
+          </table>
+         </div>
+        </div>
+       </div>
       </div>
+     </div>
     </div>
-  </footer>
-
+   </div>
+  </div>
+ </div>
+ <!-- Local Events -->
+ <div class="section cityEvents">
+  <div class="row center">
+   <div id="attractions"></div>
+  </div>
+  <div class="row center">
+   <div id="restaurants"></div>
+  </div>
+ </div>
+ <div id="artist">
+  {{{body}}}
+ </div>
+ <!-- Footer -->
+ <footer class="page-footer teal">
+  <div class="container">
+   <div class="row">
+    <div class="col l4 s12 m4">
+     <h5 class="white-text">Find your next music inspired trip.</h5>
+    </div>
+    <div class="col l4 s12 m4">
+     <h5 class="white-text">Resources</h5>
+     <ul>
+      <li>
+       <a class="white-text" href="#!">Learn More</a>
+      </li>
+      <li>
+       <a class="white-text" href="#!">Contact Us</a>
+      </li>
+     </ul>
+    </div>
+    <div class="col l4 s12 m4">
+     <h5 class="white-text">Let's Connect</h5>
+     <ul>
+      <li>
+       <div class="social-media col-xs-12">
+        <ul class="list-inline">
+         <a href="#">
+          <i class="fa fa-instagram fa-5x"></i>
+         </a>
+         <a href="#">
+          <i class="fa fa-twitter-square fa-5x"></i>
+         </a>
+         <a href="#">
+          <i class="fa fa-youtube-square fa-5x"></i>
+         </a>
+        </ul>
+       </div>
+      </li>
+     </ul>
+    </div>
+   </div>
+  </div>
+  <div class="footer-copyright">
+   <div class="container">
+    Copyright 2018 MusicGo
+   </div>
+  </div>
+ </footer>
 </body>
-
 </html>
