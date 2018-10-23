@@ -175,8 +175,8 @@ var API = {
       $.post("/event/date", { '': dateArray }).then((dateresponse) => {
         let z = 0
         nondupindexArray.forEach((i) => {
-            var eventsData =
-              `<div class = "col s12 m6 l3 eventDiv">
+          var eventsData =
+            `<div class = "col s12 m6 l3 eventDiv">
            <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
           <p data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"> ${response._embedded.events[i].name} </p>
           <p data-date="${response._embedded.events[i].dates.start.localDate}">${dateresponse.dates[z]}</p>
@@ -185,30 +185,30 @@ var API = {
           <button class="favBtn">Save to your Favorites Page!</button>
           </div>
           `;
-          z+=1
-            $("#attractions").append(eventsData);
+          z += 1
+          $("#attractions").append(eventsData);
 
         });
       });
     });
   },
 
-        signIn: (email, password) => {
-          firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
-            userid = user.user.uid;
-            email = user.user.email;
-            localStorage.setItem("userid", userid);
-            $.post("/newuser", { userid, email });
-          window.location.href = "/artist"
-        }).catch(function (error) {
-            // Handle Errors here.
-            $("#error").text("Incorrect email or password")
-            $("#error").css({ "color": "red" })
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-          })
-      },
+  signIn: (email, password) => {
+    firebase.auth().signInWithEmailAndPassword(email, password).then((user) => {
+      userid = user.user.uid;
+      email = user.user.email;
+      localStorage.setItem("userid", userid);
+      $.post("/newuser", { userid, email });
+      window.location.href = "/artist"
+    }).catch(function (error) {
+      // Handle Errors here.
+      $("#error").text("Incorrect email or password")
+      $("#error").css({ "color": "red" })
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+    })
+  },
   createUser: (email, password) => {
     firebase.auth().createUserWithEmailAndPassword(email, password).then((user) => {
       userid = user.user.uid;
@@ -232,7 +232,7 @@ var API = {
   },
   googleHotels: (city) => {
     $("#hotels").show();
-    $( "#hotels" ).addClass(city);
+    $("#hotels").addClass(city);
 
     // Adds the city to the City Banner after user searches for artist
     var banner = $("<div>").html("<h3>Hotels in " + city + "</h3>");
@@ -374,18 +374,17 @@ $(document).on("click", ".resfav", (e) => {
 
 $(document).on("click", ".favorites", (e) => {
   var userid = localStorage.getItem("userid");
-  console.log(userid)
-
+  let totalcityArray = [];
   let concertArrays = [];
   let hotelArrays = [];
   let eventArrays = [];
   let restaurantArrays = [];
   $.post("/db/concerts", { userid }).then((res) => {
-    console.log(res)
     let cityArray = [];
     res.forEach(index => {
       if (!cityArray.includes(index.city)) {
         cityArray.push(index.city)
+        totalcityArray.push(index.city);
         concertArrays.push([index])
       } else {
         concertArrays.forEach(count => {
@@ -394,15 +393,17 @@ $(document).on("click", ".favorites", (e) => {
           }
         })
       };
+      if (!totalcityArray.includes(index.city)) {
+        totalcityArray.push(index.city)
+      }
     });
-    console.log(concertArrays);
   });
   $.post("/db/hotels", { userid }).then((res) => {
     let cityArray = [];
-    console.log(res)
     res.forEach(index => {
       if (!cityArray.includes(index.city)) {
         cityArray.push(index.city)
+        totalcityArray.push(index.city);
         hotelArrays.push([index])
       } else {
         hotelArrays.forEach(count => {
@@ -412,8 +413,6 @@ $(document).on("click", ".favorites", (e) => {
         })
       };
     });
-
-    console.log(hotelArrays);
   });
   cityArray = []
   $.post("/db/events", { userid }).then((res) => {
@@ -429,19 +428,17 @@ $(document).on("click", ".favorites", (e) => {
           }
         })
       };
-      console.log(eventArrays);
-
     });
   });
 
   cityArray = []
   $.post("/db/restaurants", { userid }).then((res) => {
-    console.log(res)
     let cityArray = [];
     res.forEach(index => {
       if (!cityArray.includes(index.city)) {
-        cityArray.push(index.city)
-        restaurantArrays.push([index])
+        cityArray.push(index.city);
+        totalcityArray.push(index.city);
+        restaurantArrays.push([index]);
       } else {
         restaurantArrays.forEach(count => {
           if (count[0].city === index.city) {
@@ -450,9 +447,76 @@ $(document).on("click", ".favorites", (e) => {
         })
       }
     })
-
-    console.log(restaurantArrays);
-
+    let index = totalcityArray.indexOf("");
+    if (index > -1) {
+      totalcityArray.splice(index, 1);
+    }
+    index = totalcityArray.indexOf(null);
+    if (index > -1) {
+      totalcityArray.splice(index, 1);
+    }
+    let firstTime = 0;
+    totalcityArray.forEach(newcity => {
+        //append city (text should be new city) header/container here
+      concertArrays.forEach(item => {
+        item.forEach(cityc => {
+          if (cityc.city === newcity) {
+            //append concerts here
+            if (firstTime===0) {
+              firstTime +=1;
+              console.log(firstTime)
+              //append section
+            }
+          }
+        })
+      })
+      firstTime = 0;
+      eventArrays.forEach(item => {
+        item.forEach(citye => {
+          if (citye.city === newcity) {
+            if (firstTime===0) {
+              firstTime +=1;
+              console.log(firstTime)
+              //append section
+            }
+            //append events here
+            console.log(citye)
+          }
+        })
+      })
+      firstTime = 0;
+      hotelArrays.forEach(item => {
+        item.forEach(cityh => {
+          if (cityh.city === newcity) {
+            if (firstTime===0) {
+              firstTime +=1;
+              console.log(firstTime)
+              //append section
+            }
+            //append hotels here
+          }
+        })
+      })
+      firstTime = 0;
+      restaurantArrays.forEach(item => {
+        item.forEach(cityr => {
+          if (cityr.city === newcity) {
+            if (firstTime===0) {
+              firstTime +=1;
+              console.log(firstTime)
+              //append section
+            }
+            //append restaurants here
+          }
+        })
+      })
+    })
+      
   });
-}
-);
+
+
+
+});
+
+
+
