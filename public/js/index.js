@@ -80,7 +80,7 @@ var API = {
             } while (countryCount < 12);
           })
       } else {
-        var data = `<h2>No current concerts</h2>`
+        var data = `<h2 class="noConcert">This artist does not have any upcoming shows. Please choose another.</h2>`
         var createDivs = $("<div>").addClass("col sm12 m3 concerts");
         createDivs.append(data);
 
@@ -91,6 +91,7 @@ var API = {
   },
   yelpApi: (params) => {
     $.post("/restaurants", { ...params }).then(response => {
+
       // store the restaurant data in array so we can use it later to display
       restArray = [];
       for (var i = 0; i < 10; i++) {
@@ -110,15 +111,15 @@ var API = {
         phone = `(${phone.substring(0, 3)})${phone.substring(3, 6)}-${phone.substring(6, 10)}`
         var eventsData =
           `
-        <div class="col sm12 m3 resDiv">
-          <img class="resImages" src=${restArray[i].Pic}>
+        <div class="col s12 m6 l3 eventDiv">
+          <img class="eventImages" src=${restArray[i].Pic}>
           <p><a href = ${restArray[i].Url}>${restArray[i].Name}</a></p>
           <p> ${restArray[i].Address1}</p>
           <p> ${phone} </p>
           <p> ${restArray[i].City} </p>
           <p> ${restArray[i].Rating} </p>
           <a href=${restArray[i].Url}>
-          <button>Save to your Favorites Page!</button>
+          <button class="favBtn">Save to your Favorites Page!</button>
           </div>
       
           `
@@ -175,13 +176,13 @@ var API = {
         let z = 0
         nondupindexArray.forEach((i) => {
             var eventsData =
-              `<div class = "col m3 eventDiv">
-          <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
+              `<div class = "col s12 m6 l3 eventDiv">
+           <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
           <p data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"> ${response._embedded.events[i].name} </p>
           <p data-date="${response._embedded.events[i].dates.start.localDate}">${dateresponse.dates[z]}</p>
           <p data-time="${response._embedded.events[i].dates.start.localTime}">${response._embedded.events[i].dates.start.localTime}</p>
           <a data-link="${response._embedded.events[i].url}" href=${response._embedded.events[i].url}>
-     
+          <button class="favBtn">Save to your Favorites Page!</button>
           </div>
           `;
           z+=1
@@ -231,7 +232,14 @@ var API = {
   },
   googleHotels: (city) => {
     $("#hotels").show();
-    $("#hotels").addClass(city);
+    $( "#hotels" ).addClass(city);
+
+    // Adds the city to the City Banner after user searches for artist
+    var banner = $("<div>").html("<h3>Hotels in " + city + "</h3>");
+    banner.addClass("row center").attr("id", "cityBanner");
+    $("#cityBanner").html(banner);
+
+
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: city }, function (results) {
       map.setCenter(results[0].geometry.location);
@@ -330,6 +338,10 @@ $(document).on("click", ".concerts", (e) => {
     city
   };
   API.ticketMaster(
+    // var eventTitle = `<h3>Local Events in + ${city}</h3>`
+    // eventTitle.addClass("row").attr("id", "eventTitle");
+    // $("#eventTitle").html(eventTitle);
+
     eventData.startDate,
     eventData.endDate,
     eventData.limit,
