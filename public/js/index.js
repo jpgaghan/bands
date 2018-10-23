@@ -28,8 +28,9 @@ var API = {
       API.bandImage(band);
       var artistName = $("#name").val().trim();
       $(".artistName").empty();
-      $(".artistName").append(artistName);
+      $(".artistName").append(artistName + "'s Upcoming Shows");
       $("#events").empty();
+      
       $("#name").val("");
       let countryCount = 0;
       let i = 0
@@ -72,6 +73,7 @@ var API = {
                 var createDivs = $("<div>").addClass("col sm12 m3 concerts");
                 createDivs.append(data);
                 $("#events").append(createDivs);
+
               }
               countryCount += 1;
               // };
@@ -135,6 +137,7 @@ var API = {
       Img = new Image();
       Img.src = responseimage;
       $(".bandimg").html(Img);
+    
     }
     )
   },
@@ -179,12 +182,14 @@ var API = {
           <p data-date="${response._embedded.events[i].dates.start.localDate}">${dateresponse.dates[z]}</p>
           <p data-time="${response._embedded.events[i].dates.start.localTime}">${response._embedded.events[i].dates.start.localTime}</p>
           <a data-link="${response._embedded.events[i].url}" href=${response._embedded.events[i].url}>
+     
           </div>
           `;
           z+=1
             $("#attractions").append(eventsData);
 
         });
+
 
       });
     })

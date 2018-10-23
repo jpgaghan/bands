@@ -52,29 +52,19 @@
 <body>
 
     <nav>
-    <div class="nav-wrapper grey darken-2">
+    <div class="nav-wrapper grey darken">
       <a href="/" class="brand-logo">MusicGo</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#">Learn More</a></li>
+        <li><a href="/favorites">Favorites</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <div class="container">
-
-    <div class="row">
-      <div id="attractions"></div>
-    </div>
-  </div>
 
   <div class="container">
-    <div class="row">
-      <div id="restaurants"></div>
-    </div>
-  </div>
-    <div class="container">
+ 
     <div class="row">
       <div id="hotels" style="display: none;">
         <div class="wrapper" id="hotelWrapper">
@@ -137,6 +127,22 @@
     </div>
   </div>
 
+
+<!-- Local Events -->
+  <div class="container">
+
+    <div class="row">
+      <div id="attractions"></div>
+    </div>
+  </div>
+<!-- Local Restaurants -->
+  <div class="container">
+    <div class="row">
+      <div id="restaurants"></div>
+    </div>
+  </div>
+
+      
   <div id="artist">
 
     {{{body}}}
@@ -147,11 +153,10 @@
   <footer class="page-footer teal">
     <div class="container">
       <div class="row">
-        <div class="col l6 s12">
+        <div class="col l3 s12 m4">
           <h5 class="white-text">Find your next music inspired trip.</h5>
-
         </div>
-        <div class="col l3 s12">
+        <div class="col l3 s12 m4">
           <h5 class="white-text">Resources</h5>
           <ul>
             <li>
@@ -162,11 +167,18 @@
             </li>
           </ul>
         </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
+        <div class="col l3 s12 m4">
+          <h5 class="white-text">Let's Connect</h5>
           <ul>
             <li>
-              <a class="white-text" href="#!">Let's Talk</a>
+              <div class="social-media col-xs-12">
+            <ul class="list-inline">
+              <a href="#"><i class="fa fa-instagram fa-5x"></i></a>
+              <a href="#"><i class="fa fa-twitter-square fa-5x"></i></a>
+              <a href="#"><i class="fa fa-youtube-square fa-5x"></i></a>
+                       
+            </ul>
+          </div>
             </li>
           </ul>
         </div>
