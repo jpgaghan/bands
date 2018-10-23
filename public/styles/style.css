@@ -136,4 +136,10 @@ img {
   position: static !important;
 }
 
+.eventTitle {
+  text-align: center;
+}
 
+.resTitle {
+  text-align: center;
+}

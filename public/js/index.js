@@ -90,6 +90,7 @@ var API = {
         phone = `(${phone.substring(0, 3)})${phone.substring(3, 6)}-${phone.substring(6, 10)}`
         var eventsData =
         `
+        <h3 class="resTitle">Local Restaurants${city}</h3>
         <div class="col sm12 m3 resDiv">
         <img class="resImages" src=${restArray[i].Pic}>
         <p><a href = ${restArray[i].Url}>${restArray[i].Name}</a></p>
@@ -143,6 +144,7 @@ var API = {
             console.log(response);
         var eventsData =
           `<div class = "col m3 eventDiv">
+          <h3 class=eventsTitle>Local Events${city}</h3>
          
           <img class="eventImages" data-image="${response._embedded.events[i].images[0].url}" src=${response._embedded.events[i].images[0].url}>
           <p data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"> ${response._embedded.events[i].name} </p>
