@@ -68,7 +68,7 @@ var API = {
                 <p class = "time" data-artist ="${band}">${dates.times[countryCount]}<p>
                 `;
                 }
-                var createDivs = $("<div>").addClass("col sm12 m4 concerts");
+                var createDivs = $("<div>").addClass("col sm12 concerts");
                 createDivs.append(data);
                 $("#events").append(createDivs);
               }
@@ -79,7 +79,7 @@ var API = {
           })
       } else {
         var data = `<h2 class="noConcert">This artist does not have any upcoming shows. Please choose another.</h2>`
-        var createDivs = $("<div>").addClass("col sm12 m3 concerts");
+        var createDivs = $("<div>").addClass("col sm12 concerts");
         createDivs.append(data);
 
         $("#events").append(createDivs);
@@ -177,7 +177,7 @@ var API = {
         let z = 0
         nondupindexArray.forEach((i) => {
           var eventsData =
-            `<div class = "col s12 m6 l3 eventDiv">
+            `<div class = "col s12 m3 eventDiv">
            <img class="eventImages" src=${response._embedded.events[i].images[0].url}>
            <a href=${response._embedded.events[i].url}><p> ${response._embedded.events[i].name} </p> </a>
           <p>${dateresponse.dates[z]}</p>

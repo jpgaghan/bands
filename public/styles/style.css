@@ -14,6 +14,9 @@ body {
 }
 
 .concerts {
+  width: 30%;
+  height: 30%;
+  margin: 10px;
   border: thin;
   cursor: pointer;
   box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
@@ -94,21 +97,23 @@ main {
   width: 60%;
   height: 30%;
   border-radius: 10px;
-  margin-top: 40px;
+  margin-top: 35px;
 }
 
 
 .eventDiv {
   padding: 2px;
+  width: 30%;
   margin-top: 5px;
-  height: 56%;
+  height: 57%;
   text-align: center;
   border-radius: 5px;
   color: black;
   background: #eceff1;
   box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
-  cursor: pointer;
+  cursor: pointer; 
 }
+
 
 
 
@@ -149,10 +154,12 @@ main {
 
 .eventStyle {
   text-align: center;
+  width: 100%;
+  margin-top: 20px;
   height: 45%;
   margin-bottom: 15px;
   box-shadow:
-0 0 3px 3px #ffa726,
+  0 0 3px 3px #ffa726,
   0 0 1px 3px #0ff
 }
 
