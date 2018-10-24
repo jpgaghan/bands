@@ -4,7 +4,6 @@ module.exports = function(sequelize, DataTypes) {
       name: DataTypes.STRING,
       url: DataTypes.STRING,
       rating: DataTypes.STRING,
-      name: DataTypes.STRING,
       city: DataTypes.STRING,
       phone: DataTypes.STRING,
       street: DataTypes.STRING,

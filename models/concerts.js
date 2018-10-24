@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
       time: DataTypes.STRING,
       venue: DataTypes.STRING,
       userid: DataTypes.STRING,
-      city: DataTypes.STRING
+      city: DataTypes.STRING,
+      band: DataTypes.STRING
     });
     return Concerts;
   };

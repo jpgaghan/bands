@@ -19,8 +19,26 @@ module.exports = function (app) {
     });
   });
 
+  app.get("/db/concerts", (req, res) => {
+    db.Concerts.findAll().then((dbExamples) => {
+      res.json(dbExamples);
+    });
+  });  
+
+  app.get("/db/events", (req, res) => {
+    db.Events.findAll().then((dbExamples) => {
+      res.json(dbExamples);
+    });
+  }); 
+
+  // app.post("/db/hotels", (req, res) => {
+  //   db.Hotels.findAll(req.body.userid).then((dbExamples) => {
+  //     res.json(dbExamples);
+  //   });
+  // }); 
 
   app.post("/db/hotels", (req, res) => {
+    console.log(req.body.userid)
     db.Hotels.findAll({
       where: {
         userid: req.body.userid
@@ -28,9 +46,11 @@ module.exports = function (app) {
     }).then(function (dbExamples) {
       res.json(dbExamples);
     });
-  })
+  });
+  
 
   app.post("/db/events", (req, res) => {
+    console.log(req.body.userid)
     db.Events.findAll({
       where: {
         userid: req.body.userid
@@ -58,8 +78,8 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/event/favorite", function(req, res) {
-    db.Events.create(req.body).then(function(dbExample) {
+  app.post("/hotel/favorite", function(req, res) {
+    db.Hotels.create(req.body).then(function(dbExample) {
       res.json(dbExample);
     });
   });
@@ -77,13 +97,6 @@ module.exports = function (app) {
   app.post("/newconcert", (req, res) => {
     db.Concerts.create(req.body).then((userinfo) => { console.log(userinfo) })
   });
-
-  app.post("/restaurants/favorite", (req, res) => {
-    db.Restaurants.create(req.body).then((userinfo) => { console.log(userinfo) })
-  });
-
-
-
 
   // spotify api request
   app.post("/band/image", function (req, res) {
@@ -107,8 +120,11 @@ module.exports = function (app) {
     }
     const { city, state } = req.body
     var foodtype = `japanese`
-    fetchUrl(
-      `https://api.yelp.com/v3/businesses/search?term=restaurant&location=${city}_${state}`,
+    
+    var url = `https://api.yelp.com/v3/businesses/search?term=restaurant&location=${city}_${state}`      
+    
+    fetchUrl( 
+      url,
       options,
       function (error, meta, body) {
         var obj = JSON.parse(body);
@@ -153,11 +169,44 @@ module.exports = function (app) {
       dates: formattedDates
     });
   });
+  
+  app.post("/delete/restaurant", (req,res) => {
+    db.Restaurants.destroy({
+      where: {
+        userid: req.body.userid,
+        id : req.body.id
+      }}).then(function (dbExample) {
+        res.json(dbExample);
+    });
+  });
+  
+  app.post("/delete/hotel", (req,res) => {
+    db.Hotels.destroy({
+      where: {
+        userid: req.body.userid,
+        id : req.body.id
+      }}).then(function (dbExample) {
+        res.json(dbExample);
+    });
+  });
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function (req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function (dbExample) {
-      res.json(dbExample);
+  app.post("/delete/event", (req,res) => {
+    db.Events.destroy({
+      where: {
+        userid: req.body.userid,
+        id : req.body.id
+      }}).then(function (dbExample) {
+        res.json(dbExample);
+    });
+  });
+
+  app.post("/delete/concert", (req,res) => {
+    db.Concerts.destroy({
+      where: {
+        userid: req.body.userid,
+        id : req.body.id
+      }}).then(function (dbExample) {
+        res.json(dbExample);
     });
   });
 };

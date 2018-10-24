@@ -1,7 +1,7 @@
 var map, places, infoWindow;
 var markers = [];
 var autocomplete;
-var countryRestrict = {  };
+var countryRestrict = { };
 var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
 var hostnameRegexp = new RegExp('^https?://.+?/');
 var countries = {
@@ -249,5 +249,3 @@ function buildIWContent(place) {
     document.getElementById('iw-website-row').style.display = 'none';
   }
 }
-
-

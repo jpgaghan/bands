@@ -9,20 +9,26 @@ body {
   background-size: cover;
 }
 
-/* main {
-  flex: 1 0 auto;
+.btn {
+  padding-top: 8px;
 }
 
-.row .col {
-  margin-top: 4%;
-
+.concerts {
+  border: thin;
+  cursor: pointer;
+  box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
+  padding: 10%;
+  text-align: center;
+  border-radius: 10px;
 }
 
-.card {
-    text-align: center;
-    border-radius: 10px;
-    background: #eceff1;
-} */
+.noConcerts {
+  text-align: center;
+}
+
+.concerts:hover {
+  background-color: #84ffff;
+}
 
 img {
   display: -webkit-flex;
@@ -33,36 +39,114 @@ img {
   align-items: center;
 }
 
-
-#events {
-font-size: 15px;
-text-align: center;
-float: left;
-/* background-color: white; */
-
-
-}
-
 .artistName  {
 color: black;
 text-align: center;
 }
 
+.brand-logo {
+  margin-left: 5%;
+}
+
+#cityBanner {
+  margin: auto;
+  text-align: center;
+}
+
 #mapRow {
 margin-bottom: 0px;
 }
+.brand-logo img {
+  height: 64px;
+}
 
-.eventDiv {
-width: 100%;
-/* background: white; */
-color: black;
-margin: 2%;
-text-align: center;
+.fa {
+  color: black;
+}
+.musicHeader img{
+    float: left;   
+  }
+
+h3 {
+  text-align: center;
+}
+main {
+  flex: 1 0 auto;
+ }
+
+.favEventImages {
+  width: 21%;
+  height: 27%;
+  border-radius: 10px;
 }
 
 .eventImages {
-width: 50%;
-height: 50%;
+  width: 35%;
+  height: 10%;
+  border-radius: 10px;
+}
+
+
+.eventDiv {
+  padding: 3px;
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: black;
+  background: #eceff1;
+  box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
+  cursor: pointer;
+}
+
+.eventDiv-width {
+  padding: 3px;
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: black;
+  background: #eceff1;
+  box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
+  cursor: pointer;
+  width: 60%;
+}
+
+.favCityTitle, .favConcertTitle, .favEvent, .favResTitle{
+  text-align: center;
+}
+.band {
+  font-weight: bold;
+  font-size: 18px
+}
+
+
+.favBtn {
+  background-color: #bdbdbd;
+  text-align: center;
+  color: white;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.faveveBtn {
+  background-color: #bdbdbd;
+  text-align: center;
+  color: white;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.eventImages {
+margin-top: 3%;
+width: 75px;
+height: 75px;
+}
+
+.header {
+  margin: -2.9rem 0 1.68rem 0;
+}
+
+a {
+  text-align: center;
 }
 
 .flex {
@@ -70,36 +154,69 @@ display: flex;
 flex-wrap: wrap;
 }
 
-.resDiv {
-width: 100%;
-background: white;
-color: black;
-margin: 2%;
-text-align: center;
-
-}
-
 #backgroundImage {
 background-image: url("../assets/crowd-png-4.png");
-/* background-color: #eeeeee; */
 
 }
 
 .background {
-/* background-image: url("../assets/"); */
 background-color: #eeeeee;
 
 }
-
-.login-background {
-background-color: #eeeeee;
+.card-background {
+  background-color:#bdbdbd;
 }
-.nav-wrapper {
- position: fixed;
+
+/* .nav {
+position: fixed;
 top: 0px;
+} */
+
+.bandimg {
+  text-align: center;
+}
+
+.fav-button {
+  font-size: 10px;
+}
+
+img {
+  margin: auto;
+}
+
+.eventTitle {
+  text-align: center;
+}
+
+.brand-logo {
+  margin-left: 3px;
+  margin-bottom: 3px;
 
 }
-.resImages {
-  width: 40%;
-  height: 30%;
+/* Map Styling */
+#mapRow {
+  position: static !important;
+
+}
+#mapCard {
+  overflow: hidden;
+  justify-content: center;
+}
+#map {
+  position: static !important;
+}
+
+
+/* Map Styling */
+#mapRow {
+  position: static !important;
+  top: 1000px;
+}
+#mapCard {
+  overflow: hidden;
+  justify-content: center;
+  height: 450px;
+}
+#map {
+  position: static !important;
 }
