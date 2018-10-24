@@ -302,7 +302,7 @@ $(() => {
     var website = $("#iw-website").text();
     var telephone = $("#iw-phone").text();
     var userid = localStorage.getItem("userid");
-    $.post("/hotel/favorite", { address, website, telephone ,name , userid, city })
+    $.post("/hotel/favorite", { address, website, telephone ,name , userid, city });
   });
 });
 
@@ -379,6 +379,7 @@ $(document).on("click", ".favBtn", (e) => {
     $.post("/res/favs", { street, rating, phone, city, url, name, img, userid });
   } 
 })
+
 
 $(document).on("click", ".favorites", (e) => {
   $(".totalsection").hide();
@@ -571,10 +572,34 @@ $(document).on("click", ".favorites", (e) => {
     })
 
   });
-
-
 totalcityArray = [];
 });
+
+$(document).on("click", ".btn", (e) => {
+  var currEle = $(e.currentTarget);
+  var currId = currEle[0].dataset.id;
+  var deleteTable = currId.substring(0,1);
+  var id= currId.substring(3,currId.length); 
+  var userid = localStorage.getItem("userid");
+  switch(deleteTable) {
+    case ("r"):
+        $.post("/delete/restaurant", { userid, id })
+        $(`#${currId}`).remove();
+        break;
+    case ("h"):
+        $.post("/delete/hotel", { userid, id })
+        $(`#${currId}`).remove();
+        break;
+    case ("e"):
+        $.post("/delete/event", { userid, id })
+        $(`#${currId}`).remove();
+        break;
+    case ("c"):
+        $.post("/delete/concert", { userid, id })
+        $(`#${currId}`).remove();
+        break;
+  } 
+  });
 
 
 
