@@ -482,12 +482,13 @@ $(document).on("click", ".favorites", (e) => {
               //append section
             }
             var data = `
-            <div class = "col sm12 m3 concerts">
+            <div class = "col sm12 m3 eventDiv" id="cid${cityc.id}">
               <p class= "band"> ${cityc.band} </p>
               <p class= "city"> ${cityc.city}</p>
               <p class = "venue"> ${cityc.venue}</p>
               <p class = "dates"> ${cityc.date}</p>
               <p class = "time" >${cityc.time}</p>
+              <button class="btn" data-id="cid${cityc.id}">delete</button>
             </div>
             `;
             //append concerts here
@@ -508,11 +509,12 @@ $(document).on("click", ".favorites", (e) => {
             }
             //append events here
             $(".favoritesection").append(
-            `<div class = "col s12 m6 l3 eventDiv">
+            `<div class = "col s12 m6 l3 eventDiv" id="eid${citye.id}">
               <img class="eventImages" src=${citye.eventpics}>
               <a href=${citye.cityeticketlink}><p> ${citye.eventtitle} </p> </a>
               <p>${citye.eventdates}</p>
               <p>${citye.eventtime}</p>
+              <button class="btn" data-id="eid${citye.id}">delete</button>
             </div>
             `);
             console.log(citye)
@@ -531,10 +533,13 @@ $(document).on("click", ".favorites", (e) => {
             }
             //append hotels here
             $(".favoritesection").append(`
-            <p>${cityh.name}</p>
-            <p>${cityh.address}</p>
-            <p>${cityh.telephone}</p>
-            <p>${cityh.address}</p>`
+            <div class = "col s12 m6 l3 eventDiv" id="hid${cityh.id}">
+              <p>${cityh.name}</p>
+              <p>${cityh.address}</p>
+              <p>${cityh.telephone}</p>
+              <p>${cityh.address}</p>
+              <button class="btn" data-id="hid${cityh.id}">delete</button>
+            <div>`
             )
           }
         })
@@ -551,11 +556,14 @@ $(document).on("click", ".favorites", (e) => {
             }
             //append restaurants here
             $(".favoritesection").append(`
-            <img src="${cityr.img}" alt="food">
-            <a href="${cityr.url}"><p>${cityr.name}</p></a>
-            <p>${cityr.rating}</p>
-            <p>${cityr.phone}</p>
-            <p>${cityr.street}</p>`
+            <div class = "col s12 m6 l3 eventDiv" id="rid${cityr.id}">
+              <img src="${cityr.img}" alt="food">
+              <a href="${cityr.url}"><p>${cityr.name}</p></a>
+              <p>${cityr.rating}</p>
+              <p>${cityr.phone}</p>
+              <p>${cityr.street}</p>
+              <button class="btn" data-id="rid${cityr.id}">delete</button>
+            </div>`
             )
           }
         })
