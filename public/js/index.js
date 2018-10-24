@@ -250,10 +250,6 @@ var API = {
     $("#restaurants").prepend(banner3);
 
 
-
-
-
-
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: city }, function (results) {
       map.setCenter(results[0].geometry.location);
