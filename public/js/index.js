@@ -525,7 +525,7 @@ $(document).on("click", ".favorites", (e) => {
               <p class="hotelname">${cityh.name}</p>
               <p>${cityh.address}</p>
               <p>${cityh.telephone}</p>
-              <p>${cityh.address}</p>
+              <p>${cityh.website}</p>
               <button class="btn cyan lighten-2" data-id="hid${cityh.id}">delete</button>
             <div>`
               )
