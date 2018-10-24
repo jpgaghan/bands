@@ -169,11 +169,44 @@ module.exports = function (app) {
       dates: formattedDates
     });
   });
+  
+  app.post("/delete/restaurant", (req,res) => {
+    db.Restaurants.destroy({
+      where: {
+        userid: req.body.userid,
+        id : req.body.id
+      }}).then(function (dbExample) {
+        res.json(dbExample);
+    });
+  });
+  
+  app.post("/delete/hotel", (req,res) => {
+    db.Hotels.destroy({
+      where: {
+        userid: req.body.userid,
+        id : req.body.id
+      }}).then(function (dbExample) {
+        res.json(dbExample);
+    });
+  });
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function (req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function (dbExample) {
-      res.json(dbExample);
+  app.post("/delete/event", (req,res) => {
+    db.Events.destroy({
+      where: {
+        userid: req.body.userid,
+        id : req.body.id
+      }}).then(function (dbExample) {
+        res.json(dbExample);
+    });
+  });
+
+  app.post("/delete/concert", (req,res) => {
+    db.Concerts.destroy({
+      where: {
+        userid: req.body.userid,
+        id : req.body.id
+      }}).then(function (dbExample) {
+        res.json(dbExample);
     });
   });
 };
