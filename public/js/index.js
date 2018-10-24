@@ -243,11 +243,6 @@ var API = {
     $("#attractions").prepend(banner2);
     $("#restaurants").prepend(banner3);
 
-
-
-Collap
-
-
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ address: city }, function (results) {
       map.setCenter(results[0].geometry.location);

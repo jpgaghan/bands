@@ -62,7 +62,19 @@ text-align: center;
 #mapRow {
 margin-bottom: 0px;
 }
+.navbar-material .nav-wrapper .brand-logo img {
+  height: 64px;
+}
 
+.musicHeader img{
+
+    float: left;   
+  }
+
+
+h3 {
+  text-align: center;
+}
 .eventDiv {
   text-align: center;
   border-radius: 5px;
@@ -87,21 +99,15 @@ height: 75px;
 .header {
   margin: -2.9rem 0 1.68rem 0;
 }
+a {
+  text-align: center;
+}
 
-/* .flex {
+.flex {
 display: flex;
 flex-wrap: wrap;
-} */
+}
 
-/* 
-.resDiv {
-width: 100%;
-background: white;
-color: black;
-margin: 2%;
-text-align: center;
-
-} */
 
 #backgroundImage {
 background-image: url("../assets/crowd-png-4.png");
@@ -136,3 +142,4 @@ img {
 .eventTitle {
   text-align: center;
 }
+
