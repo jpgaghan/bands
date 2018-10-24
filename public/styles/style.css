@@ -62,7 +62,7 @@ text-align: center;
 #mapRow {
 margin-bottom: 0px;
 }
-.navbar-material .nav-wrapper .brand-logo img {
+.brand-logo img {
   height: 64px;
 }
 
@@ -84,6 +84,14 @@ h3 {
 }
 
 .favBtn {
+  background-color: #bdbdbd;
+  text-align: center;
+  color: white;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.faveveBtn {
   background-color: #bdbdbd;
   text-align: center;
   color: white;
