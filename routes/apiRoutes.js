@@ -64,7 +64,7 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/event/favorite", function(req, res) {
+  app.post("/hotel/favorite", function(req, res) {
     db.Events.create(req.body).then(function(dbExample) {
       res.json(dbExample);
     });
@@ -83,13 +83,6 @@ module.exports = function (app) {
   app.post("/newconcert", (req, res) => {
     db.Concerts.create(req.body).then((userinfo) => { console.log(userinfo) })
   });
-
-  app.post("/restaurants/favorite", (req, res) => {
-    db.Restaurants.create(req.body).then((userinfo) => { console.log(userinfo) })
-  });
-
-
-
 
   // spotify api request
   app.post("/band/image", function (req, res) {

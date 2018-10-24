@@ -4,6 +4,7 @@ module.exports = function(sequelize, DataTypes) {
       telephone: DataTypes.TEXT,
       website: DataTypes.STRING,
       city: DataTypes.STRING,
+      name: DataTypes.STRING,
       userid: DataTypes.STRING
     });
     return Hotels;
