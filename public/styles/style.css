@@ -68,12 +68,24 @@ h3 {
 }
 
 .eventDiv {
+  padding: 3px;
+  margin-top: 10px;
   text-align: center;
   border-radius: 5px;
+  color: black;
   background: #eceff1;
   box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
   cursor: pointer;
 }
+
+.favCityTitle, .favConcertTitle, .favEvent{
+  text-align: center;
+}
+.band {
+  font-weight: bold;
+  font-size: 18px
+}
+
 
 .favBtn {
   background-color: #bdbdbd;
@@ -148,4 +160,17 @@ img {
   margin-left: 3px;
   margin-bottom: 3px;
 
+}
+/* Map Styling */
+#mapRow {
+  position: static !important;
+  top: 1000px;
+}
+#mapCard {
+  overflow: hidden;
+  justify-content: center;
+  height: 450px;
+}
+#map {
+  position: static !important;
 }
