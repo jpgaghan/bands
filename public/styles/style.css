@@ -66,6 +66,7 @@ margin-bottom: 0px;
 h3 {
   text-align: center;
 }
+
 .eventDiv {
   text-align: center;
   border-radius: 5px;
@@ -141,4 +142,10 @@ img {
 
 .eventTitle {
   text-align: center;
+}
+
+.brand-logo {
+  margin-left: 3px;
+  margin-bottom: 3px;
+
 }

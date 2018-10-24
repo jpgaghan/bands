@@ -323,6 +323,7 @@ $(document).on("click", ".faveveBtn", (e) => {
 
 $(document).on("click", ".concerts", (e) => {
   event.preventDefault();
+  $(this).scrollTop(0);
   var currEle = $(e.currentTarget);
   var location = currEle[0].childNodes[1].innerText;
   var state = location.slice(-2);
