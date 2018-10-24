@@ -117,7 +117,7 @@ var API = {
           <p> ${restArray[i].City} </p>
           <p> ${restArray[i].Rating} </p>
           <a href=${restArray[i].Url}>
-          <button class="favBtn cyan lighten-2 fav-button btn" data-address="${restArray[i].Address1}" data-rating="${restArray[i].Rating}" 
+          <button class="favBtn cyan lighten-2 fav-button" data-address="${restArray[i].Address1}" data-rating="${restArray[i].Rating}" 
           data-phone="${phone}" data-city="${restArray[i].City}" data-url="${restArray[i].Url}" 
           data-name="${restArray[i].Name}" data-image="${restArray[i].Pic}">Save to Favorites</button>
         </div>
@@ -182,7 +182,7 @@ var API = {
            <a href=${response._embedded.events[i].url}><p> ${response._embedded.events[i].name} </p> </a>
           <p>${dateresponse.dates[z]}</p>
           <p>${response._embedded.events[i].dates.start.localTime}</p>
-          <button class="faveveBtn cyan lighten-2 fav-button btn" data-link="${response._embedded.events[i].url}" data-time="${response._embedded.events[i].dates.start.localTime}"
+          <button class="faveveBtn cyan lighten-2 fav-button" data-link="${response._embedded.events[i].url}" data-time="${response._embedded.events[i].dates.start.localTime}"
           data-date="${dateresponse.dates[z]}" data-name="${response._embedded.events[i].name}" data-city ="${response._embedded.events[i]._embedded.venues[0].city.name}"
           data-image="${response._embedded.events[i].images[0].url}">Save to Favorites</button>
 
@@ -254,18 +254,6 @@ var API = {
       search();
     });
   }
-};
-
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function () {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
-
-  API.deleteExample(idToDelete).then(function () {
-    refreshExamples();
-  });
 };
 
 // Add event listeners to the submit and delete buttons
