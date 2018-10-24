@@ -379,11 +379,14 @@ $(document).on("click", ".favBtn", (e) => {
   var name = currEle[0].dataset.name;
   var img = currEle[0].dataset.image;
   var userid = localStorage.getItem("userid");
-  $.post("/res/favs", { street, rating, phone, city, url, name, img, userid });
+  if(url !== null) {
+    $.post("/res/favs", { street, rating, phone, city, url, name, img, userid });
+  } 
 })
 
 $(document).on("click", ".favorites", (e) => {
   $(".totalsection").hide();
+  $(".favoritesection").html("");
   var userid = localStorage.getItem("userid");
   let totalcityArray = [];
   let concertArrays = [];
@@ -409,6 +412,8 @@ $(document).on("click", ".favorites", (e) => {
       }
     });
   });
+
+  var userid = localStorage.getItem("userid");
 
   $.post("/db/hotels", { userid }).then((res) => {
     let cityArray = [];
@@ -497,7 +502,7 @@ $(document).on("click", ".favorites", (e) => {
       firstTime = 0;
       eventArrays.forEach(item => {
         item.forEach(citye => {
-          if (citye.city === newcity) {
+          if (citye.city === newcity && citye.eventpics !== null) {
             if (firstTime === 0) {
               firstTime += 1;
             $(".favoritesection").append(`<h3>Events</h3>`);              
@@ -531,7 +536,6 @@ $(document).on("click", ".favorites", (e) => {
             $(".favoritesection").append(`
             <p>${cityh.name}</p>
             <p>${cityh.address}</p>
-            <p>${cityh.address}</p>
             <p>${cityh.telephone}</p>
             <p>${cityh.address}</p>`
             )
@@ -550,11 +554,11 @@ $(document).on("click", ".favorites", (e) => {
             }
             //append restaurants here
             $(".favoritesection").append(`
-            <p>${cityr.img}</p>
+            <img src="${cityr.img}" alt="food">
             <a href="${cityr.url}"><p>${cityr.name}</p></a>
             <p>${cityr.rating}</p>
             <p>${cityr.phone}</p>
-            <p>${cityr.steet}</p>`
+            <p>${cityr.street}</p>`
             )
           }
         })
@@ -564,7 +568,7 @@ $(document).on("click", ".favorites", (e) => {
   });
 
 
-
+totalcityArray = [];
 });
 
 
