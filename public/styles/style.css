@@ -9,6 +9,10 @@ body {
   background-size: cover;
 }
 
+.btn {
+  padding-top: 8px;
+}
+
 .concerts {
   border: thin;
   cursor: pointer;
@@ -66,6 +70,22 @@ margin-bottom: 0px;
 h3 {
   text-align: center;
 }
+main {
+  flex: 1 0 auto;
+ }
+
+.favEventImages {
+  width: 21%;
+  height: 27%;
+  border-radius: 10px;
+}
+
+.eventImages {
+  width: 35%;
+  height: 10%;
+  border-radius: 10px;
+}
+
 
 .eventDiv {
   padding: 3px;
@@ -78,7 +98,19 @@ h3 {
   cursor: pointer;
 }
 
-.favCityTitle, .favConcertTitle, .favEvent{
+.eventDiv-width {
+  padding: 3px;
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: black;
+  background: #eceff1;
+  box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
+  cursor: pointer;
+  width: 60%;
+}
+
+.favCityTitle, .favConcertTitle, .favEvent, .favResTitle{
   text-align: center;
 }
 .band {
@@ -140,12 +172,12 @@ position: fixed;
 top: 0px;
 } */
 
-/* .material-icons {
-background-color: #ffa726;
-} */
-
 .bandimg {
   text-align: center;
+}
+
+.fav-button {
+  font-size: 10px;
 }
 
 img {
@@ -161,6 +193,20 @@ img {
   margin-bottom: 3px;
 
 }
+/* Map Styling */
+#mapRow {
+  position: static !important;
+
+}
+#mapCard {
+  overflow: hidden;
+  justify-content: center;
+}
+#map {
+  position: static !important;
+}
+
+
 /* Map Styling */
 #mapRow {
   position: static !important;
