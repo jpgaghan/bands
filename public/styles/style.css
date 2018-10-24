@@ -80,12 +80,14 @@ main {
   width: 21%;
   height: 27%;
   border-radius: 10px;
+  margin-top: 30px;
 }
 
 .eventImages {
   width: 60%;
   height: 30%;
   border-radius: 10px;
+  margin-top: 40px;
 }
 
 
@@ -252,4 +254,12 @@ img {
 }
 #map {
   position: static !important;
+}
+
+.band {
+  margin-top: 40px;
+}
+
+.hotelname {
+  margin-top: 80px;
 }
