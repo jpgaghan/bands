@@ -248,14 +248,8 @@ var API = {
     $("#cityBanner").html(banner);
     $("#attractions").prepend(banner2);
     $("#restaurants").prepend(banner3);
-
-
-
-
-
-
     var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ address: city }, function (results) {
+    geocoder.geocode({  address: city }, function (results) {
       map.setCenter(results[0].geometry.location);
       map.setZoom(15);
       // then places the markers on the map
