@@ -88,8 +88,9 @@ main {
 
 
 .eventDiv {
-  padding: 3px;
+  padding: 2px;
   margin-top: 10px;
+  height: 55%;
   text-align: center;
   border-radius: 5px;
   color: black;
@@ -98,7 +99,9 @@ main {
   cursor: pointer;
 }
 
-.eventDiv-width {
+
+
+.eventDivFav {
   padding: 3px;
   margin-top: 10px;
   text-align: center;
@@ -108,6 +111,7 @@ main {
   box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
   cursor: pointer;
   width: 60%;
+  max-height: 100%;
 }
 
 .favCityTitle, .favConcertTitle, .favEvent, .favResTitle{
@@ -126,6 +130,9 @@ main {
   margin-bottom: 5px;
   border-radius: 5px;
 }
+.login-background {
+  background: #eceff1;
+}
 
 .faveveBtn {
   background-color: #bdbdbd;
@@ -137,8 +144,8 @@ main {
 
 .eventImages {
 margin-top: 3%;
-width: 75px;
-height: 75px;
+width: 100px;
+height: 100px;
 }
 
 .header {
@@ -189,8 +196,8 @@ img {
 }
 
 .brand-logo {
-  margin-left: 3px;
-  margin-bottom: 3px;
+  margin: 3px 3px 3px 3px;
+
 
 }
 /* Map Styling */
