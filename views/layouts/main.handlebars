@@ -43,7 +43,8 @@
 </head>
 ​
 <body>
-  <nav class="grey darken-3">
+
+  <nav class="nav grey darken-3">
     <div class="nav-wrapper container">
       <a href="/" class="brand-logo left">
      <img class="responsive-img" width="65px" id="logo" src="/assets/logo.png"/>
@@ -51,17 +52,22 @@
      <h3 class="musicHeader">MusicGo</h3> --}}
       </a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li class="favorites">Favorites</li>
+        <li class="favorites">
+          <a href="#">Favorites</a>
+        </li>
         <li>
           <a href="#">About</a>
         </li>
         <li>
           <a href="#">Contact</a>
         </li>
+        <li>
+         <a href="/login" class="waves-effect waves-light orange lighten-1 btn">Login</a>
+         </li>
       </ul>
     </div>
   </nav>
-  
+
   <div class="totalsection">
     <div class="container">
       <div class="row">
@@ -77,7 +83,7 @@
               <div class="row" id="mapRow">
                 <div class="card col s12" sid="mapCard">
                   <!-- Map Div -->
-                  <div class="row" style="height:500px; width:700px;" id="mapRow">
+                  <div class="row" style="height:500px; width:800px;" id="mapRow">
                     <div id="map" style="height:100%; width:100%;"></div>
                     <div id="listing" style="display: none;">
                       <table id="resultsTable">
@@ -162,13 +168,14 @@
    </div>
 ​
 ​
-​
-   <div class="row totalsection">
+​<div class="totalsection">
+   <div class="row">
     <div id="attractions"></div>
    </div>
 ​
-   <div class="row totalsection">
+   <div class="row">
     <div id="restaurants"></div>
+   </div>
    </div>
 ​
 ​
@@ -185,8 +192,9 @@
 ​
  <div class="favoritesection">
  </div>
+
  <!-- Footer -->
- <footer class="page-footer teal">
+ <footer class="page-footer orange lighten-1">
   <div class="container">
    <div class="row">
     <div class="col l3 s12 m4">
@@ -209,14 +217,14 @@
       <li>
        <div class="social-media col-xs-12">
         <ul class="list-inline">
-         <a href="#">
-          <i class="fa fa-instagram fa-5x"></i>
+         
+          <i class="fa fa-instagram fa-4x"></i>
          </a>
-         <a href="#">
-          <i class="fa fa-twitter-square fa-5x"></i>
+     
+          <i class="fa fa-twitter-square fa-4x"></i>
          </a>
-         <a href="#">
-          <i class="fa fa-youtube-square fa-5x"></i>
+  
+          <i class="fa fa-youtube-square fa-4x"></i>
          </a>
         </ul>
        </div>
