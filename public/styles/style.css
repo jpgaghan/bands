@@ -8,15 +8,10 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-/* 
-.concerts {
-    text-align: center;
-    border-radius: 10px;
-    /* background: #eceff1; */
-    /* box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
-    margin: 2%;
-    cursor: pointer;
-} */
+
+.btn {
+  padding-top: 8px;
+}
 
 .concerts {
   border: thin;
@@ -51,7 +46,6 @@ text-align: center;
 
 .brand-logo {
   margin-left: 5%;
-
 }
 
 #cityBanner {
@@ -66,22 +60,68 @@ margin-bottom: 0px;
   height: 64px;
 }
 
+.fa {
+  color: black;
+}
 .musicHeader img{
-
     float: left;   
   }
-
 
 h3 {
   text-align: center;
 }
+main {
+  flex: 1 0 auto;
+ }
+
+.favEventImages {
+  width: 21%;
+  height: 27%;
+  border-radius: 10px;
+}
+
+.eventImages {
+  width: 35%;
+  height: 10%;
+  border-radius: 10px;
+}
+
+
 .eventDiv {
+  padding: 2px;
+  margin-top: 10px;
+  height: 55%;
   text-align: center;
   border-radius: 5px;
+  color: black;
   background: #eceff1;
   box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
   cursor: pointer;
 }
+
+
+
+.eventDivFav {
+  padding: 3px;
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: black;
+  background: #eceff1;
+  box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
+  cursor: pointer;
+  width: 60%;
+  max-height: 100%;
+}
+
+.favCityTitle, .favConcertTitle, .favEvent, .favResTitle{
+  text-align: center;
+}
+.band {
+  font-weight: bold;
+  font-size: 18px
+}
+
 
 .favBtn {
   background-color: #bdbdbd;
@@ -89,6 +129,9 @@ h3 {
   color: white;
   margin-bottom: 5px;
   border-radius: 5px;
+}
+.login-background {
+  background: #eceff1;
 }
 
 .faveveBtn {
@@ -101,12 +144,14 @@ h3 {
 
 .eventImages {
 margin-top: 3%;
-width: 75px;
-height: 75px;
+width: 100px;
+height: 100px;
 }
+
 .header {
   margin: -2.9rem 0 1.68rem 0;
 }
+
 a {
   text-align: center;
 }
@@ -116,31 +161,30 @@ display: flex;
 flex-wrap: wrap;
 }
 
-
 #backgroundImage {
 background-image: url("../assets/crowd-png-4.png");
-/* background-color: #eeeeee; */
 
 }
 
 .background {
-/* background-image: url("../assets/crowd.jpg"); */
 background-color: #eeeeee;
 
 }
-
-.login-background {
-background-color: #eeeeee;
+.card-background {
+  background-color:#bdbdbd;
 }
-.nav-wrapper {
- position: fixed;
+
+/* .nav {
+position: fixed;
 top: 0px;
-
-}
+} */
 
 .bandimg {
   text-align: center;
+}
 
+.fav-button {
+  font-size: 10px;
 }
 
 img {
@@ -151,4 +195,35 @@ img {
   text-align: center;
 }
 
+.brand-logo {
+  margin: 3px 3px 3px 3px;
 
+
+}
+/* Map Styling */
+#mapRow {
+  position: static !important;
+
+}
+#mapCard {
+  overflow: hidden;
+  justify-content: center;
+}
+#map {
+  position: static !important;
+}
+
+
+/* Map Styling */
+#mapRow {
+  position: static !important;
+  top: 1000px;
+}
+#mapCard {
+  overflow: hidden;
+  justify-content: center;
+  height: 450px;
+}
+#map {
+  position: static !important;
+}

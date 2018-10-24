@@ -19,10 +19,6 @@ module.exports = function (app) {
     res.render("login");
   });
 
-  app.get("/favorites", function (req, res) {
-    res.render("favorites");
-  });
-
   // Render 404 page for any unmatched routes
   app.get("*", function (req, res) {
     res.render("404");
