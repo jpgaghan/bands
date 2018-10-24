@@ -292,12 +292,14 @@ $(() => {
 
   $(document).on("click", ".favhotel", () => {
     var address = $("#iw-address").text();
+    var name = $("#iw-url").text();
+    var name = name.substring(name.indexOf(',') + 1, name.length).trim();
     var city = address.substring(address.indexOf(',') + 1, address.length).trim();
     var address = address.substring(0, address.indexOf(',')).trim();
     var website = $("#iw-website").text();
     var telephone = $("#iw-phone").text();
     var userid = localStorage.getItem("userid");
-    $.post("/hotel/favorite", { address, website, telephone, userid, city })
+    $.post("/hotel/favorite", { address, website, telephone ,name , userid, city })
   });
 });
 
@@ -376,6 +378,7 @@ $(document).on("click", ".favBtn", (e) => {
 })
 
 $(document).on("click", ".favorites", (e) => {
+  $(".totalsection").hide();
   var userid = localStorage.getItem("userid");
   let totalcityArray = [];
   let concertArrays = [];
@@ -401,6 +404,7 @@ $(document).on("click", ".favorites", (e) => {
       }
     });
   });
+  
   $.post("/db/hotels", { userid }).then((res) => {
     let cityArray = [];
     res.forEach(index => {
@@ -417,6 +421,7 @@ $(document).on("click", ".favorites", (e) => {
       };
     });
   });
+
   cityArray = []
   $.post("/db/events", { userid }).then((res) => {
     let cityArray = [];
@@ -460,16 +465,27 @@ $(document).on("click", ".favorites", (e) => {
     }
     let firstTime = 0;
     totalcityArray.forEach(newcity => {
+      $(".favoritesection").append(`<h2>${newcity} </h2>`)
       //append city (text should be new city) header/container here
       concertArrays.forEach(item => {
         item.forEach(cityc => {
           if (cityc.city === newcity) {
-            //append concerts here
             if (firstTime === 0) {
               firstTime += 1;
-              console.log(firstTime)
+            $(".favoritesection").append(`<h3>Concerts</h3>`);              
               //append section
             }
+            var data = `
+            <div col sm12 m3 concerts>
+            <p class= "city"> ${cityc.city}<p>
+            <p class = "venue"> ${cityc.venue}<p>
+            <p class = "dates"> ${cityc.date}<p>
+            <p class = "time" >${cityc.time}<p>
+            </div>
+            `;
+            //append concerts here
+            $(".favoritesection").append(data);
+           
           }
         })
       })
@@ -479,10 +495,19 @@ $(document).on("click", ".favorites", (e) => {
           if (citye.city === newcity) {
             if (firstTime === 0) {
               firstTime += 1;
+            $(".favoritesection").append(`<h3>Events</h3>`);              
               console.log(firstTime)
               //append section
             }
             //append events here
+            $(".favoritesection").append(
+            `<div class = "col s12 m6 l3 eventDiv">
+           <img class="eventImages" src=${citye.eventpics}>
+           <a href=${citye.cityeticketlink}><p> ${citye.eventtitle} </p> </a>
+          <p>${citye.eventdates}</p>
+          <p>${citye.eventtime}</p>
+          </div>
+          `);
             console.log(citye)
           }
         })
@@ -495,8 +520,16 @@ $(document).on("click", ".favorites", (e) => {
               firstTime += 1;
               console.log(firstTime)
               //append section
+              $(".favoritesection").append(`<h3>Hotels</h3>`)
             }
             //append hotels here
+            $(".favoritesection").append(`
+            <p>${cityh.name}</p>
+            <p>${cityh.address}</p>
+            <p>${cityh.address}</p>
+            <p>${cityh.telephone}</p>
+            <p>${cityh.address}</p>`
+            )
           }
         })
       })
@@ -508,8 +541,16 @@ $(document).on("click", ".favorites", (e) => {
               firstTime += 1;
               console.log(firstTime)
               //append section
+              $(".favoritesection").append(`<h3>Restaurants</h3>`)              
             }
             //append restaurants here
+            $(".favoritesection").append(`
+            <p>${cityr.img}</p>
+            <a href="${cityr.url}"><p>${cityr.name}</p></a>
+            <p>${cityr.rating}</p>
+            <p>${cityr.phone}</p>
+            <p>${cityr.steet}</p>`
+            )
           }
         })
       })
