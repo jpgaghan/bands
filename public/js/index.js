@@ -58,17 +58,16 @@ var API = {
                 <p class= "city" style="font-weight: bold; font-size: 18px"> ${response[i].venue.city} , ${response[i].venue.region}<p>
                 <p class = "venue"> ${response[i].venue.name}<p>
                 <p class = "dates" data-sdate = "${dates.sdates[countryCount]}" data-edate = "${dates.edates[countryCount]}"> ${dates.dates[countryCount]}<p>
-                <p class = "time" >${dates.times[countryCount]}<p>
+                <p class = "time" data-artist ="${band}">${dates.times[countryCount]}<p>
                 `;
                 } else {
                   var data = `
                 <p class= "city" style="font-weight: bold; font-size: 18px">${response[i].venue.city}<p>
                 <p class = "venue"> ${response[i].venue.name}<p>
                 <p class = "dates" data-sdate = "${dates.sdates[countryCount]}" data-edate = "${dates.edates[countryCount]}"> ${dates.dates[countryCount]}<p>
-                <p class = "time" >${dates.times[countryCount]}<p>
+                <p class = "time" data-artist ="${band}">${dates.times[countryCount]}<p>
                 `;
                 }
-
                 var createDivs = $("<div>").addClass("col sm12 m4 concerts");
                 createDivs.append(data);
                 $("#events").append(createDivs);
@@ -330,6 +329,7 @@ $(document).on("click", ".concerts", (e) => {
   } else {
     var city = location;
   }
+  var band = currEle[0].childNodes[7].dataset.artist;
   var date = currEle[0].childNodes[5].innerText;
   var startDate = currEle[0].childNodes[5].dataset.sdate;
   var endDate = currEle[0].childNodes[5].dataset.edate;
@@ -338,7 +338,7 @@ $(document).on("click", ".concerts", (e) => {
   var venue = currEle[0].childNodes[3].innerText;
   $("#artist").empty();
   userid = localStorage.getItem('userid');
-  $.post("/newconcert", { location, date, time, venue, userid, city });
+  $.post("/newconcert", { location, date, time, venue, userid, city, band });
   eventData = {
     location,
     state,
@@ -348,10 +348,6 @@ $(document).on("click", ".concerts", (e) => {
     city
   };
   API.ticketMaster(
-    // var eventTitle = `<h3>Local Events in + ${city}</h3>`
-    // eventTitle.addClass("row").attr("id", "eventTitle");
-    // $("#eventTitle").html(eventTitle);
-
     eventData.startDate,
     eventData.endDate,
     eventData.limit,
@@ -486,11 +482,12 @@ $(document).on("click", ".favorites", (e) => {
               //append section
             }
             var data = `
-            <div col sm12 m3 concerts>
-            <p class= "city"> ${cityc.city}<p>
-            <p class = "venue"> ${cityc.venue}<p>
-            <p class = "dates"> ${cityc.date}<p>
-            <p class = "time" >${cityc.time}<p>
+            <div class = "col sm12 m3 concerts">
+              <p class= "band"> ${cityc.band} </p>
+              <p class= "city"> ${cityc.city}</p>
+              <p class = "venue"> ${cityc.venue}</p>
+              <p class = "dates"> ${cityc.date}</p>
+              <p class = "time" >${cityc.time}</p>
             </div>
             `;
             //append concerts here
@@ -512,12 +509,12 @@ $(document).on("click", ".favorites", (e) => {
             //append events here
             $(".favoritesection").append(
             `<div class = "col s12 m6 l3 eventDiv">
-           <img class="eventImages" src=${citye.eventpics}>
-           <a href=${citye.cityeticketlink}><p> ${citye.eventtitle} </p> </a>
-          <p>${citye.eventdates}</p>
-          <p>${citye.eventtime}</p>
-          </div>
-          `);
+              <img class="eventImages" src=${citye.eventpics}>
+              <a href=${citye.cityeticketlink}><p> ${citye.eventtitle} </p> </a>
+              <p>${citye.eventdates}</p>
+              <p>${citye.eventtime}</p>
+            </div>
+            `);
             console.log(citye)
           }
         })
