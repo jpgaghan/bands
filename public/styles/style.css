@@ -19,7 +19,8 @@ body {
   box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
   padding: 10%;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 5px;
+  background-color: white;
 }
 
 .noConcerts {
@@ -28,6 +29,7 @@ body {
 
 .concerts:hover {
   background-color: #84ffff;
+
 }
 
 img {
@@ -81,16 +83,16 @@ main {
 }
 
 .eventImages {
-  width: 35%;
-  height: 10%;
+  width: 60%;
+  height: 30%;
   border-radius: 10px;
 }
 
 
 .eventDiv {
   padding: 2px;
-  margin-top: 10px;
-  height: 55%;
+  margin-top: 5px;
+  height: 56%;
   text-align: center;
   border-radius: 5px;
   color: black;
@@ -119,7 +121,7 @@ main {
 }
 .band {
   font-weight: bold;
-  font-size: 18px
+  font-size: 20px
 }
 
 
@@ -131,7 +133,16 @@ main {
   border-radius: 5px;
 }
 .login-background {
-  background: #eceff1;
+  /* background: #eceff1; */
+  background-image: url("../assets/stonehaven.png");
+}
+
+.eventStyle {
+  text-align: center;
+  height: 45%;
+  box-shadow:
+0 0 3px 3px #ffa726,
+  0 0 1px 3px #0ff
 }
 
 .faveveBtn {
@@ -142,11 +153,6 @@ main {
   border-radius: 5px;
 }
 
-.eventImages {
-margin-top: 3%;
-width: 100px;
-height: 100px;
-}
 
 .header {
   margin: -2.9rem 0 1.68rem 0;
@@ -167,13 +173,28 @@ background-image: url("../assets/crowd-png-4.png");
 }
 
 .background {
-background-color: #eeeeee;
+/* background-color: #eeeeee; */
+background-image: url("../assets/stonehaven.png");
 
 }
 .card-background {
   background-color:#bdbdbd;
+  
+}
+nav {
+margin-top: 0;
 }
 
+.button-style {
+  font-size: 20px;
+  padding: 2px;
+  color: white;
+  background-color: #4dd0e1;
+  letter-spacing: .5px;
+}
+.button-style:hover {
+  background-color: #ffa726;
+}
 /* .nav {
 position: fixed;
 top: 0px;
@@ -184,7 +205,12 @@ top: 0px;
 }
 
 .fav-button {
-  font-size: 10px;
+  font-size: 13px;
+  color: white;
+  background-color: #4dd0e1;
+}
+.fav-button:hover {
+  background-color: #ffa726;
 }
 
 img {
@@ -226,4 +252,8 @@ img {
 }
 #map {
   position: static !important;
+}
+
+footer {
+position: relative;
 }

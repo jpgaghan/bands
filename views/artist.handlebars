@@ -1,8 +1,7 @@
+<main class="login-background">
     <div class="row center">
         <div class="col s12 m10 offset-m1 l6 offset-l3">
             <div class="card sticky-action z-depth-4 card-panel hoverable" style=" margin : 0px; padding : 2px">
-
-
                 <!-- artist search form -->
                 <form>
                     <div class="card-content">
@@ -14,16 +13,14 @@
 
                             <div class="input-field col s12">
                                 <i class="material-icons prefix center"></i>
-                                <input id="name" type='text' name='artist-name' class="validate left-align" required="true" placeholder="type" />
+                                <input id="name" type='text' name='artist-name' class="validate left-align" required="true" placeholder="search for an artist"
+                                />
                                 <label for="name" class="left-align">
                                 </label>
                             </div>
-
                         </div>
-
-                        <input type="submit" class="waves-effect cyan lighten-2 btn" value='Search' id="submit">
+                        <input type="submit" class="waves-effect cyan lighten-2 button-style" value='SEARCH' id="submit">
                         </input>
-
                     </div>
 
 
@@ -33,23 +30,15 @@
         </div>
     </div>
 
-<br>
-<br>
-<br>
-<br>
+    <div class="row">
+        <h2 class="artistName"></h2>
+        <div class="bandimg"> </div>
+    </div>
 
 
-
-<div class="row">
-    <h2 class="artistName"></h2>
-    <div class="bandimg"> </div>
-    
-</div>
-
-
-<div class="container">
-<div class="row centerEvents">
-    <div id="events"></div>
-</div>
-</div>
-
+    <div class="container">
+        <div class="row centerEvents">
+            <div id="events"></div>
+        </div>
+    </div>
+</main>
