@@ -251,7 +251,7 @@ var API = {
 
 
 
-Collap
+
 
 
     var geocoder = new google.maps.Geocoder();
@@ -415,7 +415,7 @@ $(document).on("click", ".favorites", (e) => {
       }
     });
   });
-  
+
   $.post("/db/hotels", { userid }).then((res) => {
     let cityArray = [];
     res.forEach(index => {
