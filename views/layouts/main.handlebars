@@ -20,8 +20,7 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
  <!-- JQuery -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHD6cVA78rs0apQveOhOaQUoO4epAFp9Y&libraries=places&callback=initMap"
-  async defer></script>
+ 
  <!-- Firebase -->
  <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
  <script src="/js/index.js"></script>
@@ -49,9 +48,13 @@
         <a href="/"><img src="assets/logo.png" height="50" style="display:-webkit-inline-box"></a>
       <a href="/" class="brand-logo"> MusicGo</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="/favorites">Favorites</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li class="favorites">Favorites</li>
+        <li>
+          <a href="../artist">Artist</a>
+        </li>
+        <li>
+          <a href="#">Contact</a>
+        </li>
       </ul>
     </div>
   </nav>
@@ -228,5 +231,6 @@
   </div>
  </footer>
 </body>
-​
+​<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHD6cVA78rs0apQveOhOaQUoO4epAFp9Y&libraries=places&callback=initMap"
+  async defer></script>
 </html>

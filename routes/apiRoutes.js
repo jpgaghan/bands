@@ -25,7 +25,20 @@ module.exports = function (app) {
     });
   });  
 
+  app.get("/db/events", (req, res) => {
+    db.Events.findAll().then((dbExamples) => {
+      res.json(dbExamples);
+    });
+  }); 
+
+  // app.post("/db/hotels", (req, res) => {
+  //   db.Hotels.findAll(req.body.userid).then((dbExamples) => {
+  //     res.json(dbExamples);
+  //   });
+  // }); 
+
   app.post("/db/hotels", (req, res) => {
+    console.log(req.body.userid)
     db.Hotels.findAll({
       where: {
         userid: req.body.userid
@@ -33,7 +46,8 @@ module.exports = function (app) {
     }).then(function (dbExamples) {
       res.json(dbExamples);
     });
-  })
+  });
+  
 
   app.post("/db/events", (req, res) => {
     console.log(req.body.userid)
@@ -65,7 +79,7 @@ module.exports = function (app) {
   });
 
   app.post("/hotel/favorite", function(req, res) {
-    db.Events.create(req.body).then(function(dbExample) {
+    db.Hotels.create(req.body).then(function(dbExample) {
       res.json(dbExample);
     });
   });
