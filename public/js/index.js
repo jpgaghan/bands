@@ -575,6 +575,11 @@ $(document).on("click", ".favorites", (e) => {
 totalcityArray = [];
 });
 
+$(document).on("click", ".signout", (e) => {
+  localStorage.removeItem("userid");
+  window.location.href = "/"
+});
+
 $(document).on("click", ".btn", (e) => {
   var currEle = $(e.currentTarget);
   var currId = currEle[0].dataset.id;
