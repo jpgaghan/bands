@@ -8,7 +8,7 @@
   },
   "test": {
     "username": "root",
-    "password": "LaL@1991",
+    "password": "root",
     "database": "testdb",
     "host": "localhost",
     "dialect": "mysql",
