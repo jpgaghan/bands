@@ -239,7 +239,7 @@ var API = {
 
     // Adds the city to the City Banner after user searches for artist
     var banner = $("<div>").html("<h3 style=text-align: center;>Hotels in " + city + "</h3>");
-    var banner2 = $("<div>").html("<h3>Check the events in " + city + "</h3>");
+    var banner2 = $("<div>").html("<h3>Checkout Other Events in " + city + "</h3>");
     var banner3 = $("<div>").html("<h3>Local Resturants in " + city + "</h3>");
 
     banner.addClass("row center").attr("id", "cityBanner");
@@ -479,7 +479,7 @@ $(document).on("click", ".favorites", (e) => {
           if (cityc.city === newcity) {
             if (firstTime === 0) {
               firstTime += 1;
-            $(".favoritesection").append(`<h5 class="favConcertTitle">Concerts</h5>`);              
+            $(".favoritesection").append(`<h4 class="favConcertTitle">Concerts</h4>`);              
               //append section
             }
             var data = `
@@ -504,7 +504,7 @@ $(document).on("click", ".favorites", (e) => {
           if (citye.city === newcity && citye.eventpics !== null) {
             if (firstTime === 0) {
               firstTime += 1;
-            $(".favoritesection").append(`<h5 class="favEvent">Events</h5>`);              
+            $(".favoritesection").append(`<h4 class="favEvent">Events</h4>`);              
               console.log(firstTime)
               //append section
             }
@@ -530,7 +530,7 @@ $(document).on("click", ".favorites", (e) => {
               firstTime += 1;
               console.log(firstTime)
               //append section
-              $(".favoritesection").append(`<h5>Hotels</h5>`)
+              $(".favoritesection").append(`<h4>Hotels</h4>`)
             }
             //append hotels here
             $(".favoritesection").append(`
@@ -553,7 +553,7 @@ $(document).on("click", ".favorites", (e) => {
               firstTime += 1;
               console.log(firstTime)
               //append section
-              $(".favoritesection").append(`<h5 class="favResTitle">Restaurants</h5>`)              
+              $(".favoritesection").append(`<h4 class="favResTitle">Restaurants</h4>`)              
             }
             //append restaurants here
             $(".favoritesection").append(`
