@@ -25,12 +25,11 @@ var API = {
       method: "GET"
     }).then((response) => {
       console.log(response)
-      $(".artistName").append(artistName + "'s Upcoming Shows");
       API.bandImage(band);
       var artistName = $("#name").val().trim();
       $(".artistName").empty();
       $("#events").empty();
-
+      $(".artistName").append(artistName + "'s Upcoming Shows");
       $("#name").val("");
       let countryCount = 0;
       let i = 0
@@ -239,7 +238,7 @@ var API = {
     $("#hotels").addClass(city);
 
     // Adds the city to the City Banner after user searches for artist
-    var banner = $("<div>").html("<h3>Hotels in " + city + "</h3>");
+    var banner = $("<div>").html("<h3 style=text-align: center;>Hotels in " + city + "</h3>");
     var banner2 = $("<div>").html("<h3>Check the events in " + city + "</h3>");
     var banner3 = $("<div>").html("<h3>Local Resturants in " + city + "</h3>");
 
@@ -321,6 +320,7 @@ $(document).on("click", ".faveveBtn", (e) => {
 
 $(document).on("click", ".concerts", (e) => {
   event.preventDefault();
+  $(this).scrollTop(0);
   var currEle = $(e.currentTarget);
   var location = currEle[0].childNodes[1].innerText;
   var state = location.slice(-2);

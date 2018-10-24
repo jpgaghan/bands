@@ -8,15 +8,6 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-/* 
-.concerts {
-    text-align: center;
-    border-radius: 10px;
-    /* background: #eceff1; */
-    /* box-shadow: 0 8px 15px 0 rgba(0,0,0,0.22);
-    margin: 2%;
-    cursor: pointer;
-} */
 
 .concerts {
   border: thin;
@@ -51,7 +42,6 @@ text-align: center;
 
 .brand-logo {
   margin-left: 5%;
-
 }
 
 #cityBanner {
@@ -66,15 +56,17 @@ margin-bottom: 0px;
   height: 64px;
 }
 
+.fa {
+  color: black;
+}
 .musicHeader img{
-
     float: left;   
   }
-
 
 h3 {
   text-align: center;
 }
+
 .eventDiv {
   text-align: center;
   border-radius: 5px;
@@ -104,9 +96,11 @@ margin-top: 3%;
 width: 75px;
 height: 75px;
 }
+
 .header {
   margin: -2.9rem 0 1.68rem 0;
 }
+
 a {
   text-align: center;
 }
@@ -116,31 +110,30 @@ display: flex;
 flex-wrap: wrap;
 }
 
-
 #backgroundImage {
 background-image: url("../assets/crowd-png-4.png");
-/* background-color: #eeeeee; */
 
 }
 
 .background {
-/* background-image: url("../assets/crowd.jpg"); */
 background-color: #eeeeee;
 
 }
-
-.login-background {
-background-color: #eeeeee;
+.card-background {
+  background-color:#bdbdbd;
 }
-.nav-wrapper {
- position: fixed;
+
+/* .nav {
+position: fixed;
 top: 0px;
+} */
 
-}
+/* .material-icons {
+background-color: #ffa726;
+} */
 
 .bandimg {
   text-align: center;
-
 }
 
 img {
@@ -151,3 +144,8 @@ img {
   text-align: center;
 }
 
+.brand-logo {
+  margin-left: 3px;
+  margin-bottom: 3px;
+
+}
