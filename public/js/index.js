@@ -240,7 +240,7 @@ var API = {
     // Adds the city to the City Banner after user searches for artist
     var banner = $("<div>").html("<h3 style=text-align: center;>Hotels in " + city + "</h3>");
     var banner2 = $("<div>").html("<h3>Checkout Other Events in " + city + "</h3>");
-    var banner3 = $("<div>").html("<h3>Local Resturants in " + city + "</h3>");
+    var banner3 = $("<div>").html("<h3>Local Restaurants in " + city + "</h3>");
 
     banner.addClass("row center").attr("id", "cityBanner");
     $("#cityBanner").html(banner);
@@ -471,7 +471,7 @@ $(document).on("click", ".favorites", (e) => {
               //append section
             }
             var data = `
-            <div class = "col sm12 eventDiv" id="cid${cityc.id}">
+            <div class = "col sm12 eventDiv eventStyle" id="cid${cityc.id}">
               <p class= "band"> ${cityc.band} </p>
               <p class= "city"> ${cityc.city}</p>
               <p class = "venue"> ${cityc.venue}</p>
@@ -498,7 +498,7 @@ $(document).on("click", ".favorites", (e) => {
             }
             //append events here
             $(".favoritesection").append(
-            `<div class = "col s12 eventDiv" id="eid${citye.id}">
+            `<div class = "col s12 eventDiv eventStyle" id="eid${citye.id}">
               <img class="favEventImages" src=${citye.eventpics}>
               <a href=${citye.cityeticketlink}><p> ${citye.eventtitle} </p> </a>
               <p>${citye.eventdates}</p>
@@ -522,7 +522,7 @@ $(document).on("click", ".favorites", (e) => {
             }
             //append hotels here
             $(".favoritesection").append(`
-            <div class = "col s12 eventDiv" id="hid${cityh.id}">
+            <div class = "col s12 eventDiv eventStyle" id="hid${cityh.id}">
               <p>${cityh.name}</p>
               <p>${cityh.address}</p>
               <p>${cityh.telephone}</p>
@@ -545,7 +545,7 @@ $(document).on("click", ".favorites", (e) => {
             }
             //append restaurants here
             $(".favoritesection").append(`
-            <div class = "col s12 m6 l3 eventDiv" id="rid${cityr.id}">
+            <div class = "col s12 eventDiv eventStyle" id="rid${cityr.id}">
               <img class="favEventImages"src="${cityr.img}" alt="food">
               <a href="${cityr.url}"><p>${cityr.name}</p></a>
               <p>${cityr.rating}</p>
