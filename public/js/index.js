@@ -104,12 +104,12 @@ var API = {
         })
       }
       // Now read the saved restaurants data from Array and append
-      for (i = 0; i < 8; i++) {
+      for (i = 0; i < 9; i++) {
         phone = restArray[i].Phone.substring(2, restArray[i].Phone.length);
         phone = `(${phone.substring(0, 3)})${phone.substring(3, 6)}-${phone.substring(6, 10)}`
         var eventsData =
           `
-        <div class="col s12 m3 eventDiv">
+        <div class="col sm3 eventDiv">
           <img class="eventImages" src=${restArray[i].Pic}>
           <p><a href = ${restArray[i].Url}>${restArray[i].Name}</a></p>
           <p> ${restArray[i].Address1}</p>
@@ -138,6 +138,7 @@ var API = {
       Img = new Image();
       Img.src = responseimage;
       $(".bandimg").html(Img);
+      $(".bandimg").addClass("band-image");
 
     }
     )
@@ -167,7 +168,7 @@ var API = {
           nondupindexArray.push(z);
         }
         z += 1
-      } while (nondupArray.length !== 8)
+      } while (nondupArray.length !== 9)
       var dateArray = [];
       console.log(nondupindexArray)
       nondupindexArray.forEach((i) => {
@@ -177,7 +178,7 @@ var API = {
         let z = 0
         nondupindexArray.forEach((i) => {
           var eventsData =
-            `<div class = "col s12 m3 eventDiv">
+            `<div class = "col sm3 eventDiv">
            <img class="eventImages" src=${response._embedded.events[i].images[0].url}>
            <a href=${response._embedded.events[i].url}><p> ${response._embedded.events[i].name} </p> </a>
           <p>${dateresponse.dates[z]}</p>
