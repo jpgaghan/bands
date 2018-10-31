@@ -83,6 +83,13 @@ main {
   width: 21%;
   height: 27%;
   border-radius: 10px;
+  margin-top: 40px;
+}
+
+.favresImages {
+  width: 21%;
+  height: 27%;
+  border-radius: 10px;
   margin-top: 30px;
 }
 
@@ -128,7 +135,8 @@ main {
 }
 .band {
   font-weight: bold;
-  font-size: 20px
+  font-size: 20px;
+  margin-top: 50px;
 }
 
 
@@ -149,6 +157,7 @@ main {
   width: 100%;
   margin-top: 20px;
   height: 45%;
+  margin-bottom: 15px;
   box-shadow:
   0 0 3px 3px #ffa726,
   0 0 1px 3px #0ff
@@ -263,9 +272,6 @@ img {
   position: static !important;
 }
 
-.band {
-  margin-top: 40px;
-}
 
 .hotelname {
   margin-top: 80px;

@@ -545,7 +545,7 @@ $(document).on("click", ".favorites", (e) => {
               //append restaurants here
               $(".favoritesection").append(`
             <div class = "col s12 eventDiv eventStyle" id="rid${cityr.id}">
-              <img class="favEventImages"src="${cityr.img}" alt="food">
+              <img class="favresImages"src="${cityr.img}" alt="food">
               <a href="${cityr.url}"><p>${cityr.name}</p></a>
               <p>${cityr.rating}</p>
               <p>${cityr.phone}</p>
