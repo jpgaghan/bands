@@ -13,6 +13,10 @@ body {
   padding-top: 8px;
 }
 
+.logoImage {
+  margin: 5px 5px 0 0;
+}
+
 .concerts {
   width: 30%;
   height: 30%;
@@ -103,9 +107,10 @@ main {
 
 .eventDiv {
   padding: 2px;
+  margin: 10px;
   width: 30%;
-  margin-top: 5px;
-  height: 57%;
+  margin-top: 3px;
+  height: 63%;
   text-align: center;
   border-radius: 5px;
   color: black;
@@ -211,16 +216,13 @@ margin-top: 0;
   letter-spacing: .5px;
 }
 .button-style:hover {
-  background-color: #ffa726;
 }
-/* .nav {
-position: fixed;
-top: 0px;
-} */
 
 .bandimg {
   text-align: center;
+
 }
+
 
 .fav-button {
   font-size: 13px;
@@ -258,6 +260,7 @@ img {
 }
 
 
+
 /* Map Styling */
 #mapRow {
   position: static !important;
@@ -275,4 +278,9 @@ img {
 
 .hotelname {
   margin-top: 80px;
+}
+
+.notFound {
+ text-align: center;
+ 
 }

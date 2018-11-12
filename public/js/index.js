@@ -48,7 +48,6 @@ const API = {
             let i = 0;
             do {
               const dates = dateresponse
-              // if (country === "United States") {
               if (i < response.length) {
                 if (response[i].venue.region !== "") {
                   data = `
@@ -80,11 +79,9 @@ const API = {
         $("#events").append(createDivs);
       };
     });
-
   },
   yelpApi: (params) => {
     $.post("/restaurants", { ...params }).then(response => {
-
       // store the restaurant data in array so we can use it later to display
       restArray = [];
       for (let i = 0; i < 8; i++) {
@@ -99,12 +96,12 @@ const API = {
         });
       };
       // Now read the saved restaurants data from Array and append
-      for (i = 0; i < 8; i++) {
+      for (i = 0; i < 9; i++) {
         phone = restArray[i].Phone.substring(2, restArray[i].Phone.length);
         phone = `(${phone.substring(0, 3)})${phone.substring(3, 6)}-${phone.substring(6, 10)}`;
         eventsData =
           `
-        <div class="col s12 m3 eventDiv">
+        <div class="col sm3 eventDiv">
           <img class="eventImages" src=${restArray[i].Pic}>
           <p><a href = ${restArray[i].Url}>${restArray[i].Name}</a></p>
           <p> ${restArray[i].Address1}</p>
@@ -125,7 +122,8 @@ const API = {
       Img = new Image();
       Img.src = responseimage;
       $(".bandimg").html(Img);
-    });
+      $(".bandimg").addClass("band-image");
+    })
   },
   ticketMaster: (startDate, endDate, limit, city) => {
     event.preventDefault();
@@ -156,6 +154,7 @@ const API = {
       nondupindexArray.forEach((i) => {
         dateArray.push(response._embedded.events[i].dates.start.localDate);
       });
+
       $.post("/event/date", { '': dateArray }).then((dateresponse) => {
         let z = 0;
         nondupindexArray.forEach((i) => {
@@ -367,7 +366,7 @@ $(document).on("click", ".favorites", (e) => {
       });
     });
 
-    var userid = localStorage.getItem("userid");
+    let userid = localStorage.getItem("userid");
 
     $.post("/db/hotels", { userid }).then((res) => {
       let cityArray = [];
