@@ -31,14 +31,7 @@ module.exports = function (app) {
     });
   }); 
 
-  // app.post("/db/hotels", (req, res) => {
-  //   db.Hotels.findAll(req.body.userid).then((dbExamples) => {
-  //     res.json(dbExamples);
-  //   });
-  // }); 
-
   app.post("/db/hotels", (req, res) => {
-    console.log(req.body.userid)
     db.Hotels.findAll({
       where: {
         userid: req.body.userid
@@ -48,9 +41,7 @@ module.exports = function (app) {
     });
   });
   
-
   app.post("/db/events", (req, res) => {
-    console.log(req.body.userid)
     db.Events.findAll({
       where: {
         userid: req.body.userid
@@ -84,14 +75,16 @@ module.exports = function (app) {
     });
   });
 
-
   app.post("/res/favs", (req, res) => {
     db.Restaurants.create(req.body).then((dbExample) => {
       res.json(dbExample)
-    })
-  })
+    });
+  });
+
   app.post("/newuser", function (req, res) {
-    db.Users.create(req.body).then((userInfo) => { });
+    db.Users.create(req.body).then((userInfo) => {
+      res.json(userInfo)
+    });
   });
 
   app.post("/newconcert", (req, res) => {
@@ -100,12 +93,12 @@ module.exports = function (app) {
 
   // spotify api request
   app.post("/band/image", function (req, res) {
-    spotify.search({ type: 'artist', query: req.body.bandname, limit: 1 }, function (err, data) {
-      if (err) {
+    spotify.search({ type: 'artist', query: req.body.bandname, limit: 1 }, (err, data) => {
+      (err) => {
         return console.log('Error occurred: ' + err);
       }
-      const artistPic = data.artists.items[0].images[1].url
-      res.json(artistPic)
+      const artistPic = data.artists.items[0].images[1].url;
+      res.json(artistPic);
     });
   });
 
@@ -113,15 +106,14 @@ module.exports = function (app) {
    * YELP API Request
    */
   app.post("/restaurants", function (req, res) {
-    var options = {
+    const options = {
       headers: {
         "authorization": process.env.YELP_API_TOKEN
       }
-    }
-    const { city, state } = req.body
-    var foodtype = `japanese`
+    };
+    const { city, state } = req.body;
     
-    var url = `https://api.yelp.com/v3/businesses/search?term=restaurant&location=${city}_${state}`      
+    const url = `https://api.yelp.com/v3/businesses/search?term=restaurant&location=${city}_${state}`      
     
     fetchUrl( 
       url,
@@ -136,10 +128,12 @@ module.exports = function (app) {
           var street = obj.businesses[i].location.address1;
           var city = obj.businesses[i].location.city;
           var phone = obj.businesses[i].display_phone;
-        }
-        res.json(obj)
-      })
-  })
+        };
+        res.json(obj);
+      });
+  });
+
+  //converting dates with moment.js
   app.post("/band/date", (req, res) => {
     const formattedDates = [];
     const formattedTimes = [];
@@ -156,11 +150,10 @@ module.exports = function (app) {
       times: formattedTimes,
       sdates: startDates,
       edates: endDates
-    }
-    );
+    });
   });
 
-  app.post("/event/date", function (req, res) {
+  app.post("/event/date", (req, res) => {
     const formattedDates = [];
     req.body['[]'].forEach(index => {
       formattedDates.push(moment(index).format('MMMM Do YYYY'));
@@ -175,7 +168,7 @@ module.exports = function (app) {
       where: {
         userid: req.body.userid,
         id : req.body.id
-      }}).then(function (dbExample) {
+      }}).then((dbExample) => {
         res.json(dbExample);
     });
   });
@@ -195,9 +188,9 @@ module.exports = function (app) {
       where: {
         userid: req.body.userid,
         id : req.body.id
-      }}).then(function (dbExample) {
+      }}).then((dbExample) => {
         res.json(dbExample);
-    });
+      });
   });
 
   app.post("/delete/concert", (req,res) => {
